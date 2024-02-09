@@ -26,9 +26,9 @@ CREATE TABLE IF NOT EXISTS `acteur` (
   PRIMARY KEY (`id_acteur`),
   UNIQUE KEY `id_personne` (`id_personne`),
   CONSTRAINT `acteur_ibfk_1` FOREIGN KEY (`id_personne`) REFERENCES `personne` (`id_personne`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
--- Listage des données de la table cinema_laure.acteur : ~16 rows (environ)
+-- Listage des données de la table cinema_laure.acteur : ~20 rows (environ)
 INSERT IGNORE INTO `acteur` (`id_acteur`, `id_personne`) VALUES
 	(1, 1),
 	(2, 2),
@@ -45,7 +45,11 @@ INSERT IGNORE INTO `acteur` (`id_acteur`, `id_personne`) VALUES
 	(13, 16),
 	(14, 17),
 	(15, 19),
-	(16, 21);
+	(16, 21),
+	(17, 22),
+	(18, 24),
+	(19, 25),
+	(20, 27);
 
 -- Listage de la structure de la table cinema_laure. castings
 CREATE TABLE IF NOT EXISTS `castings` (
@@ -60,13 +64,14 @@ CREATE TABLE IF NOT EXISTS `castings` (
   CONSTRAINT `castings_ibfk_3` FOREIGN KEY (`id_role`) REFERENCES `role` (`id_role`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
--- Listage des données de la table cinema_laure.castings : ~18 rows (environ)
+-- Listage des données de la table cinema_laure.castings : ~22 rows (environ)
 INSERT IGNORE INTO `castings` (`id_film`, `id_acteur`, `id_role`) VALUES
 	(1, 1, 2),
 	(1, 2, 1),
 	(1, 3, 3),
 	(2, 4, 4),
 	(8, 4, 13),
+	(11, 4, 20),
 	(2, 5, 5),
 	(3, 6, 6),
 	(3, 7, 7),
@@ -78,8 +83,11 @@ INSERT IGNORE INTO `castings` (`id_film`, `id_acteur`, `id_role`) VALUES
 	(7, 13, 11),
 	(8, 14, 12),
 	(8, 15, 14),
-	(9, 15, 15),
-	(9, 16, 16);
+	(9, 16, 15),
+	(9, 17, 16),
+	(10, 18, 18),
+	(10, 19, 17),
+	(11, 20, 19);
 
 -- Listage de la structure de la table cinema_laure. definir
 CREATE TABLE IF NOT EXISTS `definir` (
@@ -91,14 +99,16 @@ CREATE TABLE IF NOT EXISTS `definir` (
   CONSTRAINT `definir_ibfk_2` FOREIGN KEY (`id_genre`) REFERENCES `genre` (`id_genre`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
--- Listage des données de la table cinema_laure.definir : ~11 rows (environ)
+-- Listage des données de la table cinema_laure.definir : ~13 rows (environ)
 INSERT IGNORE INTO `definir` (`id_film`, `id_genre`) VALUES
 	(7, 1),
 	(1, 2),
 	(4, 2),
 	(9, 2),
+	(10, 2),
 	(8, 3),
 	(9, 3),
+	(10, 3),
 	(4, 4),
 	(5, 5),
 	(6, 5),
@@ -117,9 +127,9 @@ CREATE TABLE IF NOT EXISTS `film` (
   PRIMARY KEY (`id_film`),
   KEY `id_realisateur` (`id_realisateur`),
   CONSTRAINT `film_ibfk_1` FOREIGN KEY (`id_realisateur`) REFERENCES `realisateur` (`id_realisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
--- Listage des données de la table cinema_laure.film : ~9 rows (environ)
+-- Listage des données de la table cinema_laure.film : ~11 rows (environ)
 INSERT IGNORE INTO `film` (`id_film`, `titre`, `annee_sortie_fr`, `duree`, `synopsis`, `note`, `id_realisateur`) VALUES
 	(1, 'Million Dollar baby', 2005, 132, '"Maggie en a marre de son boulot de serveuse dans le Missouri. Elle part à Los Angeles pour se mettre à la boxe. Là-bas, elle espère bien se faire entrainer par le respecté Frankie Dunn"\r\n ', 4.4, 1),
 	(2, 'Sully', 2016, 96, 'Le 15 janvier 2009, le monde a assisté au "miracle sur l\'Hudson" accompli par le commandant "Sully" Sullenberger : en effet, celui-ci a réussi à poser son appareil sur les eaux glacées du fleuve Hudson, sauvant ainsi la vie des 155 passagers à bord. Cependant, alors que Sully était salué par l\'opinion publique et les médias pour son exploit inédit dans l\'histoire de l\'aviation, une enquête a été ouverte, menaçant de détruire sa réputation et sa carrière.', 4.1, 1),
@@ -129,7 +139,9 @@ INSERT IGNORE INTO `film` (`id_film`, `titre`, `annee_sortie_fr`, `duree`, `syno
 	(6, 'Dracula', 1992, 127, 'Transylvanie, 1462. Viad Drakul laisse la belle Elisabeta pour aller guerroyer contre l\'envahisseur turc. Revenu victorieux du combat, il découvre le corps inanimé de sa femme, qui s\'est suicidée à la fausse nouvelle de sa mort. Eperdu de douleur, il abjure sa foi et en appelle aux puissances du sang pour retrouver sa bien-aimée.', 4.2, 5),
 	(7, 'Le Parrain', 1972, 177, 'En 1945, à New York, les Corleone sont une des 5 familles de la mafia. Don Vito Corleone, `parrain\' de cette famille, marie sa fille à un bookmaker. Sollozzo, `parrain\' de la famille Tattaglia, propose à Don Vito une association dans le trafic de drogue, mais celui-ci refuse. Sonny, un de ses fils, y est quant à lui favorable. Afin de traiter avec Sonny, Sollozzo tente de faire tuer Don Vito, mais celui-ci en réchappe.', 4, 5),
 	(8, 'Forest Gump', 1994, 142, 'Sur un banc, à Savannah, en Géorgie, Forrest Gump attend le bus. Comme celui-ci tarde à venir, le jeune homme raconte sa vie à ses compagnons d\'ennui. A priori, ses capacités intellectuelles plutôt limitées ne le destinaient pas à de grandes choses', 4.6, 6),
-	(9, 'Le cercle des poètes disparus', 1990, 128, 'Todd Anderson, un garçon plutôt timide, est envoyé dans la prestigieuse académie de Welton, réputée pour être l\'une des plus fermées et austères des États-Unis, là où son frère avait connu de brillantes études. C\'est dans cette université qu\'il va faire la rencontre d\'un professeur de lettres anglaises plutôt étrange, Mr Keating, qui les encourage à toujours refuser l\'ordre établi. ', 4.3, 7);
+	(9, 'Le cercle des poètes disparus', 1990, 128, 'Todd Anderson, un garçon plutôt timide, est envoyé dans la prestigieuse académie de Welton, réputée pour être l\'une des plus fermées et austères des États-Unis, là où son frère avait connu de brillantes études. C\'est dans cette université qu\'il va faire la rencontre d\'un professeur de lettres anglaises plutôt étrange, Mr Keating, qui les encourage à toujours refuser l\'ordre établi. ', 4.3, 7),
+	(10, 'Winter Break', 2023, 133, 'Un instructeur maussade d\'une école préparatoire de la Nouvelle-Angleterre reste sur le campus pendant les vacances de Noël pour garder une poignée d\'étudiants qui n\'ont nulle part où aller.', 4.1, 8),
+	(11, 'La ligne verte', 1999, 189, 'Paul Edgecomb, pensionnaire centenaire d\'une maison de retraite, est hanté par ses souvenirs. Gardien-chef du pénitencier de Cold Mountain, en 1935, il était chargé de veiller au bon déroulement des exécutions capitales au bloc E (la ligne verte) en s\'efforçant d\'adoucir les derniers moments des condamnés. Parmi eux se trouvait un colosse du nom de John Coffey, accusé du viol et du meurtre de deux fillettes.', 4.6, 9);
 
 -- Listage de la structure de la table cinema_laure. genre
 CREATE TABLE IF NOT EXISTS `genre` (
@@ -155,9 +167,9 @@ CREATE TABLE IF NOT EXISTS `personne` (
   `sexe` varchar(10) COLLATE utf8mb3_bin DEFAULT NULL,
   `date_naissance` date DEFAULT NULL,
   PRIMARY KEY (`id_personne`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
--- Listage des données de la table cinema_laure.personne : ~22 rows (environ)
+-- Listage des données de la table cinema_laure.personne : ~27 rows (environ)
 INSERT IGNORE INTO `personne` (`id_personne`, `nom`, `prenom`, `sexe`, `date_naissance`) VALUES
 	(1, 'Eastwood', 'Clint', 'homme', '1930-05-31'),
 	(2, ' Swank', 'Hilary', 'femme', '1974-07-30'),
@@ -180,7 +192,12 @@ INSERT IGNORE INTO `personne` (`id_personne`, `nom`, `prenom`, `sexe`, `date_nai
 	(19, 'Wright', 'Robin', 'femme', '1966-04-08'),
 	(20, 'Weir', 'Peter', 'homme', '1944-08-21'),
 	(21, 'Williams', 'Robin', 'homme', '1951-07-21'),
-	(22, 'Hawke', 'Ethan', 'homme', '1970-11-06');
+	(22, 'Hawke', 'Ethan', 'homme', '1970-11-06'),
+	(23, 'Payne', 'Alexander', 'homme', '1961-02-10'),
+	(24, 'Giamitti', 'Paul', 'homme', '1967-06-06'),
+	(25, 'Randolph', 'Da\'Vine Joy', 'femme', '1986-05-21'),
+	(26, 'Darabont', 'Frank', 'homme', '1959-01-28'),
+	(27, 'Duncan', 'Michael', 'homme', '1957-12-10');
 
 -- Listage de la structure de la table cinema_laure. realisateur
 CREATE TABLE IF NOT EXISTS `realisateur` (
@@ -189,9 +206,9 @@ CREATE TABLE IF NOT EXISTS `realisateur` (
   PRIMARY KEY (`id_realisateur`),
   UNIQUE KEY `id_personne` (`id_personne`),
   CONSTRAINT `realisateur_ibfk_1` FOREIGN KEY (`id_personne`) REFERENCES `personne` (`id_personne`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
--- Listage des données de la table cinema_laure.realisateur : ~7 rows (environ)
+-- Listage des données de la table cinema_laure.realisateur : ~9 rows (environ)
 INSERT IGNORE INTO `realisateur` (`id_realisateur`, `id_personne`) VALUES
 	(1, 1),
 	(2, 6),
@@ -199,16 +216,18 @@ INSERT IGNORE INTO `realisateur` (`id_realisateur`, `id_personne`) VALUES
 	(4, 10),
 	(5, 13),
 	(6, 18),
-	(7, 20);
+	(7, 20),
+	(8, 23),
+	(9, 26);
 
 -- Listage de la structure de la table cinema_laure. role
 CREATE TABLE IF NOT EXISTS `role` (
   `id_role` int NOT NULL AUTO_INCREMENT,
   `nom_personnage` varchar(50) COLLATE utf8mb3_bin DEFAULT NULL,
   PRIMARY KEY (`id_role`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
--- Listage des données de la table cinema_laure.role : ~16 rows (environ)
+-- Listage des données de la table cinema_laure.role : ~20 rows (environ)
 INSERT IGNORE INTO `role` (`id_role`, `nom_personnage`) VALUES
 	(1, 'Maggie'),
 	(2, 'Frankie Dunn'),
@@ -225,7 +244,11 @@ INSERT IGNORE INTO `role` (`id_role`, `nom_personnage`) VALUES
 	(13, 'Forest Gump'),
 	(14, 'Jenny '),
 	(15, 'John Keating'),
-	(16, 'Todd Anderson');
+	(16, 'Todd Anderson'),
+	(17, 'Mary Lamb'),
+	(18, 'Paul Hunham'),
+	(19, 'John Coffey'),
+	(20, 'Paul Edgecomb');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
