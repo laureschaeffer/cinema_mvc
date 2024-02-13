@@ -12,19 +12,13 @@ abstract class Connect {
     const PASS = "";
 
     public static function seConnecter(){
-        // try {
-        //     return new \PDO(
-        //         "mysql:host=".self::HOST.";dbname=".self::DB.";charset=utf8", self::USER, self::PASS);
-        // } catch (\PDOException $ex){
-        //     return $ex->getMessage();
-        // }
-
-        try
-            {
-	            $mysqlClient = new PDO('mysql:host=localhost;dbname=cinema_laure;charset=utf8', 'root', '');
-	            [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]; // pour afficher les erreurs
-
+        try {
+            return new \PDO(
+                "mysql:host=".self::HOST.";dbname=".self::DB.";charset=utf8", self::USER, self::PASS);
+        } catch (\PDOException $ex){
+            return $ex->getMessage();
         }
+
         catch (Exception $e)
         {
         die('Erreur : ' . $e->getMessage());

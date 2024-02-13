@@ -3,7 +3,7 @@ use Controller\CinemaController;
 
 
 spl_autoload_register(function ($class_name) {
-    require $class_name . '.php';
+    include $class_name . '.php';
 });
 // cherche automatiquement toutes les classes 
 
@@ -23,7 +23,7 @@ if(isset($_GET["action"])){
         case "detailCasting": $ctrlCinema->detailCasting($id); break;
 
 
-
-
     }
+} else {
+    $ctrlCinema->listFilms();
 }
