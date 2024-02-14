@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `acteur` (
   CONSTRAINT `acteur_ibfk_1` FOREIGN KEY (`id_personne`) REFERENCES `personne` (`id_personne`)
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
--- Listage des données de la table cinema_laure.acteur : ~23 rows (environ)
+-- Listage des données de la table cinema_laure.acteur : ~19 rows (environ)
 INSERT IGNORE INTO `acteur` (`id_acteur`, `id_personne`) VALUES
 	(1, 1),
 	(2, 2),
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `castings` (
   CONSTRAINT `castings_ibfk_3` FOREIGN KEY (`id_role`) REFERENCES `role` (`id_role`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
--- Listage des données de la table cinema_laure.castings : ~23 rows (environ)
+-- Listage des données de la table cinema_laure.castings : ~22 rows (environ)
 INSERT IGNORE INTO `castings` (`id_film`, `id_acteur`, `id_role`) VALUES
 	(1, 1, 2),
 	(1, 2, 1),
@@ -172,41 +172,42 @@ CREATE TABLE IF NOT EXISTS `personne` (
   `sexe` varchar(10) COLLATE utf8mb3_bin DEFAULT NULL,
   `date_naissance` date DEFAULT NULL,
   `photo` text COLLATE utf8mb3_bin,
+  `biographie` text COLLATE utf8mb3_bin,
   PRIMARY KEY (`id_personne`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
 -- Listage des données de la table cinema_laure.personne : ~30 rows (environ)
-INSERT IGNORE INTO `personne` (`id_personne`, `nom`, `prenom`, `sexe`, `date_naissance`, `photo`) VALUES
-	(1, 'Eastwood', 'Clint', 'homme', '1930-05-31', 'public/img/personnes/clintEastwood.jpg'),
-	(2, ' Swank', 'Hilary', 'femme', '1974-07-30', 'public/img/personnes/hilarySwank.jpg'),
-	(3, 'Freeman', 'Morgan', 'homme', '1937-06-01', 'public/img/personnes/morganFreeman.jpg'),
-	(4, 'Hanks', 'Tom', 'homme', '1956-07-09', 'public/img/personnes/tom_hanks.jpg'),
-	(5, 'Eckhart', 'Aaron', 'homme', '1968-03-12', 'public/img/personnes/aaronEckhart.jpg'),
-	(6, 'Al-Mansour', 'Haifaa', 'femme', '1974-08-10', 'public/img/personnes/haifaaAlMansour.jpg'),
-	(7, 'Fanning', 'Elle', 'femme', '1998-04-09', 'public/img/personnes/elle-Fanning.jpg'),
-	(8, 'Booth', 'Douglas', 'homme', '1992-07-09', 'public/img/personnes/douglasBooth.jpg'),
-	(9, 'Marker', 'Chris', 'homme', '1921-07-29', 'public/img/personnes/chrisMarker.jpg'),
-	(10, 'Herzog', 'Werner', 'homme', '1942-09-05', 'public/img/personnes/wernerHerzog.jpg'),
-	(11, 'Kinski', 'Klaus', 'homme', '1926-10-18', 'public/img/personnes/klausKinski.jpg'),
-	(12, 'Adjani', 'Isabelle', 'femme', '1955-07-27', 'public/img/personnes/isabelleAdjani.jpeg'),
-	(13, 'Copola', 'Francis', 'homme', '1939-04-07', 'public/img/personnes/francisCoppola.jpg'),
-	(14, 'Oldman', 'Gary', 'homme', '1958-03-21', 'public/img/personnes/garyOldman.jpg'),
-	(15, 'Frost', 'Sadie', 'femme', '1965-06-15', 'public/img/personnes/sadieFrost.jpeg'),
-	(16, 'Pacino', 'Alfredo', 'homme', '1940-04-25', 'public/img/personnes/alPacino.jpg'),
-	(17, 'Brando', 'Marlon', 'homme', '1924-04-03', 'public/img/personnes/marlonBrando.png'),
-	(18, 'Zemeckis', 'Robert', 'homme', '1952-05-14', 'public/img/personnes/robertZemeckis.jpg'),
-	(19, 'Wright', 'Robin', 'femme', '1966-04-08', 'public/img/personnes/robinWright.jpg'),
-	(20, 'Weir', 'Peter', 'homme', '1944-08-21', 'public/img/personnes/peterWeir.jpg'),
-	(21, 'Williams', 'Robin', 'homme', '1951-07-21', 'public/img/personnes/robinWilliams.jpg'),
-	(22, 'Hawke', 'Ethan', 'homme', '1970-11-06', 'public/img/personnes/ethanHawke.jpg'),
-	(23, 'Payne', 'Alexander', 'homme', '1961-02-10', 'public/img/personnes/alexanderPayne.jpg'),
-	(24, 'Giamitti', 'Paul', 'homme', '1967-06-06', 'public/img/personnes/paulGiamatti.jpg'),
-	(25, 'Randolph', 'Da\'Vine Joy', 'femme', '1986-05-21', 'public/img/personnes/randolphDaVineJoy.jpg'),
-	(26, 'Darabont', 'Frank', 'homme', '1959-01-28', 'public/img/personnes/frankDarabont.jpg'),
-	(27, 'Duncan', 'Michael', 'homme', '1957-12-10', 'public/img/personnes/michaelDuncan.jpg'),
-	(28, 'Fanning', 'Elle', 'femme', '1998-04-09', 'public/img/personnes/elle-Fanning.jpg'),
-	(29, 'Robbie', 'Margot', 'femme', '1990-07-02', 'public/img/personnes/margot-robbie.jpeg'),
-	(30, 'Ryder', 'Winona', 'femme', '1971-10-29', 'public/img/personnes/winonaRyder.jpg');
+INSERT IGNORE INTO `personne` (`id_personne`, `nom`, `prenom`, `sexe`, `date_naissance`, `photo`, `biographie`) VALUES
+	(1, 'Eastwood', 'Clint', 'homme', '1930-05-31', 'public/img/personnes/clintEastwood.jpg', 'Légende hollywoodienne, à la fois acteur et réalisateur, ayant laissé une empreinte indélébile sur le cinéma avec des films emblématiques tels que \'Impitoyable\' et la série des \'Dirty Harry\'. '),
+	(2, ' Swank', 'Hilary', 'femme', '1974-07-30', 'public/img/personnes/hilarySwank.jpg', 'Talentueuse actrice deux fois lauréate de l\'Oscar, reconnue pour ses performances émouvantes dans des films comme ‘Boys Don\'t Cry’ et ‘Million Dollar Baby’, elle a prouvé son engagement envers des rôles complexes et provocateurs. '),
+	(3, 'Freeman', 'Morgan', 'homme', '1937-06-01', 'public/img/personnes/morganFreeman.jpg', 'Voix emblématique du cinéma, cet acteur polyvalent a captivé les spectateurs avec sa présence charismatique dans des films tels que \'Les Évadés\' et \'Bruce tout-puissant\', tout en étant un narrateur recherché pour ses documentaires. '),
+	(4, 'Hanks', 'Tom', 'homme', '1956-07-09', 'public/img/personnes/tom_hanks.jpg', 'Acteur vénéré à travers le monde, maintes fois récompensé pour ses performances dans des films tels que \'Forrest Gump\', \'Philadelphia\' et \'Captain Phillips\', il incarne la quintessence du talent et de la polyvalence à Hollywood. '),
+	(5, 'Eckhart', 'Aaron', 'homme', '1968-03-12', 'public/img/personnes/aaronEckhart.jpg', 'Acteur polyvalent, il a brillé dans des rôles variés, que ce soit en tant que procureur dans \'The Dark Knight\' ou en tant que porte-parole cynique dans \'Thank You for Smoking\', démontrant sa capacité à incarner une large gamme de personnages. '),
+	(6, 'Al-Mansour', 'Haifaa', 'femme', '1974-08-10', 'public/img/personnes/haifaaAlMansour.jpg', 'Réalisatrice saoudienne pionnière, son film \'Wadjda\' a marqué l\'histoire en tant que premier long métrage réalisé par une femme en Arabie saoudite, explorant avec sensibilité les défis de l\'émancipation féminine dans une société conservatrice.  '),
+	(7, 'Fanning', 'Elle', 'femme', '1998-04-09', 'public/img/personnes/elle-Fanning.jpg', 'Actrice éblouissante, elle a captivé le public avec ses performances dans des films tels que \'Somewhere\' et \'The Neon Demon\', révélant un talent précoce et une capacité à incarner des rôles complexes avec une grâce étonnante.'),
+	(8, 'Booth', 'Douglas', 'homme', '1992-07-09', 'public/img/personnes/douglasBooth.jpg', 'Acteur britannique en pleine ascension, il s\'est distingué dans des adaptations littéraires telles que \'Romeo and Juliet\' et \'Great Expectations\', séduisant le public par sa présence charismatique et son jeu d\'acteur convaincant. '),
+	(9, 'Marker', 'Chris', 'homme', '1921-07-29', 'public/img/personnes/chrisMarker.jpg', 'Réalisateur et écrivain visionnaire, il est célèbre pour son film expérimental \'La Jetée\' et son travail novateur dans le domaine du cinéma documentaire, offrant une perspective unique sur les questions sociales et politiques de son époque. '),
+	(10, 'Herzog', 'Werner', 'homme', '1942-09-05', 'public/img/personnes/wernerHerzog.jpg', 'Cinéaste allemand iconoclaste, ses films audacieux et provocateurs, comme \'Aguirre, la colère de Dieu\' et \'Fitzcarraldo\', repoussent les limites du cinéma conventionnel, explorant les thèmes de l\'obsession, de la folie et de la condition humaine avec une intensité saisissante.'),
+	(11, 'Kinski', 'Klaus', 'homme', '1926-10-18', 'public/img/personnes/klausKinski.jpg', 'Acteur allemand au tempérament volcanique, connu pour ses collaborations tumultueuses avec Werner Herzog dans des films comme \'Aguirre, la colère de Dieu\' et \'Fitzcarraldo\', il a laissé une marque indélébile sur le cinéma avec ses performances mémorables.'),
+	(12, 'Adjani', 'Isabelle', 'femme', '1955-07-27', 'public/img/personnes/isabelleAdjani.jpeg', 'Actrice française de renommée mondiale, récipiendaire de plusieurs prix, elle a captivé le public avec son talent exceptionnel et ses interprétations émouvantes dans des films tels que \'L\'Histoire d\'Adèle H.\' et \'Camille Claudel\'.'),
+	(13, 'Copola', 'Francis', 'homme', '1939-04-07', 'public/img/personnes/francisCoppola.jpg', 'Réalisateur légendaire, célèbre pour avoir dirigé des films emblématiques tels que \'Le Parrain\', \'Dracula\' et \'Apocalypse Now\', il est considéré comme l\'un des cinéastes les plus influents de l\'histoire du cinéma américain.'),
+	(14, 'Oldman', 'Gary', 'homme', '1958-03-21', 'public/img/personnes/garyOldman.jpg', 'Acteur polyvalent et caméléonique, il a impressionné le public avec sa capacité à se métamorphoser dans une variété de rôles, des méchants dépravés comme dans \'Léon\' aux figures historiques comme dans \'Les Heures sombres\', et son rôle de Sirius Black dans \'Harry Potter\'.'),
+	(15, 'Frost', 'Sadie', 'femme', '1965-06-15', 'public/img/personnes/sadieFrost.jpeg', 'Actrice britannique et entrepreneure, elle est également connue pour son rôle dans des films tels que \'Dracula\' de Coppola et pour sa carrière dans la mode avec la marque \'FrostFrench\'.'),
+	(16, 'Pacino', 'Alfredo', 'homme', '1940-04-25', 'public/img/personnes/alPacino.jpg', 'Icône du cinéma américain, célèbre pour ses performances légendaires dans des films tels que \'Le Parrain\', \'Scarface\' et \'Le Temps d\'un week-end\', il incarne la quintessence de l\'acteur tourmenté et charismatique.'),
+	(17, 'Brando', 'Marlon', 'homme', '1924-04-03', 'public/img/personnes/marlonBrando.png', 'Légende du cinéma, il a révolutionné l\'art de l\'interprétation avec des performances révolutionnaires dans des films comme \'Un tramway nommé Désir\' et \'Le Parrain\', influençant des générations d\'acteurs à venir par son style novateur et sa présence magnétique.'),
+	(18, 'Zemeckis', 'Robert', 'homme', '1952-05-14', 'public/img/personnes/robertZemeckis.jpg', 'Réalisateur, scénariste et producteur américain célèbre pour avoir dirigé des films emblématiques tels que \'Retour vers le futur\', \'Forrest Gump\' et \'Qui veut la peau de Roger Rabbit ?\'. Zemeckis a commencé sa carrière dans le cinéma en réalisant des films indépendants avant de connaître le succès à Hollywood. Son style visuel distinctif et son utilisation innovante des effets spéciaux lui ont valu de nombreux prix et nominations aux Oscars. En plus de son travail au cinéma, Zemeckis a également été impliqué dans la production de séries télévisées à succès.'),
+	(19, 'Wright', 'Robin', 'femme', '1966-04-08', 'public/img/personnes/robinWright.jpg', 'Actrice américaine renommée, célèbre pour son rôle dans la série télévisée \'House of Cards\' et pour ses performances remarquables dans des films tels que \'Forrest Gump\' et \'The Princess Bride\', elle est également réalisatrice et militante engagée.'),
+	(20, 'Weir', 'Peter', 'homme', '1944-08-21', 'public/img/personnes/peterWeir.jpg', 'Réalisateur australien acclamé, connu pour ses films emblématiques tels que \'Le Cercle des poètes disparus\' et \'Witness\', il est réputé pour son style visuel distinctif et sa capacité à capturer l\'essence de l\'humanité dans ses œuvres'),
+	(21, 'Williams', 'Robin', 'homme', '1951-07-21', 'public/img/personnes/robinWilliams.jpg', 'Légende de la comédie et acteur polyvalent, il a enchanté le public avec ses performances dans des films tels que \'Good Morning, Vietnam\', \'Dead Poets Society\' et \'Mrs. Doubtfire\', démontrant un talent incomparable et une profonde sensibilité.'),
+	(22, 'Hawke', 'Ethan', 'homme', '1970-11-06', 'public/img/personnes/ethanHawke.jpg', 'Acteur et écrivain polyvalent, il est connu pour ses collaborations fructueuses avec le réalisateur Richard Linklater dans des films comme la trilogie \'Before\' et \'Boyhood\', ainsi que pour ses performances remarquables dans \'Training Day\' et \'Boyhood\'.'),
+	(23, 'Payne', 'Alexander', 'homme', '1961-02-10', 'public/img/personnes/alexanderPayne.jpg', 'Réalisateur et scénariste primé, il est célèbre pour ses films satiriques et émotionnels tels que \'Sideways\', \'The Descendants\', \'Nebraska\', et plus récemment \'Winter Break\' explorant les complexités de la condition humaine avec humour et compassion.'),
+	(24, 'Giamitti', 'Paul', 'homme', '1967-06-06', 'public/img/personnes/paulGiamatti.jpg', 'Acteur talentueux et polyvalent, il a captivé le public avec ses performances dans des films tels que \'Sideways\', \'American Splendor\', \'Winter Break\' et \'Cinderella Man\', incarnant une variété de personnages mémorables avec une profondeur et une nuance remarquables.'),
+	(25, 'Randolph', 'Da\'Vine Joy', 'femme', '1986-05-21', 'public/img/personnes/randolphDaVineJoy.jpg', 'Actrice émergente, elle a marqué les esprits avec sa performance dans le film \'Dolemite Is My Name\', lui valant des éloges pour sa présence charismatique et son talent comique.'),
+	(26, 'Darabont', 'Frank', 'homme', '1959-01-28', 'public/img/personnes/frankDarabont.jpg', 'Réalisateur et scénariste acclamé, il est surtout connu pour ses adaptations cinématographiques de Stephen King, notamment \'Les Évadés\' et \'La Ligne verte\', démontrant une maîtrise narrative et une sensibilité émotionnelle exceptionnelles.'),
+	(27, 'Duncan', 'Michael', 'homme', '1957-12-10', 'public/img/personnes/michaelDuncan.jpg', 'Acteur charismatique et imposant, il a impressionné le public avec sa performance nominée aux Oscars dans \'La Ligne verte\', ainsi que dans des films comme \'Armageddon\' et \'Sin City\', laissant un impact indélébile sur le cinéma.'),
+	(28, 'Fanning', 'Elle', 'femme', '1998-04-09', 'public/img/personnes/elle-Fanning.jpg', 'Jeune actrice talentueuse, elle a rapidement gagné en notoriété pour ses performances dans des films tels que \'Somewhere\' et \'The Neon Demon\', affirmant son statut en tant que l\'une des étoiles montantes de Hollywood.'),
+	(29, 'Robbie', 'Margot', 'femme', '1990-07-02', 'public/img/personnes/margot-robbie.jpeg', 'Actrice australienne devenue une sensation mondiale, elle a brillé dans des films tels que \'Le Loup de Wall Street\', \'Suicide Squad\', \'I, Tonya\', \'Barbie\' démontrant son talent polyvalent et son charisme magnétique.'),
+	(30, 'Ryder', 'Winona', 'femme', '1971-10-29', 'public/img/personnes/winonaRyder.jpg', 'Icône du cinéma des années 90, elle a marqué des générations de cinéphiles avec ses performances dans des films emblématiques tels que \'Beetlejuice\', \'Edward aux mains d\'argent\', \'Dracula\' et \'Girl, Interrupted\', incarnant souvent des personnages excentriques et tourmentés avec une grâce et une intensité captivantes.');
 
 -- Listage de la structure de la table cinema_laure. realisateur
 CREATE TABLE IF NOT EXISTS `realisateur` (
@@ -236,7 +237,7 @@ CREATE TABLE IF NOT EXISTS `role` (
   PRIMARY KEY (`id_role`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
--- Listage des données de la table cinema_laure.role : ~21 rows (environ)
+-- Listage des données de la table cinema_laure.role : ~20 rows (environ)
 INSERT IGNORE INTO `role` (`id_role`, `nom_personnage`) VALUES
 	(1, 'Maggie'),
 	(2, 'Frankie Dunn'),
