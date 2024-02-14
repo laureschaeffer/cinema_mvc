@@ -9,7 +9,7 @@ class CinemaController {
     public function listFilms(){
         $pdo = Connect::seConnecter();
         $requeteLsFilms = $pdo->query(
-            "SELECT titre, annee_sortie_fr, id_film
+            "SELECT titre, annee_sortie_fr, id_film, affiche
             FROM film");
 
         require "view/film/listeFilms.php";
@@ -18,7 +18,7 @@ class CinemaController {
     public function listReals(){
         $pdo = Connect::seConnecter();
         $requeteLsReal = $pdo->query(
-            "SELECT CONCAT(p.prenom, ' ', p.nom) AS nomReal, p.date_naissance, r.id_realisateur
+            "SELECT CONCAT(p.prenom, ' ', p.nom) AS nomReal, p.date_naissance, r.id_realisateur, p.photo
             FROM realisateur r
             INNER JOIN personne p ON r.id_personne = p.id_personne"
         );
@@ -29,7 +29,7 @@ class CinemaController {
     public function listActeurs(){
         $pdo = Connect::seConnecter();
         $requeteLsActeur = $pdo->query(
-            "SELECT CONCAT(p.prenom, ' ', p.nom) AS nomActeur, p.date_naissance, a.id_acteur
+            "SELECT CONCAT(p.prenom, ' ', p.nom) AS nomActeur, p.date_naissance, a.id_acteur, p.photo
             FROM acteur a
             INNER JOIN personne p ON a.id_personne = p.id_personne"
         );
@@ -55,7 +55,7 @@ class CinemaController {
 
     public function detailActeur($id) {
         $pdo = Connect::seConnecter();
-        $requeteActeur = $pdo->prepare("SELECT CONCAT(p.prenom, ' ', p.nom) AS nomActeur, p.date_naissance, p.photo
+        $requeteActeur = $pdo->prepare("SELECT CONCAT(p.prenom, ' ', p.nom) AS nomActeur, DATE_FORMAT(date_naissance, '%d/%m/%Y') AS date_naissance, p.photo, p.biographie, p.sexe
         FROM acteur a
         INNER JOIN personne p ON a.id_personne = p.id_personne
         WHERE id_acteur = :id");
@@ -66,7 +66,7 @@ class CinemaController {
 
     public function detailReal($id){
         $pdo = Connect::seConnecter();
-        $requeteReal = $pdo->prepare("SELECT CONCAT(p.prenom, ' ', p.nom) AS nomReal, p.date_naissance, p.photo
+        $requeteReal = $pdo->prepare("SELECT CONCAT(p.prenom, ' ', p.nom) AS nomReal, DATE_FORMAT(date_naissance, '%d/%m/%Y') AS date_naissance, p.photo, p.biographie, p.sexe
         FROM realisateur r
         INNER JOIN personne p ON r.id_personne = p.id_personne
         WHERE id_realisateur = :id");
@@ -77,8 +77,11 @@ class CinemaController {
     
     public function detailFilm($id){
         $pdo = Connect::seConnecter();
-        $requeteDetailFilm = $pdo->prepare("SELECT titre, annee_sortie_fr, synopsis, note, affiche
-        FROM film WHERE id_film = :id");
+        $requeteDetailFilm = $pdo->prepare("SELECT f.titre, f.annee_sortie_fr, f.synopsis, f.note, f.affiche, CONCAT(prenom, ' ', nom) AS realisateur
+        FROM film f
+        INNER JOIN realisateur r ON f.id_realisateur = r.id_realisateur
+        INNER JOIN personne p ON r.id_realisateur = p.id_personne
+        WHERE id_film = :id");
         $requeteDetailFilm->execute(["id" => $id]);
 
         // il est nécessaire d'utiliser une seconde requête pour le casting

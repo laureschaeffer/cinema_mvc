@@ -2,27 +2,17 @@
 
 <p class="uk-label uk-label-warning"> Il y a <?= $requeteLsActeur->rowCount() ?> acteurs </p>
 
-<table class="uk-table uk-table-striped">
-    <thead>
-        <tr>
-            <th>Nom</th>
-            <th>Date de Naissance</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
+    <?php
         // liste de tous les acteurs présents dans la base de données ; l'url permet d'appeler l'action dans l'index
         foreach($requeteLsActeur->fetchAll() as $acteur) { ?>
-        <tr>
-            <td><a href="index.php?action=detailActeur&id=<?=$acteur["id_acteur"]?>"><?= $acteur["nomActeur"]?></a></td>
-            <td><?= $acteur["date_naissance"] ?></td>
-        </tr>
-        <?php } ?>
-    </tbody>
+        <div class="card-listing">
+            <a href="index.php?action=detailActeur&id=<?=$acteur["id_acteur"]?>"><?= $acteur["nomActeur"]?></a>
+            <p><?= $acteur["date_naissance"] ?></p>
+            <img src="<?=$acteur["photo"]?>" alt="photo de l'acteur" width=70px height=100px>
+        </div>
 
-</table>
+        <?php } 
 
-<?php
 
 $titre= "Liste des acteurs";
 $titre_secondaire = "Liste des acteurs";

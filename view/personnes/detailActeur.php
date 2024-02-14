@@ -1,18 +1,26 @@
 <?php ob_start(); // lien avec le fichier template.php ?>
 
-
         <section class="detail">
-        <?php foreach($requeteActeur->fetchAll() as $acteur) { ?>
+        <?php foreach($requeteActeur->fetchAll() as $acteur) { 
+            //condition pour savoir comment accorder la phrase
+            if($acteur["sexe"] =="femme"){
+                $accord="Née le ";
+            } else {
+                $accord="Né le ";
+            }
+            ?>
             <div class="detail-header">
                 <p><?= $acteur["nomActeur"] ?></p> 
-                <p><?= $acteur["date_naissance"]?></p> 
+                <p><?=$accord.$acteur["date_naissance"]?></p> 
                 
             </div>
             <div class="detail-main">
                 <div class="biographie">
-                    <!-- biographie  -->
+                    <p>
+                        <?=$acteur["biographie"]?>
+                    </p>
                 </div>
-                <img src="<?=$acteur["photo"]?>" alt="photo de l'acteur">
+                <img src="<?=$acteur["photo"]?>" alt="photo de l'acteur" height=200px width=200px >
                  
             </div>
     </section>

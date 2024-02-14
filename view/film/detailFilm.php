@@ -4,7 +4,8 @@
         <?php foreach($requeteDetailFilm->fetchAll() as $detFilm) { ?>
             <div class="detail-header">
                 <p><?= $detFilm["annee_sortie_fr"]?></p> 
-                <p><?= $detFilm["note"]?> /5</p> 
+                <p>Réalisé par <?=$detFilm["realisateur"]?></p>
+                <p><?= $detFilm["note"]?>/5</p> 
             </div>
             <div class="detail-main">
                 <div class="synopsis">
@@ -12,11 +13,13 @@
                 </div>
                 <img src="<?=$detFilm["affiche"]?>" alt="affiche du film" width=200px height=200px>
             </div>
+            <?php
+        }
+        ?>
             <div class="casting">
                 <?php
                     foreach($requeteCasting->fetchAll() as $casting) { 
-                        ?> <p> <?=$casting["nomActeur"]?> dans le rôle de <?= $casting["nom_personnage"] ?> </p>
-                    <?=  } ?>   
+                        ?> <p> <?=$casting["nomActeur"]?> dans le rôle de <?= $casting["nom_personnage"] ?> </p>   
             </div>
 
     </section>
