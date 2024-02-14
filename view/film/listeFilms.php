@@ -11,6 +11,7 @@
     </thead>
     <tbody>
         <?php
+        // liste de tous les films présents dans la base de données ; l'url permet d'appeler l'action dans l'index
         foreach($requeteLsFilms->fetchAll() as $film) { ?>
         <tr>
             <td><a href="index.php?action=detailFilm&id=<?=$film["id_film"] ?>"><?= $film["titre"] ?></a></td>         

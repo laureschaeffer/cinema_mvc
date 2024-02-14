@@ -10,6 +10,7 @@
     </thead>
     <tbody>
         <?php
+        //listes des genres de films
         foreach($requeteLsGenre->fetchAll() as $genre) { ?>
         <tr>
             <td><?= $genre["nom"] ?></td>

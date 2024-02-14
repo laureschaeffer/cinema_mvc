@@ -1,29 +1,26 @@
 <?php ob_start(); // lien avec le fichier template.php ?>
 
 
-<table class="uk-table uk-table-striped">
-    <thead>
-        <tr>
-            <th>Nom</th>
-            <th>Date de naissance</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-        foreach($requeteActeur->fetchAll() as $acteur) { ?>
-        <tr>
-            <td><?= $acteur["nomActeur"] ?></td>
-            <td><?= $acteur["date_naissance"]?> </td>
-        </tr>
-        <?php } ?>
-    </tbody>
+        <section class="detail">
+        <?php foreach($requeteActeur->fetchAll() as $acteur) { ?>
+            <div class="detail-header">
+                <p><?= $acteur["nomActeur"] ?></p> 
+                <p><?= $acteur["date_naissance"]?></p> 
+                
+            </div>
+            <div class="detail-main">
+                <div class="biographie">
+                    <!-- biographie  -->
+                </div>
+                <img src="<?=$acteur["photo"]?>" alt="photo de l'acteur">
+                 
+            </div>
+    </section>
 
-</table>
-
-<?php
+<?php  }
 
 $titre= "Détail Acteur";
-$titre_secondaire = "Detail de l'acteur";
+$titre_secondaire = $acteur["nomActeur"];
 $contenu = ob_get_clean();
 
 require_once "view/template.php";

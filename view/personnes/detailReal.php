@@ -1,29 +1,23 @@
 <?php ob_start(); // lien avec le fichier template.php ?>
 
+    <section class="detail">
+        <?php foreach($requeteReal->fetchAll() as $real) { ?>
+            <div class="detail-header">
+                <p><?= $real["nomReal"] ?></p> 
+                <p><?= $real["date_naissance"]?></p>  
+            </div>
+            <div class="detail-main">
+                <div class="biographie">
+                    <!-- biographie  -->
+                </div>
+                <img src="<?=$real["photo"]?>" alt="photo du réalisateur" width=200px height=200px>
+            </div>
+    </section>
 
-<table class="uk-table uk-table-striped">
-    <thead>
-        <tr>
-            <th>Nom</th>
-            <th>Date de naissance</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-        foreach($requeteReal->fetchAll() as $real) { ?>
-        <tr>
-            <td><?= $real["nomReal"] ?></td>
-            <td><?= $real["date_naissance"]?> </td>
-        </tr>
-        <?php } ?>
-    </tbody>
-
-</table>
-
-<?php
+<?php }
 
 $titre= "Détail réalisateur";
-$titre_secondaire = "Detail du réalisateur";
+$titre_secondaire = $real["nomReal"];
 $contenu = ob_get_clean();
 
 require_once "view/template.php";

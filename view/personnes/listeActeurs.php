@@ -11,6 +11,7 @@
     </thead>
     <tbody>
         <?php
+        // liste de tous les acteurs présents dans la base de données ; l'url permet d'appeler l'action dans l'index
         foreach($requeteLsActeur->fetchAll() as $acteur) { ?>
         <tr>
             <td><a href="index.php?action=detailActeur&id=<?=$acteur["id_acteur"]?>"><?= $acteur["nomActeur"]?></a></td>

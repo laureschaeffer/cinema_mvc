@@ -55,7 +55,7 @@ class CinemaController {
 
     public function detailActeur($id) {
         $pdo = Connect::seConnecter();
-        $requeteActeur = $pdo->prepare("SELECT CONCAT(p.prenom, ' ', p.nom) AS nomActeur, p.date_naissance
+        $requeteActeur = $pdo->prepare("SELECT CONCAT(p.prenom, ' ', p.nom) AS nomActeur, p.date_naissance, p.photo
         FROM acteur a
         INNER JOIN personne p ON a.id_personne = p.id_personne
         WHERE id_acteur = :id");
@@ -66,7 +66,7 @@ class CinemaController {
 
     public function detailReal($id){
         $pdo = Connect::seConnecter();
-        $requeteReal = $pdo->prepare("SELECT CONCAT(p.prenom, ' ', p.nom) AS nomReal, p.date_naissance
+        $requeteReal = $pdo->prepare("SELECT CONCAT(p.prenom, ' ', p.nom) AS nomReal, p.date_naissance, p.photo
         FROM realisateur r
         INNER JOIN personne p ON r.id_personne = p.id_personne
         WHERE id_realisateur = :id");

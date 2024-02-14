@@ -11,6 +11,7 @@
     </thead>
     <tbody>
         <?php
+        // liste de tous les realisateurs présents dans la base de données ; l'url permet d'appeler l'action dans l'index
         foreach($requeteLsReal->fetchAll() as $real) { ?>
         <tr>
             <td><a href="index.php?action=detailReal&id=<?= $real["id_realisateur"]?>"><?= $real["nomReal"] ?></a></td>
