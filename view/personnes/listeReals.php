@@ -1,19 +1,19 @@
-<?php ob_start(); ?>
+<?php ob_start(); // lien avec le fichier template.php ?>
 
 <p class="uk-label uk-label-warning"> Il y a <?= $requeteLsReal->rowCount() ?> réalisateurs </p>
 
 <table class="uk-table uk-table-striped">
     <thead>
         <tr>
-            <th>TITRE</th>
-            <th>ANNEE SORTIE</th>
+            <th>Nom</th>
+            <th>Année de naissance</th>
         </tr>
     </thead>
     <tbody>
         <?php
         foreach($requeteLsReal->fetchAll() as $real) { ?>
         <tr>
-            <td><?= $real["nom_real"] ?></td>
+            <td><a href="index.php?action=detailReal&id=<?= $real["id_realisateur"]?>"><?= $real["nomReal"] ?></a></td>
             <td><?= $real["date_naissance"]?> </td>
         </tr>
         <?php } ?>

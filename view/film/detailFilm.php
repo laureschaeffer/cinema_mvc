@@ -1,31 +1,30 @@
-<?php ob_start(); ?>
+<?php ob_start(); // lien avec le fichier template.php ?>
 
+    <section class="detail">
+        <?php foreach($requeteDetailFilm->fetchAll() as $detFilm) { ?>
+            <div class="detail-header">
+                <p><?= $detFilm["annee_sortie_fr"]?></p> 
+                <p><?= $detFilm["note"]?> /5</p> 
+            </div>
+            <div class="detail-main">
+                <div class="synopsis">
+                    <?= $detFilm["synopsis"] ?>
+                </div>
+                <img src="<?=$detFilm["affiche"]?>" alt="affiche du film" width=200px height=200px>
+            </div>
+            <div class="casting">
+                <?php
+                    foreach($requeteCasting->fetchAll() as $casting) { 
+                        ?> <p> <?=$casting["nomActeur"]?> dans le rôle de <?= $casting["nom_personnage"] ?> </p>
+                    <?=  } ?>   
+            </div>
 
-<table class="uk-table uk-table-striped">
-    <thead>
-        <tr>
-            <th>Titre</th>
-            <th>Année de sortie</th>
-            <th>Note sur 5</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-        foreach($requeteDetailFilm->fetchAll() as $detFilm) { ?>
-        <tr>
-            <td><?= $detFilm["titre"] ?></td>
-            <td><?= $detFilm["annee_sortie_fr"]?> </td>
-            <td><?= $detFilm["note"]?> </td>
-        </tr>
-        <?php } ?>
-    </tbody>
+    </section>
 
-</table>
+        <?php } 
 
-<?php
-
-$titre= "Détail film";
-$titre_secondaire = "Detail du film";
+$titre= "Détail du film film";
+$titre_secondaire = $detFilm["titre"];
 $contenu = ob_get_clean();
 
 require_once "view/template.php";

@@ -1,22 +1,22 @@
-<?php ob_start(); ?>
+<?php ob_start(); // lien avec le fichier template.php ?>
 
 <p class="uk-label uk-label-warning"> Il y a <?= $requeteLsFilms->rowCount() ?> films </p>
 
 <table class="uk-table uk-table-striped">
     <thead>
         <tr>
-            <th>TITRE</th>
-            <th>ANNEE SORTIE</th>
+            <th>Titre</th>
+            <th>Année de sortie</th>
         </tr>
     </thead>
     <tbody>
         <?php
         foreach($requeteLsFilms->fetchAll() as $film) { ?>
         <tr>
-            <td><?= $film["titre"] ?></td>
+            <td><a href="index.php?action=detailFilm&id=<?=$film["id_film"] ?>"><?= $film["titre"] ?></a></td>         
             <td><?= $film["annee_sortie_fr"]?> </td>
         </tr>
-        <?php } ?>
+        <?php }  ?>
     </tbody>
 
 </table>

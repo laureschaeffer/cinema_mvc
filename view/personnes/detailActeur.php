@@ -1,11 +1,11 @@
-<?php ob_start(); ?>
+<?php ob_start(); // lien avec le fichier template.php ?>
 
 
 <table class="uk-table uk-table-striped">
     <thead>
         <tr>
-            <th>TITRE</th>
-            <th>ANNEE SORTIE</th>
+            <th>Nom</th>
+            <th>Date de naissance</th>
         </tr>
     </thead>
     <tbody>
