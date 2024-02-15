@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `acteur` (
   CONSTRAINT `acteur_ibfk_1` FOREIGN KEY (`id_personne`) REFERENCES `personne` (`id_personne`)
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
--- Listage des données de la table cinema_laure.acteur : ~19 rows (environ)
+-- Listage des données de la table cinema_laure.acteur : ~23 rows (environ)
 INSERT IGNORE INTO `acteur` (`id_acteur`, `id_personne`) VALUES
 	(1, 1),
 	(2, 2),
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `castings` (
   CONSTRAINT `castings_ibfk_3` FOREIGN KEY (`id_role`) REFERENCES `role` (`id_role`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
--- Listage des données de la table cinema_laure.castings : ~22 rows (environ)
+-- Listage des données de la table cinema_laure.castings : ~23 rows (environ)
 INSERT IGNORE INTO `castings` (`id_film`, `id_acteur`, `id_role`) VALUES
 	(1, 1, 2),
 	(1, 2, 1),
@@ -84,7 +84,7 @@ INSERT IGNORE INTO `castings` (`id_film`, `id_acteur`, `id_role`) VALUES
 	(6, 11, 9),
 	(6, 12, 10),
 	(7, 13, 11),
-	(8, 14, 12),
+	(7, 14, 12),
 	(8, 15, 14),
 	(9, 16, 15),
 	(9, 17, 16),
@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `definir` (
   CONSTRAINT `definir_ibfk_2` FOREIGN KEY (`id_genre`) REFERENCES `genre` (`id_genre`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
--- Listage des données de la table cinema_laure.definir : ~11 rows (environ)
+-- Listage des données de la table cinema_laure.definir : ~13 rows (environ)
 INSERT IGNORE INTO `definir` (`id_film`, `id_genre`) VALUES
 	(7, 1),
 	(1, 2),
@@ -179,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `personne` (
 -- Listage des données de la table cinema_laure.personne : ~30 rows (environ)
 INSERT IGNORE INTO `personne` (`id_personne`, `nom`, `prenom`, `sexe`, `date_naissance`, `photo`, `biographie`) VALUES
 	(1, 'Eastwood', 'Clint', 'homme', '1930-05-31', 'public/img/personnes/clintEastwood.jpg', 'Légende hollywoodienne, à la fois acteur et réalisateur, ayant laissé une empreinte indélébile sur le cinéma avec des films emblématiques tels que \'Impitoyable\' et la série des \'Dirty Harry\'. '),
-	(2, ' Swank', 'Hilary', 'femme', '1974-07-30', 'public/img/personnes/hilarySwank.jpg', 'Talentueuse actrice deux fois lauréate de l\'Oscar, reconnue pour ses performances émouvantes dans des films comme ‘Boys Don\'t Cry’ et ‘Million Dollar Baby’, elle a prouvé son engagement envers des rôles complexes et provocateurs. '),
+	(2, 'Swank', 'Hilary', 'femme', '1974-07-30', 'public/img/personnes/hilarySwank.jpg', 'Talentueuse actrice deux fois lauréate de l\'Oscar, reconnue pour ses performances émouvantes dans des films comme ‘Boys Don\'t Cry’ et ‘Million Dollar Baby’, elle a prouvé son engagement envers des rôles complexes et provocateurs. '),
 	(3, 'Freeman', 'Morgan', 'homme', '1937-06-01', 'public/img/personnes/morganFreeman.jpg', 'Voix emblématique du cinéma, cet acteur polyvalent a captivé les spectateurs avec sa présence charismatique dans des films tels que \'Les Évadés\' et \'Bruce tout-puissant\', tout en étant un narrateur recherché pour ses documentaires. '),
 	(4, 'Hanks', 'Tom', 'homme', '1956-07-09', 'public/img/personnes/tom_hanks.jpg', 'Acteur vénéré à travers le monde, maintes fois récompensé pour ses performances dans des films tels que \'Forrest Gump\', \'Philadelphia\' et \'Captain Phillips\', il incarne la quintessence du talent et de la polyvalence à Hollywood. '),
 	(5, 'Eckhart', 'Aaron', 'homme', '1968-03-12', 'public/img/personnes/aaronEckhart.jpg', 'Acteur polyvalent, il a brillé dans des rôles variés, que ce soit en tant que procureur dans \'The Dark Knight\' ou en tant que porte-parole cynique dans \'Thank You for Smoking\', démontrant sa capacité à incarner une large gamme de personnages. '),
@@ -237,7 +237,7 @@ CREATE TABLE IF NOT EXISTS `role` (
   PRIMARY KEY (`id_role`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 
--- Listage des données de la table cinema_laure.role : ~20 rows (environ)
+-- Listage des données de la table cinema_laure.role : ~21 rows (environ)
 INSERT IGNORE INTO `role` (`id_role`, `nom_personnage`) VALUES
 	(1, 'Maggie'),
 	(2, 'Frankie Dunn'),

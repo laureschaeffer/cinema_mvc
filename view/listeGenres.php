@@ -5,7 +5,7 @@
     <?php
         //listes des genres de films
         foreach($requeteLsGenre->fetchAll() as $genre) { ?>
-            <p><?= $genre["nom"] ?></p>
+            <p><a href="index.php?action=detailGenre&id=<?=$genre["id_genre"]?>"><?= $genre["nom"] ?></a></p>
         <?php } ?>
 
 </div>

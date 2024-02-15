@@ -17,15 +17,22 @@ $id= (isset($_GET["id"])) ? $_GET["id"] : null;
 
 if(isset($_GET["action"])){
     switch ($_GET["action"]){ 
+        //listes
         case "listFilms": $ctrlCinema->listFilms(); break;
         case "listReals": $ctrlCinema->listReals(); break;
         case "listActeurs" : $ctrlCinema->listActeurs(); break;
         case "listGenres" : $ctrlCinema->listGenres(); break;
         
+        //details
         case "detailActeur": $ctrlCinema->detailActeur($id); break;
         case "detailReal" : $ctrlCinema->detailReal($id); break;
-        case "detailFilm": $ctrlCinema->detailFilm($id); 
+        case "detailFilm": $ctrlCinema->detailFilm($id); break;
+        case "detailGenre" : $ctrlCinema->detailGenre($id); break;
+        case "listeRole" : $ctrlCinema->listRole($id); break;
 
+        //formulaire
+        // case "ajouterFilm" : $ctrlCinema->listReals(); break ;
+            
     }
 } else {
     $ctrlCinema->listFilms();

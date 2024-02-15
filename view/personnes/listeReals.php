@@ -8,7 +8,7 @@
         <div class="card-listing">
             <p><a href="index.php?action=detailReal&id=<?= $real["id_realisateur"]?>"><?= $real["nomReal"] ?></a></p>
             <p><?= $real["date_naissance"]?> </p>
-            <img src="<?=$real["photo"]?>" alt="photo du réalisateur" width=70px height=100px>
+            <img src="<?=$real["photo"]?>" alt="photo du réalisateur <?=$real["nomReal"]?>">
         </div>
 
         <?php } 

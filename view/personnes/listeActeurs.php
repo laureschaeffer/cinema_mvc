@@ -8,10 +8,13 @@
         <div class="card-listing">
             <a href="index.php?action=detailActeur&id=<?=$acteur["id_acteur"]?>"><?= $acteur["nomActeur"]?></a>
             <p><?= $acteur["date_naissance"] ?></p>
-            <img src="<?=$acteur["photo"]?>" alt="photo de l'acteur" width=70px height=100px>
+            <img src="<?=$acteur["photo"]?>" alt="photo de l'acteur <?=$acteur["nomActeur"]?>">
         </div>
 
         <?php } 
+        var_dump($acteur);
+        
+    
 
 
 $titre= "Liste des acteurs";

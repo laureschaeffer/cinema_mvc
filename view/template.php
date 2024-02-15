@@ -21,7 +21,7 @@
         <a href="index.php?action=listReals">Réalisateurs</a></li>
         <a href="index.php?action=listActeurs">Acteurs</a></li>
         <a href="index.php?action=listGenres">Genres</a></li>
-        <a href="#">Formulaires</a></li>
+        <!-- <a href="index.php?action=listReals">Formulaires</a></li> -->
         <div class="network">
             <a href="#">
                 <i class="fa-brands fa-facebook-f"></i>                        
