@@ -145,5 +145,26 @@ class CinemaController {
 
     // // -------------------------------------------------formulaires--------------------------------------------
 
+    public function addFilm(){ // requete pour les listes déroulantes
+        // choix du genre d'un film
+        $pdo = Connect::seConnecter();
+        $choixGenre = $pdo->prepare("SELECT nom FROM genre ORDER BY nom");
+        $choixGenre->execute();
 
+        // choix d'un acteur
+        $choixActeur = $pdo->prepare("SELECT concat(p.prenom, ' ', p.nom) AS nomActeur
+        FROM acteur a
+        INNER JOIN personne p ON a.id_personne = p.id_personne
+        ORDER BY p.nom");
+        $choixActeur->execute();
+
+        // choix du réalisateur
+        $choixReal = $pdo->prepare("SELECT concat(p.prenom, ' ', p.nom) AS nomReal
+        FROM realisateur r
+        INNER JOIN personne p ON r.id_personne = p.id_personne
+        ORDER BY p.nom");
+        $choixReal->execute();
+
+        require "view/formulaires/ajouterFilm.php";
+    }
 }
