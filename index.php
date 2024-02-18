@@ -33,7 +33,7 @@ if(isset($_GET["action"])){
         //aller vers le formulaire depuis la navbar
         case "formulaireFilm" : $ctrlCinema->addFilm(); break ;
 
-        //------------------------------------traitement des données-----------
+        //-------------------------------------------------traitement des données---------------------------------------------------
 
         case "ajouterFilm" : 
             if(isset($_POST['submit'])){ // si la session récupère les infos avec le bouton submit
@@ -51,10 +51,10 @@ if(isset($_GET["action"])){
                     "nom"=> $nom,
                     "resume"=>$resume,
                     "role"=>$role,
-                    //récupérer les infos de la liste déroulante
-                    // "acteur"=>$acteur,
-                    // "realisateur"=>$realisateur,
-                    // "genre"=>$genre,
+                    //element de la liste déroulante
+                    "genre" => $_POST["genre"],
+                    "acteur" => $_POST["acteur"],
+                    "realisateur" => $_POST["realisateur"],
                     ];
                     $_SESSION['nvFilm'][]=$nvFilm; //comme array_push mais moins lourd
                 }
@@ -81,13 +81,12 @@ if(isset($_GET["action"])){
 
                 //si l'extension fait parti de celles autorisées dans le tableau, et qu'aucune erreur n'est apparu, alors je la télécharge et l'ajoute à la session
                 if(in_array($extension, $extensionsAutorisees) && $fileError==0){
-                    move_uploaded_file($tmpName, 'public/img/upload'.$newFileName);
+                    move_uploaded_file($tmpName, 'public/img/upload/'.$newFileName);
                 }
                 $_SESSION['nameFile'][]=$newFileName;
             }
-            var_dump($_SESSION);
-            // header('Location:index.php');
-            // exit;
+            header('Location:index.php');
+            exit;
             break;
             
     }

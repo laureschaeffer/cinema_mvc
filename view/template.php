@@ -13,6 +13,7 @@
     
 </head>
 <body>
+<div id="wrapper">
     <nav class="topNav" id="MyTopnav">
             <!-- <li><a href="index.php?action=">
             <img src="../public/img/clapperboard-29986_1280.webp" alt="logo-cinephile" width=50px height=50px>
@@ -39,7 +40,6 @@
         <!-- menu "burger" pour les media queries -->
 
     </nav>
-    <div id="wrapper">
         <main>
             <div id="contenu">
                 <h1>PDO Cinema</h1>
@@ -61,6 +61,7 @@
         </main>
     </div>
 
+<!-- navbar responsive -->
 <script>
     function myFunction(){
         var x = document.getElementById("MyTopnav");

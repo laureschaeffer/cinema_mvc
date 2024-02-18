@@ -1,5 +1,5 @@
 <?php
-// fichier formulaire
+// fichier formulaire d'ajout
 
 session_start(); //récupère ou crée une session
 ob_start();
@@ -44,7 +44,7 @@ ob_start();
         </p>
         <p>
             <label>
-                <textarea name="resume" rows="4" cols="50">Résumé</textarea>
+                <textarea name="resume">Résumé</textarea>
             </label>
         </p>
         <p>
