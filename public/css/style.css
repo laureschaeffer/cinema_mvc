@@ -39,6 +39,7 @@ h1, h2, .uk-label{
 
 #MyTopnav a{
     font-size: 2em;
+    color: white;
 }
 
 .network a{
@@ -71,7 +72,7 @@ img{
     padding: 4%;
 }
 textarea{
-    width: 80%;
+    width: 100%;
 }
 
 /* -----------------------------------------------------------------VERSION MOBILE --------------------------------------------------- */

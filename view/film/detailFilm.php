@@ -23,6 +23,7 @@
                         <?php 
                     } ?>
             </div>
+            <p><a href="index.php?action=modifierFilm&id=<?=$detFilm["id_film"]?>">Apporter une modification</a></p>
 
     </section>
 

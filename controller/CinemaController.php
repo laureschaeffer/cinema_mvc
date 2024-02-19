@@ -9,12 +9,13 @@ class CinemaController {
     public function listFilms(){
         $pdo = Connect::seConnecter();
         $requeteLsFilms = $pdo->query(
-            "SELECT titre, annee_sortie_fr, id_film, affiche
+            'SELECT titre, annee_sortie_fr, id_film, affiche
             FROM film
-            ORDER BY titre");
+            ORDER BY titre');
 
         require "view/film/listeFilms.php";
     }
+
 
     public function listReals(){
         $pdo = Connect::seConnecter();
@@ -24,6 +25,7 @@ class CinemaController {
             INNER JOIN personne p ON r.id_personne = p.id_personne
             ORDER BY nomReal"
         );
+    
 
         require "view/personnes/listeReals.php";
     }
@@ -97,7 +99,7 @@ class CinemaController {
     
     public function detailFilm($id){
         $pdo = Connect::seConnecter();
-        $requeteDetailFilm = $pdo->prepare("SELECT f.titre, f.annee_sortie_fr, f.synopsis, f.note, f.affiche, CONCAT(prenom, ' ', nom) AS realisateur, f.id_realisateur
+        $requeteDetailFilm = $pdo->prepare("SELECT f.titre, f.annee_sortie_fr, f.synopsis, f.note, f.affiche, CONCAT(prenom, ' ', nom) AS realisateur, f.id_realisateur, f.id_film
         FROM film f
         INNER JOIN realisateur r ON f.id_realisateur = r.id_realisateur
         INNER JOIN personne p ON r.id_personne = p.id_personne
@@ -145,12 +147,107 @@ class CinemaController {
 
     // // -------------------------------------------------formulaires--------------------------------------------
 
-    public function addFilm(){ // requete pour les listes déroulantes
+    public function showList(){ // requete pour les listes déroulantes du formulaire
+        $pdo = Connect::seConnecter();
+        // choix du réalisateur
+        $choixReal = $pdo->prepare("SELECT concat(p.prenom, ' ', p.nom) AS nomReal, r.id_realisateur
+        FROM realisateur r
+        INNER JOIN personne p ON r.id_personne = p.id_personne
+        ORDER BY p.nom");
+        $choixReal->execute();
+
         // choix du genre d'un film
         $pdo = Connect::seConnecter();
         $choixGenre = $pdo->prepare("SELECT nom FROM genre ORDER BY nom");
         $choixGenre->execute();
+   
+        require "view/formulaires/ajouterFilm.php";
+    }
 
+    // recupere les données du formulaire pour les ajouter à la bdd
+    public function ajouterFilm(){
+        if(isset($_POST['submit'])){ // si la session récupère les infos avec le bouton submit
+            
+            // ----------------------d'abord traitement de l'image téléchargée---------
+            if(isset($_FILES['file'])){ //si la session récupère l'image avec la methode file, un tableau associatif se crée
+                $tmpName = $_FILES['file']['tmp_name'];
+                $fileName= $_FILES['file']['name'];
+                $fileSize = $_FILES['file']['size'];
+                $fileError= $_FILES['file']['error'];
+                // https://www.php.net/manual/en/features.file-upload.errors.php
+                $fileType= $_FILES['file']['type'];
+
+                // récupère l'extension .jpg, ...
+                $label = explode(".", $fileName);
+                $extension = strtolower(end($label));
+
+                // ----crée un identifiant unique, et rajoute l'extension 
+                $extensionsAutorisees= ["jpg", "jpeg", "gif", "png"];
+                $uniqueName= uniqid("", true);
+                $newFileName = $uniqueName.'.'.$extension ;
+
+                $lienAffiche='public/img/affiches/'.$newFileName;
+                //si l'extension fait parti de celles autorisées dans le tableau, et qu'aucune erreur n'est apparu, alors je la télécharge
+                if(in_array($extension, $extensionsAutorisees) && $fileError==0){
+                    move_uploaded_file($tmpName, $lienAffiche);
+                } 
+            }
+
+            // -----------ensuite traitement des input-----
+
+            // filtres les caractères pour la sécurité
+            $nom= filter_input(INPUT_POST, "nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $resume= filter_input(INPUT_POST, "resume", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $role= filter_input(INPUT_POST, "role", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $anneeSortie= filter_input(INPUT_POST, "anneeSortie", FILTER_VALIDATE_INT);
+            $duree= filter_input(INPUT_POST, "duree", FILTER_VALIDATE_INT);
+            $note= filter_input(INPUT_POST, "note", FILTER_VALIDATE_INT);
+
+            //si ces éléments sont filtrés correctement, alors on les rentre dans le tableau de la session
+            if($nom && $resume && $role && $anneeSortie && $duree && $note){
+
+                // Ajouter les données récupérées à la bdd à l'aide de la requete sql
+                $pdo = Connect::seConnecter();
+                $ajouterFilmBDD = $pdo->prepare("INSERT into film(titre, annee_sortie_fr, duree, synopsis, note, id_realisateur, affiche) VALUES(:titre, :annee_sortie_fr, :duree, :synopsis, :note, :id_realisateur, :affiche)");
+                $ajouterFilmBDD->execute([
+                    'titre'=>$nom,
+                    'annee_sortie_fr'=>$anneeSortie,
+                    'duree'=>$duree,
+                    'synopsis'=>$resume,
+                    'note'=>$note,
+                    'id_realisateur' => $_POST["realisateur"],
+                    'affiche' => $lienAffiche, // en lien avec le traitement de l'image plus haut
+                ]);
+            }
+
+        }
+        header("Location:index.php");
+        exit;
+    }
+
+    //pour modifier un film lorsqu'on est sur le detail d'un film
+    public function showListFilm($id){
+        $pdo = Connect::seConnecter();
+        $requeteDetailFilm = $pdo->prepare("SELECT f.titre, f.annee_sortie_fr, f.synopsis, f.note, f.affiche, CONCAT(prenom, ' ', nom) AS realisateur, f.id_realisateur
+        FROM film f
+        INNER JOIN realisateur r ON f.id_realisateur = r.id_realisateur
+        INNER JOIN personne p ON r.id_personne = p.id_personne
+        WHERE id_film = :id");
+        $requeteDetailFilm->execute(["id" => $id]);
+
+        // il est nécessaire d'utiliser une seconde requête pour le casting
+        $requeteCasting = $pdo->prepare("SELECT CONCAT(p.prenom, ' ', p.nom) AS nomActeur, r.nom_personnage, c.id_acteur, c.id_role
+        FROM castings c
+        INNER JOIN acteur a ON c.id_acteur = a.id_acteur
+        INNER JOIN personne p ON a.id_personne = p.id_personne
+        INNER JOIN role r ON c.id_role = r.id_role
+        WHERE c.id_film = :id");
+        $requeteCasting->execute(["id" => $id]);
+        
+        // choix d'un role
+        $choixRole = $pdo->prepare("SELECT * FROM role");
+        $choixRole->execute();
+    
         // choix d'un acteur
         $choixActeur = $pdo->prepare("SELECT concat(p.prenom, ' ', p.nom) AS nomActeur
         FROM acteur a
@@ -159,12 +256,38 @@ class CinemaController {
         $choixActeur->execute();
 
         // choix du réalisateur
-        $choixReal = $pdo->prepare("SELECT concat(p.prenom, ' ', p.nom) AS nomReal
+        $choixReal = $pdo->prepare("SELECT concat(p.prenom, ' ', p.nom) AS nomReal, r.id_realisateur
         FROM realisateur r
         INNER JOIN personne p ON r.id_personne = p.id_personne
         ORDER BY p.nom");
         $choixReal->execute();
-
-        require "view/formulaires/ajouterFilm.php";
+        require "view/formulaires/modifierFilm.php";
     }
+
+    public function modifierBDDFilm($id){
+        //-------------- modifie les données
+        if(isset($_POST['submit'])){
+            $nom= filter_input(INPUT_POST, "nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $resume= filter_input(INPUT_POST, "resume", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $role= filter_input(INPUT_POST, "role", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $anneeSortie= filter_input(INPUT_POST, "anneeSortie", FILTER_VALIDATE_INT);
+            $duree= filter_input(INPUT_POST, "duree", FILTER_VALIDATE_INT);
+            $note= filter_input(INPUT_POST, "note", FILTER_VALIDATE_INT);
+
+            //si ces éléments sont filtrés correctement, alors on les rentre dans le tableau de la session
+            if($nom && $resume && $role && $anneeSortie && $duree && $note){
+
+                // Ajouter les données récupérées à la bdd à l'aide de la requete sql
+                $modifierFilmBDD = $pdo->prepare("UPDATE film
+                SET titre= :titre
+                WHERE id_film= :id");
+                $ajouterFilmBDD->execute([
+                    'titre'=>$nom,
+                    'id'=>$id,
+                ]);
+
+            } }
+
+    }
+
 }

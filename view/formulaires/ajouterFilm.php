@@ -1,11 +1,11 @@
 <?php
 // fichier formulaire d'ajout
 
-session_start(); //récupère ou crée une session
+
 ob_start();
 ?>
 
-<section id="ajouterFilm">
+<section class="formulaireFilm">
     <form action="index.php?action=ajouterFilm" method="post" enctype="multipart/form-data">
         <p>
             <label>
@@ -21,11 +21,23 @@ ob_start();
         </p>
         <p>
             <label>
+                Durée (en minute) :
+                <input type="number" name="duree" value="120">
+            </label>
+        </p>
+        <p>
+            <label>
+                Note sur 5 :
+                <input type="number" name="note" value="0">
+            </label>
+        </p>
+        <p>
+            <label>
                 Choissiez un réalisateur :
                 <select name="realisateur" id="realisateur-select">
                     <option value="realisateur">----réalisateur----</option>
                     <?php foreach($choixReal->fetchAll() as $real){ ?>
-                        <option value="<?=$real["nomReal"]?>"><?=$real["nomReal"]?></option>
+                        <option value="<?=$real["id_realisateur"]?>"><?=$real["nomReal"]?></option>
                     <?php 
                     } ?>
                 </select>
@@ -47,26 +59,12 @@ ob_start();
                 <textarea name="resume">Résumé</textarea>
             </label>
         </p>
-        <p>
+        <!-- <p>
             <label>
                 Nom du rôle:
                 <input type="text" name="role">
             </label>
-        </p>
-        <p>
-            <label>
-                Joué par l'acteur:
-                <select name="acteur" id="acteur-select">
-                    <option value="acteur">----acteur----</option>
-                    <?php foreach($choixActeur->fetchAll() as $acteur){ ?>
-                        <option value="<?=$acteur["nomActeur"]?>"><?=$acteur["nomActeur"]?></option>
-                    <?php 
-                    } ?>
-
-                </select>
-
-            </label>
-        </p>
+        </p> -->
         <p>
             <label for="file"> Ajouter une affiche, format autorisé: jpg, jpeg, gif
                 <input type="file" name="file"/>
