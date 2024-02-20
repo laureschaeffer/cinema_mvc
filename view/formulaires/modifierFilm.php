@@ -1,27 +1,29 @@
-<?php ob_start(); // lien avec le fichier template.php ?>
+<?php ob_start(); // lien avec le fichier template.php 
+?>
 
     <section class="formulaireFilm">
         <form action="index.php?action=ajouterModification" methode="post" enctype="multipart/form-data">
-            <?php foreach($requeteDetailFilm->fetchAll() as $detFilm) { ?>
+        <?php foreach($requeteDetailFilm->fetchAll() as $detFilm) { ?>
+
                 <img src="<?=$detFilm["affiche"]?>" alt="affiche du film" width=200px height=200px>
                 <p>
                     <label>
                         Nom du film:
-                        <input type="text" name="nom" placeholder="<?= $detFilm["titre"]?>">
+                        <input type="text" name="nom" value="<?= $detFilm["titre"]?>">
 
                     </label>
                 </p>
                 <p>
                     <label>
                         Année de sortie :
-                        <input type="number" name ="anneeSortie" placeholder="<?= $detFilm["annee_sortie_fr"]?>">
+                        <input type="number" name ="anneeSortie" value="<?= $detFilm["annee_sortie_fr"]?>">
                     </label>
                 </p>
                 <p>
                     <label>
                         Réalisé par :
                         <select name="realisateur" id="realisateur-select">
-                            <option value="realisateur">----réalisateur----</option>
+                            <option value="realisateur"><?=$detFilm["realisateur"]?></option>
                             <?php foreach($choixReal->fetchAll() as $real){ ?>
                                 <option value="<?=$real["id_realisateur"]?>"><?=$real["nomReal"]?></option>
                             <?php 
@@ -32,7 +34,7 @@
                 <p>
                     <label>
                         Note sur 5 :
-                        <input type="number" name="note" placeholder="<?= $detFilm["note"]?>">
+                        <input type="number" name="note" value="<?= $detFilm["note"]?>">
                     </label>
                 </p>
                 <p>

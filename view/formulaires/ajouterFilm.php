@@ -1,11 +1,11 @@
 <?php
 // fichier formulaire d'ajout
 
-
 ob_start();
 ?>
 
 <section class="formulaireFilm">
+    <!-- action: rediriger vers la fonction dans le controleur -->
     <form action="index.php?action=ajouterFilm" method="post" enctype="multipart/form-data">
         <p>
             <label>
@@ -56,7 +56,7 @@ ob_start();
         </p>
         <p>
             <label>
-                <textarea name="resume">Résumé</textarea>
+                <textarea name="resume" rows="4" cols="50" >Résumé</textarea>
             </label>
         </p>
         <!-- <p>

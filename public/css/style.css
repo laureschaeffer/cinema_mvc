@@ -5,22 +5,13 @@
     vertical-align: top;
 }
 #wrapper{
-    background: radial-gradient(#D9D9D9, #2F303A);
+    /* background: radial-gradient(#D9D9D9, #2F303A); */
     /* background: radial-gradient(ellipse at top, #2F303A, transparent),
             radial-gradient(ellipse at bottom, #D9D9D9, transparent); */
-    font-family: "IBM Plex", Serif
-}
-.card-listing a{
-   color: black;
-   font-size: larger;
-   /* font-weight: bold; */
+    font-family: "IBM Plex", Serif;
+    background-color: #2F303A;
 }
 
-.detail a{
-    color: #010101;
-    font-weight: bold;
-    text-decoration: underline;
-}
 
 h1, h2, .uk-label{
     color: white;
@@ -49,6 +40,50 @@ h1, h2, .uk-label{
 footer{
     background-color: #D9D9D9;
 }
+/* ----------------------------------------------------home-page---------------------------------- */
+
+/* ---------------------------------------home-container------------------ */
+
+.subscribe{
+    background-color: black;
+    padding: 2%;
+    border-radius: 20px;
+}
+.subscribe p{
+    color: #E29A9A;
+    font-size: large;
+    text-align: center;
+    padding: 3% 0;
+    
+}
+.subscribe input{
+    padding: 2%;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+}
+.subscribe button{
+    background-color: #D9D9D9;
+    width: 5em;
+    padding: 2%;
+    border-radius: 20px;
+}
+.subscribe-btn{
+    display: flex;
+    background-color: white;
+    border-radius: 20px;
+    width: 100%;
+    justify-content: space-between;
+    padding: 2%;
+}
+
+#coup-de-coeur, .card-movie{
+    background-color: #6e6e72d6;
+}
+
+.card-movie p, #intro p, h4{
+    color: white;
+}
 /* ---------------------------------------------------------------------listes genre, real, acteurs, film------------------------- */
 .introduction{
     background-color: #D9D9D9;
@@ -62,6 +97,17 @@ footer{
 img{
     width: 200px;
 }
+.card-listing a{
+    color: black;
+    font-size: larger;
+    /* font-weight: bold; */
+ }
+ 
+ .detail a{
+     color: #010101;
+     font-weight: bold;
+     text-decoration: underline;
+ }
 
 /* --------------------------------------------------------------------formulaire------------------------------------------------------- */
 

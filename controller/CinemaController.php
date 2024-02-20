@@ -6,6 +6,14 @@ use Model\Connect;
 class CinemaController {
     //-------------------------------------------------------requetes des listes------------------------------------------
     
+    public function viewHomePage(){
+        $pdo = Connect::seConnecter();
+        $requeteHomeActeur = $pdo->prepare("SELECT CONCAT(prenom, ' ', nom) AS acteur, photo, biographie FROM personne
+        WHERE id_personne IN (3, 4, 7, 29)");
+        $requeteHomeActeur->execute();
+        require "view/home.php";
+    }
+    
     public function listFilms(){
         $pdo = Connect::seConnecter();
         $requeteLsFilms = $pdo->query(
@@ -200,11 +208,11 @@ class CinemaController {
             $resume= filter_input(INPUT_POST, "resume", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $role= filter_input(INPUT_POST, "role", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $anneeSortie= filter_input(INPUT_POST, "anneeSortie", FILTER_VALIDATE_INT);
-            $duree= filter_input(INPUT_POST, "duree", FILTER_VALIDATE_INT);
-            $note= filter_input(INPUT_POST, "note", FILTER_VALIDATE_INT);
+            $duree=filter_input(INPUT_POST, "duree", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+            $note= filter_input(INPUT_POST, "note", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 
-            //si ces éléments sont filtrés correctement, alors on les rentre dans le tableau de la session
-            if($nom && $resume && $role && $anneeSortie && $duree && $note){
+            //si ces éléments sont filtrés correctement, alors on les execute dans values 
+            // if($nom && $resume && $role && $anneeSortie && $duree && $note){
 
                 // Ajouter les données récupérées à la bdd à l'aide de la requete sql
                 $pdo = Connect::seConnecter();
@@ -218,21 +226,22 @@ class CinemaController {
                     'id_realisateur' => $_POST["realisateur"],
                     'affiche' => $lienAffiche, // en lien avec le traitement de l'image plus haut
                 ]);
-            }
+
+            // }
 
         }
-        header("Location:index.php");
-        exit;
+        // header("Location:index.php"); // redirige vers la page par defaut, liste films
+        // exit;
     }
 
     //pour modifier un film lorsqu'on est sur le detail d'un film
     public function showListFilm($id){
         $pdo = Connect::seConnecter();
-        $requeteDetailFilm = $pdo->prepare("SELECT f.titre, f.annee_sortie_fr, f.synopsis, f.note, f.affiche, CONCAT(prenom, ' ', nom) AS realisateur, f.id_realisateur
+        $requeteDetailFilm = $pdo->prepare("SELECT f.titre, f.annee_sortie_fr, f.synopsis, f.note, f.affiche, CONCAT(prenom, ' ', nom) AS realisateur, f.id_realisateur, f.id_film
         FROM film f
         INNER JOIN realisateur r ON f.id_realisateur = r.id_realisateur
         INNER JOIN personne p ON r.id_personne = p.id_personne
-        WHERE id_film = :id");
+        WHERE f.id_film = :id");
         $requeteDetailFilm->execute(["id" => $id]);
 
         // il est nécessaire d'utiliser une seconde requête pour le casting
@@ -264,29 +273,32 @@ class CinemaController {
         require "view/formulaires/modifierFilm.php";
     }
 
-    public function modifierBDDFilm($id){
-        //-------------- modifie les données
+    public function modifierFilmBDD(){ 
+        //-------------- modifie les données, action en haut du formulaire
         if(isset($_POST['submit'])){
             $nom= filter_input(INPUT_POST, "nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $resume= filter_input(INPUT_POST, "resume", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $role= filter_input(INPUT_POST, "role", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $anneeSortie= filter_input(INPUT_POST, "anneeSortie", FILTER_VALIDATE_INT);
-            $duree= filter_input(INPUT_POST, "duree", FILTER_VALIDATE_INT);
-            $note= filter_input(INPUT_POST, "note", FILTER_VALIDATE_INT);
+            $duree=filter_input(INPUT_POST, "duree", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+            $note= filter_input(INPUT_POST, "note", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 
-            //si ces éléments sont filtrés correctement, alors on les rentre dans le tableau de la session
-            if($nom && $resume && $role && $anneeSortie && $duree && $note){
-
-                // Ajouter les données récupérées à la bdd à l'aide de la requete sql
-                $modifierFilmBDD = $pdo->prepare("UPDATE film
-                SET titre= :titre
-                WHERE id_film= :id");
-                $ajouterFilmBDD->execute([
+             //si ces éléments sont filtrés correctement, alors on les execute dans values 
+            // if($nom && $resume && $role && $anneeSortie && $duree && $note ){
+         
+                
+                $modifications = [
                     'titre'=>$nom,
-                    'id'=>$id,
-                ]);
+                    'annee_sortie_fr' => $anneeSortie,
+                    'synopsis' => $resume,
+                    'note' => $note,
+                    // 'id'=>$id, 
+                ];
 
-            } }
+            } 
+        // }
+            // header("Location:index.php");
+            // exit;
 
     }
 

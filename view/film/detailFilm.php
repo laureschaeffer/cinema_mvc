@@ -1,4 +1,4 @@
-<?php ob_start(); // lien avec le fichier template.php ?>
+<?php ob_start(); // lien avec le fichier template.php  ?>
 
     <section class="detail">
         <?php foreach($requeteDetailFilm->fetchAll() as $detFilm) { ?>
@@ -24,6 +24,7 @@
                     } ?>
             </div>
             <p><a href="index.php?action=modifierFilm&id=<?=$detFilm["id_film"]?>">Apporter une modification</a></p>
+            <!-- action: redirige vers une page de modification  -->
 
     </section>
 

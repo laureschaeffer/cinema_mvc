@@ -3,6 +3,7 @@
 use Controller\CinemaController;
 
 
+
 // cherche automatiquement toutes les classes 
 
 // spl_autoload_register(function ($class_name) {
@@ -23,6 +24,8 @@ $id= (isset($_GET["id"])) ? $_GET["id"] : null;
 
 if(isset($_GET["action"])){
     switch ($_GET["action"]){ 
+        //homepage
+        case "homePage" : $ctrlCinema->viewHomePage(); break ;
         //listes
         case "listFilms": $ctrlCinema->listFilms(); break;
         case "listReals": $ctrlCinema->listReals(); break;
@@ -40,9 +43,9 @@ if(isset($_GET["action"])){
         case "formulaireFilm" : $ctrlCinema->showList(); break ;
 
         //-------------------------------------------------traitement des données---------------------------------------------------
-        case "ajouterFilm" : $ctrlCinema->ajouterFilm(); break;
+        case "ajouterFilm" : $ctrlCinema->ajouterFilm() ; break;
         case "modifierFilm" : $ctrlCinema->showListFilm($id); break; 
-        case "ajouterModification" : $ctrlCinema->modifierBDDFilm($id); break;
+        case "ajouterModification" : $ctrlCinema->modifierFilmBDD(); break;
         
             
     }
