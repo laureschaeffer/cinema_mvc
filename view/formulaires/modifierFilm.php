@@ -2,21 +2,27 @@
 ?>
 
     <section class="formulaireFilm">
-        <form action="index.php?action=ajouterModification" methode="post" enctype="multipart/form-data">
         <?php foreach($requeteDetailFilm->fetchAll() as $detFilm) { ?>
+            <form action="index.php?action=ajouterModification&id=<?=$detFilm["id_film"]?>" method="post" enctype="multipart/form-data">
 
                 <img src="<?=$detFilm["affiche"]?>" alt="affiche du film" width=200px height=200px>
                 <p>
                     <label>
                         Nom du film:
-                        <input type="text" name="nom" value="<?= $detFilm["titre"]?>">
+                        <input type="text" name="titre" value="<?= $detFilm["titre"]?>">
 
                     </label>
                 </p>
                 <p>
                     <label>
                         Année de sortie :
-                        <input type="number" name ="anneeSortie" value="<?= $detFilm["annee_sortie_fr"]?>">
+                        <input type="number" name ="annee_sortie_fr" value="<?= $detFilm["annee_sortie_fr"]?>">
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        Durée (en minutes) :
+                        <input type="number" name ="duree" value="<?= $detFilm["duree"]?>">
                     </label>
                 </p>
                 <p>
@@ -40,38 +46,13 @@
                 <p>
                     <label>
                         Résumé :
-                        <textarea name="resume" height= "200px"><?= $detFilm["synopsis"] ?></textarea>
+                        <textarea name="synopsis" height= "200px"><?= $detFilm["synopsis"] ?></textarea>
                     </label>
                 </p>
                 <?php
         }
         ?>
-            <div class="casting">
-                <p>Castings</p>
-                <p>
-                    <label>
-                        <select name="acteur" id="acteur-select">
-                            <option value="acteur">----acteur----</option>
-                            <?php foreach($choixActeur->fetchAll() as $acteur){ ?>
-                            <option value="<?=$acteur["nomActeur"]?>"><?=$acteur["nomActeur"]?></option>
-                        <?php 
-                            } ?>
 
-                        </select>
-                    </label>
-                    <label>
-                        dans le rôle de
-                        <select name="role" id="role-select">
-                            <option value="role">----role----</option>
-                            <?php foreach($choixRole->fetchAll() as $role){ ?>
-                                <option value="<?=$role["id_role"]?>"><?=$role["nom_personnage"]?></option>
-                                <?php
-                            } ?>
-                        </select>
-                    </label>
-                </p>
-
-            </div>
             <p>
                 <input type="submit" name="submit" value="Modifier le film">
             </p>
@@ -80,8 +61,8 @@
 
 <?php 
 
-$titre= "Modifier film";
-$titre_secondaire = "Modifier film";
+$titre= "Modifier le film";
+$titre_secondaire = "Modifier le film";
 $contenu = ob_get_clean();
 
 require_once "view/template.php";

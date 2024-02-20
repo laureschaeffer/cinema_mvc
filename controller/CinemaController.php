@@ -123,6 +123,15 @@ class CinemaController {
         WHERE c.id_film = :id");
         $requeteCasting->execute(["id" => $id]);
 
+        // pour avoir plusieurs genres
+        $requeteGenreFilm = $pdo->prepare("SELECT d.id_film, g.nom AS nomGenre
+        FROM definir d
+        INNER JOIN film f ON d.id_film = f.id_film
+        INNER JOIN genre g ON d.id_genre = g.id_genre
+        WHERE d.id_film = :id");
+
+        $requeteGenreFilm->execute(["id" => $id]);
+
         require "view/film/detailFilm.php";
 
     }
@@ -230,14 +239,14 @@ class CinemaController {
             // }
 
         }
-        // header("Location:index.php"); // redirige vers la page par defaut, liste films
-        // exit;
+        header("Location:index.php"); // redirige vers la page par defaut, liste films
+        exit;
     }
 
     //pour modifier un film lorsqu'on est sur le detail d'un film
     public function showListFilm($id){
         $pdo = Connect::seConnecter();
-        $requeteDetailFilm = $pdo->prepare("SELECT f.titre, f.annee_sortie_fr, f.synopsis, f.note, f.affiche, CONCAT(prenom, ' ', nom) AS realisateur, f.id_realisateur, f.id_film
+        $requeteDetailFilm = $pdo->prepare("SELECT f.titre, f.annee_sortie_fr, f.synopsis, f.duree, f.note, f.affiche, CONCAT(prenom, ' ', nom) AS realisateur, f.id_realisateur, f.id_film
         FROM film f
         INNER JOIN realisateur r ON f.id_realisateur = r.id_realisateur
         INNER JOIN personne p ON r.id_personne = p.id_personne
@@ -273,32 +282,37 @@ class CinemaController {
         require "view/formulaires/modifierFilm.php";
     }
 
-    public function modifierFilmBDD(){ 
+    public function modifierFilmBDD($id){ 
         //-------------- modifie les données, action en haut du formulaire
         if(isset($_POST['submit'])){
-            $nom= filter_input(INPUT_POST, "nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $resume= filter_input(INPUT_POST, "resume", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $titre= filter_input(INPUT_POST, "titre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $synopsis= filter_input(INPUT_POST, "synopsis", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $role= filter_input(INPUT_POST, "role", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $anneeSortie= filter_input(INPUT_POST, "anneeSortie", FILTER_VALIDATE_INT);
+            $annee_sortie_fr= filter_input(INPUT_POST, "annee_sortie_fr", FILTER_VALIDATE_INT);
             $duree=filter_input(INPUT_POST, "duree", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
             $note= filter_input(INPUT_POST, "note", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 
              //si ces éléments sont filtrés correctement, alors on les execute dans values 
             // if($nom && $resume && $role && $anneeSortie && $duree && $note ){
          
-                
-                $modifications = [
-                    'titre'=>$nom,
-                    'annee_sortie_fr' => $anneeSortie,
-                    'synopsis' => $resume,
+                $pdo = Connect::seConnecter();                
+                $modifierFilmBDD = $pdo->prepare("UPDATE film
+                SET titre= :titre, annee_sortie_fr= :annee_sortie_fr, duree= :duree, synopsis= :synopsis, note= :note
+                WHERE id_film= :id");
+                $modifierFilmBDD->execute([
+                    'titre'=>$titre,
+                    'annee_sortie_fr' => $annee_sortie_fr,
+                    'duree' => $duree,
+                    'synopsis' => $synopsis,
                     'note' => $note,
-                    // 'id'=>$id, 
-                ];
+                    'id'=>$id,
+                ]);
+
 
             } 
         // }
-            // header("Location:index.php");
-            // exit;
+            header("Location:index.php");
+            exit;
 
     }
 

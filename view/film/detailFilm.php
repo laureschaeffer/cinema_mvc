@@ -4,6 +4,12 @@
         <?php foreach($requeteDetailFilm->fetchAll() as $detFilm) { ?>
             <div class="detail-header">
                 <p><?= $detFilm["annee_sortie_fr"]?></p> 
+                <p>Genre :
+                <?php foreach($requeteGenreFilm->fetchAll() as $genre){ ?>
+                    <?=$genre["nomGenre"]?>
+                    <?php
+                } ?>
+                 </p>
                 <p>Réalisé par <a href="index.php?action=detailReal&id=<?=$detFilm["id_realisateur"]?>"><?=$detFilm["realisateur"]?></a></p>
                 <p><?= $detFilm["note"]?>/5</p> 
             </div>

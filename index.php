@@ -45,7 +45,7 @@ if(isset($_GET["action"])){
         //-------------------------------------------------traitement des données---------------------------------------------------
         case "ajouterFilm" : $ctrlCinema->ajouterFilm() ; break;
         case "modifierFilm" : $ctrlCinema->showListFilm($id); break; 
-        case "ajouterModification" : $ctrlCinema->modifierFilmBDD(); break;
+        case "ajouterModification" : $ctrlCinema->modifierFilmBDD($id); break;
         
             
     }
