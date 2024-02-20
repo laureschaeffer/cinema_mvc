@@ -6,56 +6,42 @@
             <form action="index.php?action=ajouterModification&id=<?=$detFilm["id_film"]?>" method="post" enctype="multipart/form-data">
 
                 <img src="<?=$detFilm["affiche"]?>" alt="affiche du film" width=200px height=200px>
-                <p>
-                    <label>
-                        Nom du film:
-                        <input type="text" name="titre" value="<?= $detFilm["titre"]?>">
+                <div class="form-group">
+                    <label>Nom du film:</label>
+                    <input type="text" class="form-control" name="titre" value="<?= $detFilm["titre"]?>">
+                </div>
 
-                    </label>
-                </p>
-                <p>
-                    <label>
-                        Année de sortie :
-                        <input type="number" name ="annee_sortie_fr" value="<?= $detFilm["annee_sortie_fr"]?>">
-                    </label>
-                </p>
-                <p>
-                    <label>
-                        Durée (en minutes) :
-                        <input type="number" name ="duree" value="<?= $detFilm["duree"]?>">
-                    </label>
-                </p>
-                <p>
-                    <label>
-                        Réalisé par :
-                        <select name="realisateur" id="realisateur-select">
-                            <option value="realisateur"><?=$detFilm["realisateur"]?></option>
+                <div class="form-group">
+                    <label>Année de sortie :</label>
+                    <input type="number" class="form-control" name ="annee_sortie_fr" value="<?= $detFilm["annee_sortie_fr"]?>">
+                </div>
+                <div class="form-group">
+                    <label>Durée (en minutes) :</label>
+                    <input type="number" class="form-control" name ="duree" value="<?= $detFilm["duree"]?>">
+                </div>
+                <div class="form-group">
+                    <label>Réalisé par :</label>
+                    <select class="form-control" name="realisateur" id="realisateur-select">
+                        <option value="realisateur"><?=$detFilm["realisateur"]?></option>
                             <?php foreach($choixReal->fetchAll() as $real){ ?>
                                 <option value="<?=$real["id_realisateur"]?>"><?=$real["nomReal"]?></option>
                             <?php 
                             } ?>
-                        </select>
-                    </label>
-                </p>
-                <p>
-                    <label>
-                        Note sur 5 :
-                        <input type="number" name="note" value="<?= $detFilm["note"]?>">
-                    </label>
-                </p>
-                <p>
-                    <label>
-                        Résumé :
-                        <textarea name="synopsis" height= "200px"><?= $detFilm["synopsis"] ?></textarea>
-                    </label>
-                </p>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Note sur 5 :</label>
+                    <input type="number" class="form-control" name="note" value="<?= $detFilm["note"]?>">
+                </div>
+                <div class="form-group">
+                    <label>Résumé :</label>
+                        <textarea class="form-control" name="synopsis" row="4" ><?= $detFilm["synopsis"] ?></textarea>
+                </div>             
                 <?php
         }
         ?>
+        <button type="submit" class="btn btn-secondary">Modifier le film</button>
 
-            <p>
-                <input type="submit" name="submit" value="Modifier le film">
-            </p>
         </form>
     </section>
 

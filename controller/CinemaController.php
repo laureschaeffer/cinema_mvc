@@ -8,7 +8,7 @@ class CinemaController {
     
     public function viewHomePage(){
         $pdo = Connect::seConnecter();
-        $requeteHomeActeur = $pdo->prepare("SELECT CONCAT(prenom, ' ', nom) AS acteur, photo, biographie FROM personne
+        $requeteHomeActeur = $pdo->prepare("SELECT CONCAT(prenom, ' ', nom) AS acteur, photo, biographie, id_personne FROM personne
         WHERE id_personne IN (3, 4, 7, 29)");
         $requeteHomeActeur->execute();
         require "view/home.php";

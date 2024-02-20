@@ -8,22 +8,22 @@
     /* background: radial-gradient(#D9D9D9, #2F303A); */
     /* background: radial-gradient(ellipse at top, #2F303A, transparent),
             radial-gradient(ellipse at bottom, #D9D9D9, transparent); */
-    font-family: "IBM Plex", Serif;
+    font-family: "Gill Sans", sans-serif;
     background-color: #2F303A;
 }
-
-
-h1, h2, .uk-label{
-    color: white;
-    text-align: center;
+.card-header{
+    border-bottom: none;
 }
+
 /* ---------------------------------------------------------navbar--------------------------------------------------------------- */
 #MyTopnav{
     /* background-color: #D9D9D9; */
     display: flex;
     justify-content: space-evenly;
 }
-
+#MyTopnav img{
+    width: 50px;
+}
 #MyTopnav .icon{
     display: none;
 }
@@ -37,27 +37,26 @@ h1, h2, .uk-label{
     padding: 0 12px;
 }
 
-footer{
-    background-color: #D9D9D9;
-}
-/* ----------------------------------------------------home-page---------------------------------- */
+
+/* --------------------------------------------------------------------------home-page---------------------------------- */
 
 /* ---------------------------------------home-container------------------ */
+h1, h2, h3, .uk-label, .card-movie p, #intro p, h4{
+    color: white;
+    text-align: center;
+}
 
 .subscribe{
     background-color: black;
-    padding: 2%;
     border-radius: 20px;
 }
 .subscribe p{
     color: #E29A9A;
     font-size: large;
     text-align: center;
-    padding: 3% 0;
     
 }
 .subscribe input{
-    padding: 2%;
     border: none;
     outline: none;
     border-radius: 20px;
@@ -65,7 +64,6 @@ footer{
 .subscribe button{
     background-color: #D9D9D9;
     width: 5em;
-    padding: 2%;
     border-radius: 20px;
 }
 .subscribe-btn{
@@ -73,16 +71,114 @@ footer{
     background-color: white;
     border-radius: 20px;
     justify-content: space-between;
+}
+
+/* --------------------------------------cards--------------------------  */
+
+/* ---films  */
+#movie1{
+    background-color: #7A5864;
+    border-radius: 15px;
+    margin: 5%;
+    padding: 2%;
+}
+#movie2{
+    background-color: #3B4D5A;
+    border-radius: 15px;
+    margin: 5%;
+    padding: 2%;
+}
+#movie3{
+    background-color: #45695A;
+    border-radius: 15px;
+    margin: 5%;
+    padding: 2%;
+}
+#coup-de-coeur{
+    background-color: #6e6e72d6;
+    border-radius: 15px;
+    margin: 5%;
     padding: 2%;
 }
 
-#coup-de-coeur, .card-movie{
-    background-color: #6e6e72d6;
+.card-header{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.card-header img, .card-acteur img{
+    width: 150px;
 }
 
-.card-movie p, #intro p, h4{
+.titre-movie{
+    font-size: large;
+    font-weight: bold;
+}
+.date-movie{
+    opacity: 0.5;
+}
+
+.real-movie{
+    font-weight: bold;
+}
+.resume{
+    padding: 0 2%;
+    text-align: justify;
+
+}
+
+
+
+ /* -----parallax---------- */
+#parallax{
+    width: 100vw;
+    height: 30vh;
+    background-image: url("../img/parallax.jpg");
+    background-size: cover;
+    background-position: center; 
+    /* background-repeat: no-repeat; */
+    background-attachment: fixed;
+}
+#parallax h3{
+    padding: 5% 0 0 0;
+}
+
+/* ---------citations----------- */
+.card-citation{
+    background-color: #17181B;
+    margin: 5%;
+    padding: 2%;
+}
+.card-citation p{
     color: white;
 }
+
+.citation{
+    font-family: 'Courier New', Courier, monospace;
+    font-style: italic;
+}
+.citation-auteur{
+    text-align: right;
+}
+
+.card-acteur figure{
+    text-align: center;
+}
+
+/* -----acteurs  */
+
+.card-acteur{
+    background-color: #6e6e72d6;
+    margin: 5%;
+    padding: 2%;
+}
+.card-acteur p{
+    text-align: center;
+}
+.card-acteur a{
+    color: white;
+}
+
 /* ---------------------------------------------------------------------listes genre, real, acteurs, film------------------------- */
 .introduction{
     background-color: #D9D9D9;
@@ -93,8 +189,8 @@ footer{
     padding: 3%;
     margin: 3%;
 }
-img{
-    width: 200px;
+.card-listing img{
+    width: 150px;
 }
 .card-listing a{
     color: black;
@@ -108,7 +204,7 @@ img{
      text-decoration: underline;
  }
 
-/* --------------------------------------------------------------------formulaire------------------------------------------------------- */
+/* --------------------------------------------------------------------formulaires------------------------------------------------------- */
 
 
 .formulaireFilm{
@@ -116,6 +212,17 @@ img{
     padding: 3%;
     margin: 3%;
 }
+
+
+/* -----footer------ */
+footer a {
+    color: #010101;
+}
+
+footer{
+    background-color: #D9D9D9;
+}
+
 
 /* -----------------------------------------------------------------VERSION MOBILE --------------------------------------------------- */
 @media screen and (max-width: 500px){
@@ -126,17 +233,17 @@ img{
 
 
 /* --navbar fermee-- */
-/* #MyTopnav{
+#MyTopnav{
     position: relative;
-} */
+} 
 
 #MyTopnav .icon{
+    position: absolute;
     display: block;
-    color: #010101;
+    color: white;
     font-size: 30px;
-    top: 0;
-    right: 0;
-
+    top: 5%;
+    right: 5%;
 }
 
 nav a{
@@ -147,7 +254,7 @@ nav a{
 
 .navbarResponsive{
     display: flex;
-    position: relative;
+    /* position: relative; */
     flex-direction: column;
     width: 100%;
     text-align: center;
@@ -157,8 +264,8 @@ nav a{
 
 .navbarResponsive .icon{
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 5%;
+    right: 5%;
     float: right;
     color: #010101;
     font-size: 30px;
@@ -174,25 +281,39 @@ nav a{
     text-align: left;
     padding: 5px 5px;
 }
-
-/* ----------Header--------- */
+/* ---------------------------------------home-page---------------------- */
 h1, h2{
     padding: 4% 0;
 }
 
-
-
-
-
-
-
-/* -----footer------ */
-footer a {
-    color: #010101;
+.subscribe{
+    padding: 2%;
 }
 
+.subscribe p{
+    padding: 3% 0;
+    
+}
+.subscribe input{
+    padding: 2%;
+}
+.subscribe button{
+    width: 5em;
+    padding: 2%;
+}
+.subscribe-btn{
+    justify-content: space-between;
+    padding: 2%;
+}
 
+/* --------------------------------------cards-------------------------- */
 
+#coup-de-coeur h4{
+    padding: 2%;
+}
 
+.card-acteur img{
+    width: 150px;
+}
 
 }

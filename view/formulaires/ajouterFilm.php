@@ -7,74 +7,60 @@ ob_start();
 <section class="formulaireFilm">
     <!-- action: rediriger vers la fonction dans le controleur -->
     <form action="index.php?action=ajouterFilm" method="post" enctype="multipart/form-data">
-        <p>
-            <label>
-                Nom du film :
-                <input type="text" name="nom">
-            </label>
-        </p>
-        <p>
-            <label>
-                Année de sortie :
-                <input type="number" name="anneeSortie" value="2024">
-            </label>
-        </p>
-        <p>
-            <label>
-                Durée (en minute) :
-                <input type="number" name="duree" value="120">
-            </label>
-        </p>
-        <p>
-            <label>
-                Note sur 5 :
-                <input type="number" name="note" value="0">
-            </label>
-        </p>
-        <p>
-            <label>
-                Choissiez un réalisateur :
-                <select name="realisateur" id="realisateur-select">
-                    <option value="realisateur">----réalisateur----</option>
-                    <?php foreach($choixReal->fetchAll() as $real){ ?>
-                        <option value="<?=$real["id_realisateur"]?>"><?=$real["nomReal"]?></option>
-                    <?php 
-                    } ?>
-                </select>
-            </label>
-        </p>
-        <p>
+        <div class="form-group">
+            <label>Nom du film :</label>
+                <input type="text" class="form-control" name="nom" placeholder="Titre">
+        </div>
+        <div class="form-group">
+            <label>Année de sortie :</label>
+                <input type="number" class="form-control" name="anneeSortie" value="2024">
+        </div>
+        <div class="form-group">
+            <label>Durée (en minute) :</label>
+                <input type="number" class="form-control" name="duree" value="120">
+        </div>
+
+        <div class="form-group">
+            <label>Note sur 5 :</label>
+                <input type="number" class="form-control" name="note" value="0">
+        </div>
+
+        <div class="form-group">
+            <label>Choissiez un réalisateur :</label>
+            <select class="form-control" name="realisateur" id="realisateur-select">
+                <?php foreach($choixReal->fetchAll() as $real){ ?>
+                    <option value="<?=$real["id_realisateur"]?>"><?=$real["nomReal"]?></option>
+                <?php 
+                } ?>
+            </select>
+        </div>
+        <div class="form-group">
             <label>Choisissez un genre :
-                <select name="genre" id="genre-select">
-                    <option value="genre">----genre----</option>
+                <select class="form-control" name="genre" id="genre-select">
                     <?php foreach($choixGenre->fetchAll() as $genre){ ?>
                         <option value="<?=$genre["nom"]?>"><?=$genre["nom"]?></option> <?php
                     }
             ?>
                 </select>
             </label>
-        </p>
-        <p>
-            <label>
-                <textarea name="resume" rows="4" cols="50" >Résumé</textarea>
-            </label>
-        </p>
+        </div>
+
+        <div class="form-group">
+            <label>Resumé</label>
+            <textarea class="form-control" name="resume" rows="4"></textarea>
+        </div>
+
         <!-- <p>
             <label>
                 Nom du rôle:
                 <input type="text" name="role">
             </label>
         </p> -->
-        <p>
-            <label for="file"> Ajouter une affiche, format autorisé: jpg, jpeg, gif
-                <input type="file" name="file"/>
-            </label>
-        </p>
-        <p>
-            <input type="submit" name="submit" value="Soumettre le film">
-        </p>
-
-
+        <div class="form-group">
+            <label for="file">Ajouter une affiche, format autorisé: jpg, jpeg, gif</label>
+            <input type="file" class="form-control-file">
+        </div>
+        <button type="submit" class="btn btn-secondary">Soumettre le film</button>
 
 
     </form>

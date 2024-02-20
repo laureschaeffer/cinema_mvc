@@ -18,13 +18,13 @@
 <div id="wrapper">
     <nav class="topNav" id="MyTopnav">
         <a href="index.php?action=homePage">
-            <img src="public/img/clapperboard-29986_1280.webp" alt="logo-cinephile" heigh=30px>
+            <img src="public/img/clapperboard-29986_1280.webp" alt="logo-cinephile">
         </a>
         <a href="index.php?action=listFilms">Films</a></li>
         <a href="index.php?action=listReals">Réalisateurs</a></li>
         <a href="index.php?action=listActeurs">Acteurs</a></li>
         <a href="index.php?action=listGenres">Genres</a></li>
-        <a href="index.php?action=formulaireFilm">Formulaires</a></li>
+        <a href="index.php?action=formulaireFilm">Ajouter un film</a></li>
         <div class="network">
             <a href="#">
                 <i class="fa-brands fa-facebook-f"></i>                        
