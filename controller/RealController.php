@@ -39,5 +39,27 @@ class RealController{
     }
 
     // fonctions ajout real
+    public function ajoutReal(){
+        if(isset($_POST['submitReal'])){
+            $nom= filter_input(INPUT_POST, "nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $prenom= filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $sexe= filter_input(INPUT_POST, "sexe", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            // date
+            $biographie= filter_input(INPUT_POST, "biographie", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            // filtre
+            $pdo = Connect::seConnecter();
+            $ajouterPers = $pdo->prepare("INSERT INTO personne(nom, prenom, sexe, date_naissance, photo, biographie) VALUES(:nom, :prenom, :sexe, :date_naissance, :photo, :biographie)");
+            $ajouterPers->execute([
+                // "nom"=> ,
+                // "prenom" => ,
+                // "sexe" => ,
+                // "date_naissance" => ,
+                // "photo" => ,
+                // "biographie" => ,
+            ]);
+
+        }
+    }
 
 }

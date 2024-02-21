@@ -60,13 +60,18 @@ class FilmController {
         ORDER BY p.nom");
         $choixReal->execute();
 
+        // choix du genre, dans la table définir qui va récupérer les id
+        $choixGenre = $pdo->prepare("SELECT *
+        FROM genre");
+        $choixGenre->execute();
+
    
         require "view/formulaires/ajouterFilm.php";
     }
 
     // formulaire ajout d'un film
     public function ajouterFilm(){
-        if(isset($_POST['submit'])){ // si la session récupère les infos avec le bouton submit
+        if(isset($_POST['submitFilm'])){ // si la session récupère les infos avec le bouton submit
             
             // ----------------------d'abord traitement de l'image téléchargée---------
             if(isset($_FILES['file'])){ //si la session récupère l'image avec la methode file, un tableau associatif se crée
@@ -103,7 +108,7 @@ class FilmController {
             $note= filter_input(INPUT_POST, "note", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 
             //si ces éléments sont filtrés correctement, alors on les execute dans values 
-            if($nom && $resume && $anneeSortie && $duree && $note){
+            // if($nom && $resume && $anneeSortie && $duree && $note){
 
                 // Ajouter les données récupérées à la bdd à l'aide de la requete sql
                 $pdo = Connect::seConnecter();
@@ -117,12 +122,17 @@ class FilmController {
                     'id_realisateur' => $_POST["realisateur"],
                     'affiche' => $lienAffiche, // en lien avec le traitement de l'image plus haut
                 ]);
+                $ajouterDefinirBDD = $pdo->prepare("INSERT into definir(id_film, id_genre) VALUES(:id_film, :id_genre)");
+                $ajouterDefinirBDD->execute([
+                    // 'id_film'=> , https://www.php.net/manual/fr/pdo.lastinsertid.php
+                    'id_genre'=> $_POST["id_genre"],
+                ]);
 
-            }
+            // }
 
         }
-        header("Location:index.php"); // redirige vers la page par defaut, liste films
-        exit;
+        // header("Location:index.php"); // redirige vers la page par defaut, liste films
+        // exit;
     }
 
     //affiche les infos d'un film dans le formulaire de modification
@@ -136,13 +146,8 @@ class FilmController {
         $requeteDetailFilm->execute(["id" => $id]);
 
         //pour afficher le genre
-        $requeteGenreFilm = $pdo->prepare("SELECT d.id_film, g.nom AS nomGenre
-        FROM definir d
-        INNER JOIN film f ON d.id_film = f.id_film
-        INNER JOIN genre g ON d.id_genre = g.id_genre
-        WHERE d.id_film = :id");
-
-        $requeteGenreFilm->execute(["id" => $id]);
+        $requeteGenreFilm = $pdo->prepare("SELECT * FROM genre");
+        $requeteGenreFilm->execute();
 
 
         // choix du réalisateur

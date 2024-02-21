@@ -30,6 +30,16 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <label>Genre :</label>
+                    <select class="form-control" name="genre" id="genre-select">
+                            <?php foreach($requeteGenreFilm->fetchAll() as $genre){ ?> 
+                                <option value="<?=$genre["id_genre"]?>"><?=$genre["nom"]?></option>
+                            <?php 
+                            } ?>
+                    </select>
+                </div>
+                
+                <div class="form-group">
                     <label>Note sur 5 :</label>
                     <input type="number" class="form-control" name="note" value="<?= $detFilm["note"]?>">
                 </div>
