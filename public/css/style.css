@@ -5,9 +5,8 @@
     vertical-align: top;
 }
 #wrapper{
-    /* background: radial-gradient(#D9D9D9, #2F303A); */
     /* background: radial-gradient(ellipse at top, #2F303A, transparent),
-            radial-gradient(ellipse at bottom, #D9D9D9, transparent); */
+    radial-gradient(ellipse at bottom, #D9D9D9, transparent); */
     font-family: "Gill Sans", sans-serif;
     background-color: #2F303A;
 }
@@ -17,7 +16,8 @@
 
 /* ---------------------------------------------------------navbar--------------------------------------------------------------- */
 #MyTopnav{
-    /* background-color: #D9D9D9; */
+    background-color:#17181B ;
+    opacity: 0.8;
     display: flex;
     justify-content: space-evenly;
 }
@@ -25,6 +25,7 @@
     width: 50px;
 }
 #MyTopnav .icon{
+    /* icone menu burger  */
     display: none;
 }
 
@@ -45,61 +46,92 @@ h1, h2, h3, .uk-label, .card-movie p, #intro p, h4{
     color: white;
     text-align: center;
 }
+h1{
+    padding: 1%;
+}
+
+#home-container{
+    display: flex;
+    align-items: center;
+    gap: 200px;
+}
+
+/* ---premier enfant de home-container--- */
+#intro{
+    flex: 1;
+    padding: 5%;
+}
 
 .subscribe{
-    background-color: black;
-    border-radius: 20px;
+    padding-bottom: 0.5%;
+    background-color: #010101;
+    border-radius: 15px;
 }
 .subscribe p{
-    color: #E29A9A;
-    font-size: large;
-    text-align: center;
-    
+    color: rebeccapurple;
+    padding-top: 1%;
 }
 .subscribe input{
+    /* padding: 1%; */
+    border-radius: 15px;
     border: none;
     outline: none;
-    border-radius: 20px;
+    width: 90%;
 }
-.subscribe button{
-    background-color: #D9D9D9;
-    width: 5em;
-    border-radius: 20px;
-}
+
 .subscribe-btn{
-    display: flex;
     background-color: white;
-    border-radius: 20px;
-    justify-content: space-between;
+    display: flex;
+    margin: 5%;
+    border-radius: 15px;
+    padding: 1%;
+}
+
+.subscribe button{
+    background-color: #17181B;
+    color: #D9D9D9;
+    border: none;
+    padding: 1%;
+    border-radius: 15px;
+}
+/* ---deuxieme enfant de home-container--- */
+
+#coup-de-coeur{
+    background-color: #6e6e72d6;
+    border-radius: 15px;
+    margin: 5%;
+    padding: 2%;
+    flex: 1;
 }
 
 /* --------------------------------------cards--------------------------  */
 
 /* ---films  */
+#sortie-recente{
+    display: flex;
+}
 #movie1{
     background-color: #7A5864;
     border-radius: 15px;
     margin: 5%;
     padding: 2%;
+    flex: 1;
 }
 #movie2{
     background-color: #3B4D5A;
     border-radius: 15px;
     margin: 5%;
     padding: 2%;
+    flex: 1;
 }
 #movie3{
     background-color: #45695A;
     border-radius: 15px;
     margin: 5%;
     padding: 2%;
+    flex: 1;
 }
-#coup-de-coeur{
-    background-color: #6e6e72d6;
-    border-radius: 15px;
-    margin: 5%;
-    padding: 2%;
-}
+
 
 .card-header{
     display: flex;
@@ -121,6 +153,10 @@ h1, h2, h3, .uk-label, .card-movie p, #intro p, h4{
 .real-movie{
     font-weight: bold;
 }
+.titre-movie a, .real-movie a{
+    color: white;
+
+}
 .resume{
     padding: 0 2%;
     text-align: justify;
@@ -140,14 +176,18 @@ h1, h2, h3, .uk-label, .card-movie p, #intro p, h4{
     background-attachment: fixed;
 }
 #parallax h3{
-    padding: 5% 0 0 0;
+    padding: 3% 0 0 0;
 }
 
 /* ---------citations----------- */
+#citations{
+    display: flex;
+}
 .card-citation{
     background-color: #17181B;
-    margin: 5%;
+    margin: 3%;
     padding: 2%;
+    flex: 1;
 }
 .card-citation p{
     color: white;
@@ -161,15 +201,20 @@ h1, h2, h3, .uk-label, .card-movie p, #intro p, h4{
     text-align: right;
 }
 
-.card-acteur figure{
-    text-align: center;
-}
 
 /* -----acteurs  */
 
+#acteurs-moment{
+    display: flex;
+}
+
+.card-acteur figure{
+    text-align: center;
+}
 .card-acteur{
     background-color: #6e6e72d6;
-    margin: 5%;
+    flex: 1;
+    margin: 3%;
     padding: 2%;
 }
 .card-acteur p{
@@ -198,7 +243,7 @@ h1, h2, h3, .uk-label, .card-movie p, #intro p, h4{
     /* font-weight: bold; */
  }
  
- .detail a{
+ .detail a, .listing-genre a{
      color: #010101;
      font-weight: bold;
      text-decoration: underline;
@@ -224,7 +269,7 @@ footer{
 }
 
 
-/* -----------------------------------------------------------------VERSION MOBILE --------------------------------------------------- */
+/* ===============================================VERSION MOBILE ================================= */
 @media screen and (max-width: 500px){
 
 .network{
@@ -242,19 +287,23 @@ footer{
     display: block;
     color: white;
     font-size: 30px;
-    top: 5%;
-    right: 5%;
+    top: 10px;
+    right: 25px;
+
 }
 
 nav a{
     display: none;
+}
+.accueil-btn{
+    display: block;
 }
 
 /* --navbar ouverte-- */
 
 .navbarResponsive{
     display: flex;
-    /* position: relative; */
+    position: relative;
     flex-direction: column;
     width: 100%;
     text-align: center;
@@ -264,8 +313,8 @@ nav a{
 
 .navbarResponsive .icon{
     position: absolute;
-    top: 5%;
-    right: 5%;
+    top: 25px;
+    right: 25px;
     float: right;
     color: #010101;
     font-size: 30px;
@@ -282,26 +331,31 @@ nav a{
     padding: 5px 5px;
 }
 /* ---------------------------------------home-page---------------------- */
+
+#home-container, #sortie-recente, #citations, #acteurs-moment{
+    display: block;
+}
+
 h1, h2{
     padding: 4% 0;
 }
 
-.subscribe{
+#subscribe{
     padding: 2%;
 }
 
-.subscribe p{
+#subscribe p{
     padding: 3% 0;
     
 }
-.subscribe input{
+#subscribe input{
     padding: 2%;
 }
-.subscribe button{
+#subscribe button{
     width: 5em;
     padding: 2%;
 }
-.subscribe-btn{
+#subscribe-btn{
     justify-content: space-between;
     padding: 2%;
 }

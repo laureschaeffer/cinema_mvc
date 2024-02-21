@@ -3,14 +3,14 @@
 <section id="home-container">
     <div id="intro">
         <p>Cinéphile est un site web francophone culturel. Le site propose de découvrir, de noter et d'écrire des critiques d'œuvres culturelles appartenant aux domaines du cinéma.</p>
+        <div class="subscribe">
+            <p>Inscrivez-vous à la newsletter</p>
+            <form class="subscribe-btn">
+                <input type="text" placeholder="Votre e-mail">
+                <button type="submit">Valider</button>
+            </form>
     </div>
-    <form class="subscribe">
-        <p>Inscrivez-vous à la newsletter</p>
-        <div class="subscribe-btn">
-            <input type="text" placeholder="Entrez votre adresse e-mail">
-            <button type="submit" class="btn btn-secondary">Valider</button>
-        </div>
-    </form>
+    </div>
     <div id="coup-de-coeur">
         <h4>Notre coup de coeur</h4>
         <div class="card-movie">
@@ -19,18 +19,18 @@
                     <img src="public/img/affiches/winterbreak.webp" alt="affiche film winter break">
                 </figure>
                 <div class="card-info">
-                    <p><span class="titre-movie">Winter Break, </span>4,1/5</p>
+                    <p><span class="titre-movie"><a href="index.php?action=detailFilm&id=10">Winter Break,</a></span>4,1/5</p>
                     <p class="date-movie">13 décembre 2023</p>
-                    <p>De <span class="real-movie">Alexander Payne</span></p>
+                    <p>De <span class="real-movie"><a href="index.php?action=detailReal&id=8">Alexander Payne</a></span></p>
                 </div>
             </div>
             <p class="resume">Un instructeur maussade d'une école préparatoire de la Nouvelle-Angleterre reste sur le campus pendant les vacances de Noël pour garder une poignée d'étudiants qui n'ont nulle part où aller.</p>
         </div>
     </div>
-    <div id="parallax">
-        <h3>Sorties récentes</h3>
-    </div>
 </section>
+<div id="parallax">
+    <h3>Sorties récentes</h3>
+</div>
 <section id="sortie-recente">
     <div id="movie1">
         <div class="card-movie">
@@ -87,8 +87,8 @@
         <p class="citation-auteur">- Jean-Luc Godard</p>
     </div>
 </section>
+<h3>TOP Acteurs du moment</h3>
 <section id="acteurs-moment">
-    <h3>TOP Acteurs du moment</h3>
     <!-- 4 acteurs précisés dans la requete du controleur  -->
     <?php foreach($requeteHomeActeur->fetchAll() as $acteur){ ?>
         <div class="card-acteur">

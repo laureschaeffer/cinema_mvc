@@ -34,16 +34,7 @@ ob_start();
                 } ?>
             </select>
         </div>
-        <div class="form-group">
-            <label>Choisissez un genre :
-                <select class="form-control" name="genre" id="genre-select">
-                    <?php foreach($choixGenre->fetchAll() as $genre){ ?>
-                        <option value="<?=$genre["nom"]?>"><?=$genre["nom"]?></option> <?php
-                    }
-            ?>
-                </select>
-            </label>
-        </div>
+
 
         <div class="form-group">
             <label>Resumé</label>

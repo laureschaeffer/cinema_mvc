@@ -17,8 +17,8 @@
 <body>
 <div id="wrapper">
     <nav class="topNav" id="MyTopnav">
-        <a href="index.php?action=homePage">
-            <img src="public/img/clapperboard-29986_1280.webp" alt="logo-cinephile">
+        <a class="accueil-btn" href="index.php?action=homePage">
+            <img src="public/img/clapperboard-29986_1280.webp" alt="logo-cinephile"> Accueil
         </a>
         <a href="index.php?action=listFilms">Films</a></li>
         <a href="index.php?action=listReals">Réalisateurs</a></li>

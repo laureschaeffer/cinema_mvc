@@ -6,7 +6,7 @@ namespace Model;
 
 abstract class Connect {
 
-    const HOST = "localhost";
+    const HOST = "localhost"; 
     const DB = "cinema_laure";
     const USER = "root" ;
     const PASS = "";
@@ -19,10 +19,10 @@ abstract class Connect {
             return $ex->getMessage();
         }
 
-        catch (Exception $e)
-        {
-        die('Erreur : ' . $e->getMessage());
-        }
+        // catch (Exception $e)
+        // {
+        // die('Erreur : ' . $e->getMessage());
+        // }
 
     }
 
