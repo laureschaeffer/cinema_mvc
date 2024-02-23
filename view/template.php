@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content=<?=$description?> >
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -24,7 +25,7 @@
         <a href="index.php?action=listReals">Réalisateurs</a></li>
         <a href="index.php?action=listActeurs">Acteurs</a></li>
         <a href="index.php?action=listGenres">Genres</a></li>
-        <a href="index.php?action=formulaireFilm">Ajouter un film</a></li>
+        <!-- <a href="index.php?action=formulaireFilm">Ajouter un film</a></li> -->
         <div class="network">
             <a href="#">
                 <i class="fa-brands fa-facebook-f"></i>                        

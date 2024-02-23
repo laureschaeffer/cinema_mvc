@@ -44,17 +44,23 @@ if(isset($_GET["action"])){
         case "detailGenre" : $ctrlGenre->detailGenre($id); break;
         case "listeRole" : $ctrlRole->listRole($id); break;
 
-        // fonction qui contient les requetes pour avoir accès aux listes deroulantes
-        case "formulaireFilm" : $ctrlFilm->showList(); break ;
+        
+        // redirige vers les formulaires, liens dans les listes 
+        case "formulaireFilm" : $ctrlFilm->showList(); break ;    // fonction qui contient les requetes pour avoir accès a la liste deroulante
         case "modifierFilm" : $ctrlFilm->showListFilm($id); break; 
-
+        case "formGenre": $ctrlGenre->formGenre() ; break ;
+        case "formReal": $ctrlReal->formReal(); break;
+        case "formActeur" : $ctrlActeur->formActeur(); break; 
         //-------------------------------------------------traitement des données---------------------------------------------------
         case "ajouterFilm" : $ctrlFilm->ajouterFilm() ; break;
+        case "ajoutAct" : $ctrlActeur->ajoutActeur(); break; 
+        case "ajoutReal" : $ctrlReal->ajoutRealisateur(); break;
+        case "ajoutGenre" : $ctrlGenre->ajoutGenre(); break;
+        // modifier un film
         case "ajouterModification" : $ctrlFilm->modifierFilmBDD($id); break;
         
             
     }
-} 
-else {
+} else {
     $ctrlCinema->viewHomePage();
 }

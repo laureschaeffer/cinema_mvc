@@ -1,7 +1,9 @@
-<?php ob_start(); // lien avec le fichier template.php  ?>
+<?php ob_start(); 
+$detFilm = $requeteDetailFilm->fetch();
+
+// lien avec le fichier template.php  ?>
 
     <section class="detail">
-        <?php foreach($requeteDetailFilm->fetchAll() as $detFilm) { ?>
             <div class="detail-header">
                 <p><?= $detFilm["annee_sortie_fr"]?></p> 
                 <p>Genre :
@@ -19,9 +21,7 @@
                 </div>
                 <img src="<?=$detFilm["affiche"]?>" alt="affiche du film" width=200px height=200px>
             </div>
-            <?php
-        }
-        ?>
+           
             <div class="casting">
                 <?php
                     foreach($requeteCasting->fetchAll() as $casting) { 
@@ -35,7 +35,7 @@
     </section>
 
         <?php 
-
+$description="Page dédiée au détail du film".$detFilm["titre"].", contenant ses infos principales";
 $titre= "Détail du film";
 $titre_secondaire = $detFilm["titre"];
 $contenu = ob_get_clean();

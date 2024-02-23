@@ -4,7 +4,7 @@ namespace Controller;
 use Model\Connect;
 
 class CinemaController {
-    //-------------------------------------------------------requetes des listes------------------------------------------
+    //-------------------------------------------------------landing page------------------------------------------
     
     public function viewHomePage(){
         $pdo = Connect::seConnecter();
@@ -12,4 +12,5 @@ class CinemaController {
         $requeteHomeActeur->execute();
         require "view/home.php";
     }
+
 }

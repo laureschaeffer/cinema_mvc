@@ -53,7 +53,7 @@ h1{
 #home-container{
     display: flex;
     align-items: center;
-    gap: 200px;
+    gap: 10vw;
 }
 
 /* ---premier enfant de home-container--- */
@@ -72,7 +72,6 @@ h1{
     padding-top: 1%;
 }
 .subscribe input{
-    /* padding: 1%; */
     border-radius: 15px;
     border: none;
     outline: none;
@@ -97,7 +96,7 @@ h1{
 /* ---deuxieme enfant de home-container--- */
 
 #coup-de-coeur{
-    background-color: #6e6e72d6;
+    background-color: #63637D;
     border-radius: 15px;
     margin: 5%;
     padding: 2%;
@@ -113,21 +112,21 @@ h1{
 #movie1{
     background-color: #7A5864;
     border-radius: 15px;
-    margin: 5%;
+    margin: 2vw;
     padding: 2%;
     flex: 1;
 }
 #movie2{
     background-color: #3B4D5A;
     border-radius: 15px;
-    margin: 5%;
+    margin: 2vw;
     padding: 2%;
     flex: 1;
 }
 #movie3{
     background-color: #45695A;
     border-radius: 15px;
-    margin: 5%;
+    margin: 2vw;
     padding: 2%;
     flex: 1;
 }
@@ -139,7 +138,7 @@ h1{
     align-items: center;
 }
 .card-header img, .card-acteur img{
-    width: 150px;
+    width: 30vh;
 }
 
 .titre-movie{
@@ -147,7 +146,7 @@ h1{
     font-weight: bold;
 }
 .date-movie{
-    opacity: 0.5;
+    opacity: 0.8;
 }
 
 .real-movie{
@@ -212,13 +211,14 @@ h1{
     text-align: center;
 }
 .card-acteur{
-    background-color: #6e6e72d6;
+    background-color: #595969;
     flex: 1;
     margin: 3%;
     padding: 2%;
 }
 .card-acteur p{
     text-align: center;
+    color: white;
 }
 .card-acteur a{
     color: white;
@@ -230,7 +230,7 @@ h1{
 }
 
 .card-listing, .listing-genre, .detail{
-    background-color: #6e6e72d6;
+    background-color: #595969;
     padding: 3%;
     margin: 3%;
 }
@@ -252,7 +252,7 @@ h1{
 /* --------------------------------------------------------------------formulaires------------------------------------------------------- */
 
 
-.formulaireFilm, .formulaireReal{
+.formulaireFilm, .formulaireReal, .formulaireActeur, .formulaireGenre{
     background-color: #6e6e72d6;
     padding: 3%;
     margin: 3%;
@@ -270,7 +270,7 @@ footer{
 
 
 /* ===============================================VERSION MOBILE ================================= */
-@media screen and (max-width: 500px){
+@media screen and (max-width: 768px){
 
 .network{
     display: none;

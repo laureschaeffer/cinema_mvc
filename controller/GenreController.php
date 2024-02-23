@@ -28,4 +28,23 @@ class GenreController{
 
         require "view/detailGenre.php"; 
     }
+
+    // lien vers le formulaire ajout genre
+    public function formGenre(){
+        require "view/formulaires/ajouterGenre.php";
+    }
+
+    // ------formulaire------
+    public function ajoutGenre(){
+        if(isset($_POST['submit'])){
+            $nom= filter_input(INPUT_POST, "nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            if($nom){
+                $pdo = Connect::seConnecter();
+                $ajouterGenreBDD = $pdo->prepare("INSERT into genre(nom) VALUES(:nom)");
+                $ajouterGenreBDD->execute(["nom"=>$nom]);
+            }
+        }
+        header("Location:index.php"); // redirige vers la page par defaut
+        exit;
+    }
 }

@@ -38,6 +38,7 @@
 
 <?php  }
 
+$description="Page dédiée à l'acteur ".$acteur["nomActeur"].", contenant ses infos principales";
 $titre= "Détail Acteur";
 $titre_secondaire = $acteur["nomActeur"];
 $contenu = ob_get_clean();

@@ -36,6 +36,7 @@
 
 <?php 
 
+$description="Page dédiée au réalisateur ".$realisateur["nomReal"].", contenant ses infos principales";
 $titre= "Détail réalisateur";
 $titre_secondaire = $real["nomReal"];
 $contenu = ob_get_clean();

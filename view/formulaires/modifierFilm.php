@@ -50,13 +50,14 @@
                 <?php
         }
         ?>
-        <button type="submit" class="btn btn-secondary">Modifier le film</button>
+        <button type="submit" name="submit" class="btn btn-secondary">Modifier le film</button>
 
         </form>
     </section>
 
 <?php 
 
+$description="Proposez une modification sur un film contenant une erreur." ;
 $titre= "Modifier le film";
 $titre_secondaire = "Modifier le film";
 $contenu = ob_get_clean();

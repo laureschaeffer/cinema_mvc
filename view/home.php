@@ -104,6 +104,7 @@
 
 
 <?php
+$description="Découvrez un monde de magie cinématographique, plongez dans une collection d'actualités et analyses de films plus anciens. Que vous soyez un cinéphile passionné ou un novice curieux, notre plateforme vous offre une expérience pour explorer et apprécier le cinéma.";
 $titre= "Page d'accueil";
 $titre_secondaire = "Cinéphile";
 $contenu = ob_get_clean();

@@ -10,7 +10,7 @@
 </section>
 
 <?php
-
+$description="Détail du role".$role["nom_personnage"]."joué par leurs acteurs dans différents films.";
 $titre= "Roles";
 $titre_secondaire = $role["nom_personnage"];
 $contenu = ob_get_clean();

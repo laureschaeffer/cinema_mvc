@@ -1,6 +1,9 @@
 <?php ob_start(); // lien avec le fichier template.php ?>
 
 <p class="uk-label uk-label-warning"> Il y a <?= $requeteLsActeur->rowCount() ?> acteurs </p>
+<div class="card-listing">
+    <p class="uk-label uk-label-warning"><a href="index.php?action=formActeur">Ajouter un acteur</a></p>
+</div>
 
     <?php
         // liste de tous les acteurs présents dans la base de données ; l'url permet d'appeler l'action dans l'index
@@ -12,11 +15,9 @@
         </div>
 
         <?php } 
-        var_dump($acteur);
-        
     
 
-
+$description="Voilà la liste de tous les acteurs et actrices présents dans notre site. Présentez-nous votre préféré.";
 $titre= "Liste des acteurs";
 $titre_secondaire = "Liste des acteurs";
 $contenu = ob_get_clean();
