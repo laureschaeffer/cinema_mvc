@@ -17,5 +17,5 @@
 12 exemples de requêtes utilisées en sql
 
 ### Utilisation : 
-- heidiSQL, SQL, docker, laragon, PHP, CSS, bootstrap
+- heidiSQL, SQL, docker, laragon, PHP, CSS
 - design pattern: modele MVC
