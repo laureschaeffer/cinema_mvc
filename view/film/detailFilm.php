@@ -5,23 +5,19 @@ $detFilm = $requeteDetailFilm->fetch();
 
     <section class="detail">
         <div class="card-movie">
-                <?php foreach($requeteGenreFilm->fetchAll() as $genre){ ?>
-                <div class="card-header">
-                    <figure><img src="<?=$detFilm["affiche"]?>" alt="affiche du film"></figure>
-                    <div class="card-info">
+            <div class="card-header">
+                <figure><img src="<?=$detFilm["affiche"]?>" alt="affiche du film"></figure>
+                <div class="card-info">
+                        <?php foreach($requeteGenreFilm->fetchAll() as $genre){ ?>
                         <p><?=$genre["nomGenre"]?></p>
+                        <?php
+                        } ?>
                         <p><?= $detFilm["note"]?>/5</p> 
                         <p class="date-movie"><?= $detFilm["annee_sortie_fr"]?></p>
                         <p>De <span class="real-movie"><a href="index.php?action=detailReal&id=<?=$detFilm["id_realisateur"]?>"><?=$detFilm["realisateur"]?></a></span></p>
                     </div>
                 </div>
                 <p class="resume"><?= $detFilm["synopsis"] ?></p>
-                    <?php
-                } ?>
-            <div class="detail-main">
-                <div class="synopsis">
-                    <p><?= $detFilm["synopsis"] ?></p>
-                </div>
                 <div class="casting">
                     <?php
                         foreach($requeteCasting->fetchAll() as $casting) { 
@@ -29,10 +25,9 @@ $detFilm = $requeteDetailFilm->fetch();
                             <?php 
                         } ?>
                 </div>
-            </div>
-            <div class="form-btn">
-                <button><a href="index.php?action=modifierFilm&id=<?=$detFilm["id_film"]?>">Apporter une modification</a></button>
-            </div>
+        </div>
+        <div class="form-btn">
+            <button><a href="index.php?action=modifierFilm&id=<?=$detFilm["id_film"]?>">Apporter une modification</a></button>
         </div>
             <!-- action: redirige vers une page de modification  -->
 

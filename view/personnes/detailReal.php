@@ -9,18 +9,12 @@
                 $accord="né le ";
             }
             ?>
-            <div class="detail-header">
-                <p><?= $real["nomReal"].', '.$accord.$real["date_naissance"]?></p>  
-            </div>
-            <div class="detail-main">
-                <img src="<?=$real["photo"]?>" alt="photo du réalisateur" width=200px>
-                <div class="biographie">
-                    <p>
-                        <?=$real["biographie"] ?>
-                    </p>
-                </div>
+            <div class="detail-card">
+                <figure><img src="<?=$real["photo"]?>" alt="photo du réalisateur" width=200px></figure>
+                <p><?= $real["nomReal"].', '.$accord.$real["date_naissance"]?></p> 
+                <p><?=$real["biographie"] ?></p> 
+                <h3>Filmographie</h3>
                 <div class="filmographie">
-                    <h3>Films réalisés :</h3>
                     <?php foreach($realFilmographie->fetchAll() as $filmo){
                         // liste de la filmographie avec un lien qui redirige vers le détail du film
                         ?> <ul>

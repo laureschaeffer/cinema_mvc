@@ -117,7 +117,6 @@ class FilmController {
                     if(in_array($extension, $extensionsAutorisees) && $fileError==0 && $fileSize <=$maxSize){
                         // move_uploaded_file($tmpName, $lienAffiche);
                         imagewebp(imagecreatefromstring(file_get_contents($tmpName)), $lienAffiche);
-                        // header("Location")
                     } 
                 } else {
                     $lienAffiche= "https://placehold.co/600x400";//image par défaut
@@ -160,12 +159,11 @@ class FilmController {
                     ]);
                 }
 
+                header("Location:index.php?action=detailFilm&id=$idFilm");
+                exit;
             }
 
         }
-        
-        header("Location:index.php"); // redirige vers la page par defaut
-        exit;
     }
 
     //affiche les infos d'un film dans le formulaire de modification

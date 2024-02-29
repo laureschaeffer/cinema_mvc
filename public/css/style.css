@@ -291,7 +291,7 @@ h1{
 /* -----------------------------------------------detail film-------------------- */
 .detail p{
     color: white;
-    padding: 2%;
+    padding: 1%;
 }
 
 .detail-header{
@@ -311,6 +311,21 @@ h1{
 .casting a{
     color: white;
 }
+
+/* ------------------detail acteur--------- */
+.filmographie{
+    padding: 2%;
+}
+.filmographie li{
+    color: white;
+    padding: 1% 0;
+    list-style: none;
+}
+.filmographie a{
+    color: white;
+    font-weight: bold;
+}
+
 /* --------------------------------------------------------------------formulaires------------------------------------------------------- */
 
 
