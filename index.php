@@ -1,5 +1,5 @@
 <?php   //fichier qui traite toutes les fonctions à travers l'url
-
+// phpinfo();die;
 // on appelle tous les controlleurs 
 
 use Controller\ActeurController;

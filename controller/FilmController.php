@@ -11,10 +11,13 @@ class FilmController {
         $pdo = Connect::seConnecter();
         // $managerFilm = new FilmManager();
         // $requeteLsFilms = $managerFilm->getFilms();
-        $requeteLsFilms = $pdo->query(
-            'SELECT titre, annee_sortie_fr, id_film, affiche
-            FROM film
-            ORDER BY titre');
+        $requeteLsFilms = $pdo->prepare(
+            "SELECT f.titre, f.annee_sortie_fr, f.synopsis, f.note, f.affiche, CONCAT(prenom, ' ', nom) AS realisateur, f.id_realisateur, f.id_film
+            FROM film f
+            INNER JOIN realisateur r ON f.id_realisateur = r.id_realisateur
+            INNER JOIN personne p ON r.id_personne = p.id_personne
+            ORDER BY f.titre");
+        $requeteLsFilms->execute();
 
         require "view/film/listeFilms.php";
     }
@@ -103,15 +106,18 @@ class FilmController {
                     // ----crée un identifiant unique, et rajoute l'extension 
                     $extensionsAutorisees= ["jpg", "jpeg", "gif", "png"];
                     $uniqueName= uniqid("", true);
-                    $newFileName = $uniqueName.'.'.$extension ;
+                    $newFileName = $uniqueName.'.webp';
 
                     // taille max
-                    $maxSize = 400000;
+                    $maxSize = 40000000;
     
                     $lienAffiche='public/img/affiches/'.$newFileName;
                     //si l'extension fait parti de celles autorisées dans le tableau, et qu'aucune erreur n'est apparu, alors je la télécharge
+                  
                     if(in_array($extension, $extensionsAutorisees) && $fileError==0 && $fileSize <=$maxSize){
-                        move_uploaded_file($tmpName, $lienAffiche);
+                        // move_uploaded_file($tmpName, $lienAffiche);
+                        imagewebp(imagecreatefromstring(file_get_contents($tmpName)), $lienAffiche);
+                        // header("Location")
                     } 
                 } else {
                     $lienAffiche= "https://placehold.co/600x400";//image par défaut
@@ -157,6 +163,7 @@ class FilmController {
             }
 
         }
+        
         header("Location:index.php"); // redirige vers la page par defaut
         exit;
     }

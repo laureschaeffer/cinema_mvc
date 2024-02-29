@@ -1,20 +1,22 @@
 <?php ob_start(); // lien avec le fichier template.php ?>
 
-<p class="uk-label uk-label-warning"> Il y a <?= $requeteLsActeur->rowCount() ?> acteurs </p>
-<div class="card-listing">
-    <p class="uk-label uk-label-warning"><a href="index.php?action=formActeur">Ajouter un acteur</a></p>
-</div>
-
+<div id="listings">
     <?php
         // liste de tous les acteurs présents dans la base de données ; l'url permet d'appeler l'action dans l'index
         foreach($requeteLsActeur->fetchAll() as $acteur) { ?>
-        <div class="card-listing">
-            <a href="index.php?action=detailActeur&id=<?=$acteur["id_acteur"]?>"><?= $acteur["nomActeur"]?></a>
+        <div class="card">
+            <figure><a href="index.php?action=detailActeur&id=<?=$acteur["id_acteur"]?>"><img src="<?=$acteur["photo"]?>" alt="photo de l'acteur <?=$acteur["nomActeur"]?>"></a></figure>
+            <p><a href="index.php?action=detailActeur&id=<?=$acteur["id_acteur"]?>"><?= $acteur["nomActeur"]?></a></p>
             <p><?= $acteur["date_naissance"] ?></p>
-            <img src="<?=$acteur["photo"]?>" alt="photo de l'acteur <?=$acteur["nomActeur"]?>">
         </div>
-
         <?php } 
+        ?>
+
+</div>
+<div class="form-btn">
+    <button><a href="index.php?action=formActeur">Ajouter un acteur</a></button>
+</div>
+<?php
     
 
 $description="Voilà la liste de tous les acteurs et actrices présents dans notre site. Présentez-nous votre préféré.";

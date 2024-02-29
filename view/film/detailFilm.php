@@ -4,35 +4,40 @@ $detFilm = $requeteDetailFilm->fetch();
 // lien avec le fichier template.php  ?>
 
     <section class="detail">
-            <div class="detail-header">
-                <p><?= $detFilm["annee_sortie_fr"]?></p> 
-                <p>Genre :
+        <div class="card-movie">
                 <?php foreach($requeteGenreFilm->fetchAll() as $genre){ ?>
-                    <?=$genre["nomGenre"]?>
+                <div class="card-header">
+                    <figure><img src="<?=$detFilm["affiche"]?>" alt="affiche du film"></figure>
+                    <div class="card-info">
+                        <p><?=$genre["nomGenre"]?></p>
+                        <p><?= $detFilm["note"]?>/5</p> 
+                        <p class="date-movie"><?= $detFilm["annee_sortie_fr"]?></p>
+                        <p>De <span class="real-movie"><a href="index.php?action=detailReal&id=<?=$detFilm["id_realisateur"]?>"><?=$detFilm["realisateur"]?></a></span></p>
+                    </div>
+                </div>
+                <p class="resume"><?= $detFilm["synopsis"] ?></p>
                     <?php
                 } ?>
-                 </p>
-                <p>Réalisé par <a href="index.php?action=detailReal&id=<?=$detFilm["id_realisateur"]?>"><?=$detFilm["realisateur"]?></a></p>
-                <p><?= $detFilm["note"]?>/5</p> 
-            </div>
             <div class="detail-main">
                 <div class="synopsis">
-                    <?= $detFilm["synopsis"] ?>
+                    <p><?= $detFilm["synopsis"] ?></p>
                 </div>
-                <img src="<?=$detFilm["affiche"]?>" alt="affiche du film" width=200px height=200px>
+                <div class="casting">
+                    <?php
+                        foreach($requeteCasting->fetchAll() as $casting) { 
+                            ?> <p><a href="index.php?action=detailActeur&id=<?=$casting["id_acteur"]?>"><?=$casting["nomActeur"]?></a> dans le rôle de <a href="index.php?action=listeRole&id=<?=$casting["id_role"]?>"><?= $casting["nom_personnage"]?></a></p> 
+                            <?php 
+                        } ?>
+                </div>
             </div>
-           
-            <div class="casting">
-                <?php
-                    foreach($requeteCasting->fetchAll() as $casting) { 
-                        ?> <p><a href="index.php?action=detailActeur&id=<?=$casting["id_acteur"]?>"><?=$casting["nomActeur"]?></a> dans le rôle de <a href="index.php?action=listeRole&id=<?=$casting["id_role"]?>"><?= $casting["nom_personnage"]?></a></p> 
-                        <?php 
-                    } ?>
+            <div class="form-btn">
+                <button><a href="index.php?action=modifierFilm&id=<?=$detFilm["id_film"]?>">Apporter une modification</a></button>
             </div>
-            <p><a href="index.php?action=modifierFilm&id=<?=$detFilm["id_film"]?>">Apporter une modification</a></p>
+        </div>
             <!-- action: redirige vers une page de modification  -->
 
-    </section>
+</section>
+
 
         <?php 
 $description="Page dédiée au détail du film".$detFilm["titre"].", contenant ses infos principales";

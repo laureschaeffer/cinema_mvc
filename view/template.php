@@ -51,14 +51,14 @@
 
 
 
-        <footer class="py-3 my-4">
-        <p class="text-center text-body-secondary">Retrouvez-nous</p>
-        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary"><i class="fa-brands fa-facebook-f"></i></a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary"><i class="fa-brands fa-twitter"></i></a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary"><i class="fa-brands fa-instagram"></i></a></li>                  
+        <footer>
+        <p>Retrouvez-nous</p>
+        <ul>
+            <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>                  
         </ul>
-        <p class="text-center text-body-secondary">© 2024 Laure Schaeffer</p>
+        <p>© 2024 Laure Schaeffer</p>
         </footer>
         </main>
     </div>
