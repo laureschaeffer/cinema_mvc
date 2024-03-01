@@ -6,10 +6,20 @@
 }
 :root {
     --main-bg-color: #1c1f23;
+    --main-txt-color: white; 
   }
+
 #wrapper{
     font-family: "Gill Sans", sans-serif;
     background-color: var(--main-bg-color);
+}
+/* ----tous les elements en blanc---- */
+#MyTopnav a, .subscribe button, .card-citation p, .card-acteur p, .card-acteur a, .card p, .card a, .detail p, .casting a, .filmographie a, .filmographie li, #listing-genre a, h1, h2, h3, #intro p, h4, .real-movie a, .card-movie p, .card-movie a{
+    color: var(--main-txt-color);
+}
+
+.subscribe-btn, .form-btn button, .formulaire button{
+    background-color: var(--main-txt-color);
 }
 
 /* ---------------------------------------------------------navbar--------------------------------------------------------------- */
@@ -35,9 +45,13 @@
 
 #MyTopnav a{
     font-size: 2em;
-    color: white;
+    text-decoration: none;
+    transition: 0.5s;
 }
 
+#MyTopnav a:hover{
+    opacity: 0.8;
+}
 .network a{
     padding: 0 12px;
 }
@@ -46,12 +60,14 @@
 /* --------------------------------------------------------------------------home-page---------------------------------- */
 
 /* ---------------------------------------home-container------------------ */
-h1, h2, h3, .uk-label, .card-movie p, #intro p, h4{
-    color: white;
+h1, h2, h3, #intro p{
     text-align: center;
 }
 h1{
-    padding: 5% 0 1% 0;
+    padding: 10% 0 1% 0;
+}
+h2{
+    padding-bottom: 3%;
 }
 
 #home-container{
@@ -75,7 +91,6 @@ h1{
     border-radius: 15px;
 }
 .subscribe p{
-    /* color: rebeccapurple; */
     padding-top: 3%;
 }
 .subscribe input{
@@ -87,7 +102,6 @@ h1{
 }
 
 .subscribe-btn{
-    background-color: white;
     display: flex;
     margin: 5%;
     border-radius: 15px;
@@ -96,7 +110,6 @@ h1{
 
 .subscribe button{
     background-color: #17181B;
-    color: #D9D9D9;
     border: none;
     padding: 2% 3%;
     border-radius: 15px;
@@ -117,32 +130,29 @@ h1{
     flex: 1;
 }
 
+
 /* --------------------------------------cards--------------------------  */
 
 /* ---films  */
 #sortie-recente{
     display: flex;
+    flex-wrap: wrap;
+}
+.card-movie{
+    border-radius: 15px;
+    margin: 1%;
+    padding: 2%;
+    flex: 1;
+
 }
 #movie1{
     background-color: #7A5864;
-    border-radius: 15px;
-    margin: 2vw;
-    padding: 2%;
-    flex: 1;
 }
 #movie2{
     background-color: #3B4D5A;
-    border-radius: 15px;
-    margin: 2vw;
-    padding: 2%;
-    flex: 1;
 }
 #movie3{
     background-color: #45695A;
-    border-radius: 15px;
-    margin: 2vw;
-    padding: 2%;
-    flex: 1;
 }
 
 
@@ -152,9 +162,11 @@ h1{
     align-items: center;
 }
 .card-header img, .card-acteur img{
-    width: 30vh;
+    width: 20vw;
 }
-
+.card-info{
+    padding-left: 3%;
+}
 .titre-movie{
     font-size: large;
     font-weight: bold;
@@ -166,30 +178,30 @@ h1{
 .real-movie{
     font-weight: bold;
 }
-.titre-movie a, .real-movie a{
-    color: white;
 
-}
 .resume{
-    padding: 0 2%;
+    padding: 2% 0;
     text-align: justify;
 
 }
-
 
 
  /* -----parallax---------- */
 #parallax{
     width: 100vw;
     height: 30vh;
-    background-image: url("../img/parallax.jpg");
+    background-image: url("../img/ticket-2974645_1280.jpg");
     background-size: cover;
     background-position: center; 
     /* background-repeat: no-repeat; */
     background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 #parallax h3{
-    padding: 3% 0 0 0;
+    font-family: "Lato", sans-serif;
+    font-size: xx-large;
 }
 
 /* ---------citations----------- */
@@ -201,9 +213,6 @@ h1{
     margin: 3%;
     padding: 2%;
     flex: 1;
-}
-.card-citation p{
-    color: white;
 }
 
 .citation{
@@ -219,6 +228,7 @@ h1{
 
 #acteurs-moment{
     display: flex;
+    flex-wrap: wrap;
 }
 
 .card-acteur figure{
@@ -227,17 +237,19 @@ h1{
 .card-acteur{
     background-color: #303039;
     flex: 1;
-    margin: 3%;
-    padding: 2%;
-    border-radius: 20px;
+    margin: 1%;
+    padding: 1%;
+    box-shadow: 20px 13px #7A5864;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
 }
 .card-acteur p{
     text-align: justify;
-    color: white;
+    padding: 3% 0;
 }
-.card-acteur a{
-    color: white;
-}
+
 
 /* -----------------------------------------------------------------------listes genre, real, acteurs, film--------------------------------- */
 
@@ -259,11 +271,8 @@ h1{
     justify-content: center;
     margin: 2%;
 }
-.card img{
-    width: 150px;
-}
+
 .card p, .card a{
-    color: white;
     padding: 2% 0;
     text-align: center;
 }
@@ -274,16 +283,26 @@ h1{
 .card a:hover{
     opacity: 0.5;
 }
-
+.card img{
+    width: 150px;
+    height: 200px;
+}
 .form-btn{
     display: flex;
     justify-content: center;
 }
 
 .form-btn button{
+    color: black;
+    border: none;
     padding: 1%;
-    border-radius: 10px;
-    background-color: #7A5864;
+    border-radius: 15px;
+    margin-bottom: 1%;
+    transition: 0.5s;
+}
+
+.form-btn button:hover{
+    opacity: 0.8;
 }
 .form-btn a{
     color: #010101;
@@ -292,7 +311,6 @@ h1{
 
 /* -----------------------------------------------detail film-------------------- */
 .detail p{
-    color: white;
     padding: 1%;
 }
 
@@ -304,14 +322,19 @@ h1{
     padding: 3% 0;
 }
 
+.detail ul{
+    padding: 3% 0;
+}
 
 .synopsis p{
     text-align: justify;
     padding: 2% 5%;
 }
-
-.casting a{
-    color: white;
+.detail a{
+    transition: 0.5s;
+}
+.detail a:hover{
+    opacity: 0.5;
 }
 
 /* ------------------detail acteur--------- */
@@ -319,32 +342,90 @@ h1{
     padding: 2%;
 }
 .filmographie li{
-    color: white;
-    padding: 1% 0;
     list-style: none;
 }
 .filmographie a{
-    color: white;
+
     font-weight: bold;
 }
+.detail-card img{
+    width: 20vw;
+}
 
+/* -------------liste genre------------------ */
+
+#listing-genre ul{
+    list-style: none;
+    padding-left: 2%;
+}
+#listing-genre li{
+    padding: 1% 0;
+}
+#listing-genre a{
+    transition: 0.5s;
+}
+#listing-genre a:hover{
+    opacity: 0.5;
+}
 /* --------------------------------------------------------------------formulaires------------------------------------------------------- */
 
 
-.formulaireFilm, .formulaireReal, .formulaireActeur, .formulaireGenre{
+.formulaire{
     background-color: #6e6e72d6;
     padding: 3%;
     margin: 3%;
 }
 
+.formulaire input[type="text"], .formulaire input[type="number"], select{
+    border: none;
+    outline: none;
+    padding: 1%;
+    border-radius: 5px;
+    margin: 1% 0;
+}
+
+input[type="file"]{
+    padding: 1% 0;
+}
+.formulaire button{
+    border: none;
+    padding: 0.5%;
+    border-radius: 5px;
+    margin-bottom: 1%;
+    transition: 0.5s;
+}
+.formulaire textarea{
+    border-radius: 5px;
+    outline: none;
+
+}
+.formulaire p{
+    margin: 1% 0;
+}
 
 /* -----footer------ */
 footer a {
     color: #010101;
+    transition: 0.5s;
 }
-
+footer a:hover{
+    opacity: 0.5;
+}
 footer{
     background-color: #D9D9D9;
+    margin-top: 2%;
+}
+footer p{
+    text-align: center;
+    padding: 0.5% 0;
+}
+footer ul{
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+footer li{
+    padding: 0 1%;
 }
 
 
@@ -364,7 +445,7 @@ footer{
 #MyTopnav .icon{
     position: absolute;
     display: block;
-    color: white;
+    color: var(--main-txt-color);
     font-size: 30px;
     top: 10px;
     right: 25px;
@@ -438,6 +519,10 @@ h1, h2{
     justify-content: space-between;
     padding: 2%;
 }
+/* ------acteurs du moment-----  */
+.card-header img{
+    width: 50vw;
+}
 
 /* --------------------------------------cards-------------------------- */
 
@@ -448,5 +533,6 @@ h1, h2{
 .card-acteur img{
     width: 150px;
 }
+
 
 }

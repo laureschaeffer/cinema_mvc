@@ -1,13 +1,15 @@
 <?php ob_start(); // lien avec le fichier template.php ?>
 
 <div id="listing-genre">
+    <ul>
     <?php
         //listes des genres de films
         foreach($requeteLsGenre->fetchAll() as $genre) { ?>
-            <p><a href="index.php?action=detailGenre&id=<?=$genre["id_genre"]?>"><?= $genre["nom"] ?></a></p>
-        <?php } ?>
-
-</div>
+                <li><a href="index.php?action=detailGenre&id=<?=$genre["id_genre"]?>"><?= $genre["nom"] ?></a></li>
+                <?php } ?>
+                
+    </ul>
+            </div>
 <div class="form-btn">
     <button><a href="index.php?action=formGenre">Ajouter un genre</a></button>
 </div>

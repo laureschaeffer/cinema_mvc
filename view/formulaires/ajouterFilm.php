@@ -4,55 +4,38 @@
 ob_start();
 ?>
 
-<section class="formulaireFilm">
+<section class="formulaire">
     <form action="index.php?action=ajouterFilm" method="post" enctype="multipart/form-data">
-        <div class="form-group">
-            <label>Nom du film :</label>
-                <input type="text" class="form-control" name="nom" placeholder="Titre" required>
-        </div>
-        <div class="form-group">
-            <label>Année de sortie :</label>
-                <input type="number" class="form-control" name="anneeSortie" placeholder="Année de sortie">
-        </div>
-        <div class="form-group">
-            <label>Durée (en minute) :</label>
-                <input type="number" class="form-control" name="duree" placeholder="Durée">
-        </div>
+        <p><label>Nom du film :</label></p>
+        <input type="text" class="form-control" name="nom" placeholder="Titre" required>
+        <p><label>Année de sortie :</label></p>
+        <input type="number" class="form-control" name="anneeSortie" placeholder="Année de sortie">
+        <p><label>Durée (en minute) :</label></p>
+        <input type="number" class="form-control" name="duree" placeholder="Durée">
+        <p><label>Note sur 5 :</label></p>
+        <input type="number" class="form-control" name="note" placeholder="Note">
 
-        <div class="form-group">
-            <label>Note sur 5 :</label>
-                <input type="number" class="form-control" name="note" placeholder="Note">
-        </div>
-
-        <div class="form-group">
-            <label>Choissiez un réalisateur :</label>
-            <select class="form-control" name="realisateur" id="realisateur-select">
-                <?php foreach($choixReal->fetchAll() as $real){ ?>
+        <p><label>Choissiez un réalisateur :</label></p>
+        <select class="form-control" name="realisateur" id="realisateur-select">
+            <?php foreach($choixReal->fetchAll() as $real){ ?>
                     <option value="<?=$real["id_realisateur"]?>"><?=$real["nomReal"]?></option>
                 <?php 
                 } ?>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Choisissez un genre :</label> <br>
+        </select>
+        <p><label>Choisissez un genre :</label></p> 
         <?php foreach($choixGenre->fetchAll() as $genre){ ?>
-            <input type="checkbox" id="<?=$genre["nom"]?>" name="genres[]" value="<?=$genre["id_genre"]?>"/>
-            <label for="<?=$genre["nom"]?>"><?=$genre["nom"]?></label> <br>   
+            <p><input type="checkbox" id="<?=$genre["nom"]?>" name="genres[]" value="<?=$genre["id_genre"]?>"/>
+            <label for="<?=$genre["nom"]?>"><?=$genre["nom"]?></label> </p>  
                 <?php
             }
-            ?>
+            ?> 
+      
+        <p><label>Resumé</label></p>
+        <textarea class="form-control" name="resume" rows="4" placeholder="Synopsis"></textarea>
 
-        
-        <div class="form-group">
-            <label>Resumé</label>
-            <textarea class="form-control" name="resume" rows="4" placeholder="Synopsis"></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="file">Ajouter une affiche, format autorisé: jpg, jpeg, gif</label>
-            <input type="file" name="file" class="form-control-file">
-        </div>
-        <button type="submit" name="submit" class="btn btn-secondary">Soumettre le film</button>
+        <p><label for="file">Ajouter une affiche, format autorisé: jpg, jpeg, gif</label></p>
+        <input type="file" name="file" class="form-control-file">
+        <p><button type="submit" name="submit" class="btn btn-secondary">Soumettre le film</button></p>
 
 
     </form>

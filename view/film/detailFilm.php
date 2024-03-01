@@ -21,13 +21,13 @@ $detFilm = $requeteDetailFilm->fetch();
                 <div class="casting">
                     <?php
                         foreach($requeteCasting->fetchAll() as $casting) { 
-                            ?> <p><a href="index.php?action=detailActeur&id=<?=$casting["id_acteur"]?>"><?=$casting["nomActeur"]?></a> dans le rôle de <a href="index.php?action=listeRole&id=<?=$casting["id_role"]?>"><?= $casting["nom_personnage"]?></a></p> 
+                            ?> <p><a href="index.php?action=detailActeur&id=<?=$casting["id_acteur"]?>" aria-label="detail acteur"><?=$casting["nomActeur"]?></a> dans le rôle de <a href="index.php?action=listeRole&id=<?=$casting["id_role"]?>"><?= $casting["nom_personnage"]?></a></p> 
                             <?php 
                         } ?>
                 </div>
         </div>
         <div class="form-btn">
-            <button><a href="index.php?action=modifierFilm&id=<?=$detFilm["id_film"]?>">Apporter une modification</a></button>
+            <button><a href="index.php?action=modifierFilm&id=<?=$detFilm["id_film"]?>" aria-label="apporter une modification">Apporter une modification</a></button>
         </div>
             <!-- action: redirige vers une page de modification  -->
 

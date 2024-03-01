@@ -32,44 +32,40 @@
     <h3>Sorties récentes</h3>
 </div>
 <section id="sortie-recente">
-    <div id="movie1">
-        <div class="card-movie">
-            <div class="card-header">
-                <figure><img src="public/img/affiches/laBete.jpg" alt="affiche film la bete"></figure>
-                <div class="card-info">
-                    <p><span class="titre-movie">La bete, </span>3/5</p>
-                    <p class="date-movie">7 février 2024</p>
-                    <p>De <span class="real-movie">Bertrand Bonello</span></p>
-                </div>
+
+    <div class="card-movie" id="movie1">
+        <div class="card-header">
+            <figure><img src="public/img/affiches/laBete.jpg" alt="affiche film la bete"></figure>
+            <div class="card-info">
+                <p><span class="titre-movie">La bete, </span>3/5</p>
+                <p class="date-movie">7 février 2024</p>
+                <p>De <span class="real-movie">Bertrand Bonello</span></p>
             </div>
-            <p class="resume">Dans un futur proche où règne l’intelligence artificielle, les émotions humaines sont devenues une menace. Pour s'en débarrasser, Gabrielle doit purifier son ADN en replongeant dans ses vies antérieures. Elle y retrouve Louis, son grand amour. Mais une peur l'envahit, le pressentiment qu'une catastrophe se prépare.</p>
         </div>
+        <p class="resume">Dans un futur proche où règne l’intelligence artificielle, les émotions humaines sont devenues une menace. Pour s'en débarrasser, Gabrielle doit purifier son ADN en replongeant dans ses vies antérieures. Elle y retrouve Louis, son grand amour. Mais une peur l'envahit, le pressentiment qu'une catastrophe se prépare.</p>
     </div>
-    <div id="movie2">
-        <div class="card-movie">
-            <div class="card-header">
-                <figure><img src="public/img/affiches/greenBorder.jpg" alt="affiche film green border"></figure>
-                <div class="card-info">
-                    <p><span class="titre-movie">Green Border, </span>3.3/5</p>
-                    <p class="date-movie">7 février 2024</p>
-                    <p>De <span class="real-movie">Agnieszka Holland</span></p>
-                </div>
+
+    <div class="card-movie" id="movie2">
+        <div class="card-header">
+            <figure><img src="public/img/affiches/greenBorder.jpg" alt="affiche film green border"></figure>
+            <div class="card-info">
+                <p><span class="titre-movie">Green Border, </span>3.3/5</p>
+                <p class="date-movie">7 février 2024</p>
+                <p>De <span class="real-movie">Agnieszka Holland</span></p>
             </div>
-            <p class="resume">Ayant fui la guerre, une famille syrienne entreprend un éprouvant périple pour rejoindre la Suède. A la frontière entre le Belarus et la Pologne, synonyme d'entrée dans l'Europe, ils se retrouvent embourbés avec des dizaines d'autres familles, dans une zone marécageuse, à la merci de militaires aux méthodes violentes. </p>
         </div>
+        <p class="resume">Ayant fui la guerre, une famille syrienne entreprend un éprouvant périple pour rejoindre la Suède. A la frontière entre le Belarus et la Pologne, synonyme d'entrée dans l'Europe, ils se retrouvent embourbés avec des dizaines d'autres familles, dans une zone marécageuse, à la merci de militaires aux méthodes violentes. </p>
     </div>
-    <div id="movie3">
-        <div class="card-movie">
-            <div class="card-header">
-                <figure><img src="public/img/affiches/daali.jpg" alt="affiche film Daaaaaali"></figure>
-                <div class="card-info">
-                    <p><span class="titre-movie">DAAAAAALI !, </span>3.4/5</p>
-                    <p class="date-movie">7 février 2024</p>
-                    <p>De <span class="real-movie">Quentin Dupieux</span></p>
-                </div>  
-            </div>
-            <p class="resume">Une journaliste française rencontre Salvador Dali à plusieurs reprises pour un projet de documentaire.</p>
+    <div class="card-movie" id="movie3">
+        <div class="card-header">
+            <figure><img src="public/img/affiches/daali.jpg" alt="affiche film Daaaaaali"></figure>
+            <div class="card-info">
+                <p><span class="titre-movie">DAAAAAALI !, </span>3.4/5</p>
+                <p class="date-movie">7 février 2024</p>
+                <p>De <span class="real-movie">Quentin Dupieux</span></p>
+            </div>  
         </div>
+        <p class="resume">Une journaliste française rencontre Salvador Dali à plusieurs reprises pour un projet de documentaire.</p>
     </div>
 
 </section>

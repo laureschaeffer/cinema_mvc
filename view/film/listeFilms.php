@@ -8,9 +8,9 @@
     foreach($requeteLsFilms->fetchAll() as $film) { ?>
     <div class="card">
         <figure><a href="index.php?action=detailFilm&id=<?=$film["id_film"] ?>"><img src="<?=$film["affiche"]?>" alt="affiche du film<?=$film["titre"]?>"></a></figure>
-        <p><a href="index.php?action=detailFilm&id=<?=$film["id_film"] ?>"><?= $film["titre"] ?></a></p>
+        <p><a href="index.php?action=detailFilm&id=<?=$film["id_film"] ?>" aria-label="detail du film"><?= $film["titre"] ?></a></p>
         <p class="date-movie"><?= $film["annee_sortie_fr"]?></p>
-        <p>De <span class="real-movie"><a href="index.php?action=detailFilm&id=<?=$film["id_film"] ?>"><?= $film["realisateur"] ?></a></span></p>
+        <p>De <span class="real-movie"><a href="index.php?action=detailFilm&id=<?=$film["id_film"] ?>" aria-label="detail du realisateur"><?= $film["realisateur"] ?></a></span></p>
     </div>
     <?php }  
     ?>
@@ -18,7 +18,7 @@
 
 </div>
 <div class="form-btn">
-    <button><a href="index.php?action=formulaireFilm">Ajouter un film</a></button>
+    <button><a href="index.php?action=formulaireFilm" aria-label="formulaire ajout d'un film">Ajouter un film</a></button>
 </div>
 
 <?php

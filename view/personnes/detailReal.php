@@ -9,21 +9,24 @@
                 $accord="né le ";
             }
             ?>
-            <div class="detail-card">
+            <div class="card-header">
                 <figure><img src="<?=$real["photo"]?>" alt="photo du réalisateur" width=200px></figure>
-                <p><?= $real["nomReal"].', '.$accord.$real["date_naissance"]?></p> 
-                <p><?=$real["biographie"] ?></p> 
-                <h3>Filmographie</h3>
-                <div class="filmographie">
-                    <?php foreach($realFilmographie->fetchAll() as $filmo){
-                        // liste de la filmographie avec un lien qui redirige vers le détail du film
-                        ?> <ul>
-                            <li><a href="index.php?action=detailFilm&id=<?=$filmo["id_film"]?>"><?=$filmo["titre"].' ('.$filmo["annee_sortie_fr"].')'?></a></li>
-                        </ul>
-                   <?php } ; 
-                   ?>
+                <div class="card-info">
+                    <p><?= $real["nomReal"].', '.$accord.$real["date_naissance"]?></p> 
+                    <div class="filmographie">
+                        <h4>Filmographie</h4>
+                        <?php foreach($realFilmographie->fetchAll() as $filmo){
+                            // liste de la filmographie avec un lien qui redirige vers le détail du film
+                            ?> <ul>
+                                <li><a href="index.php?action=detailFilm&id=<?=$filmo["id_film"]?>"><?=$filmo["titre"].' ('.$filmo["annee_sortie_fr"].')'?></a></li>
+                            </ul>
+                       <?php } ; 
+                       ?>
+                    </div>
+
                 </div>
             </div>
+            <p><?=$real["biographie"] ?></p> 
             <?php } ;
             ?>
     </section>
