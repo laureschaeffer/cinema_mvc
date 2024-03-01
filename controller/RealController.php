@@ -80,9 +80,7 @@ class RealController{
                 if(in_array($extension, $extensionsAutorisees) && $fileError==0){
                     // move_uploaded_file($tmpName, $lienPhoto);
                     imagewebp(imagecreatefromstring(file_get_contents($tmpName)), $lienPhoto);
-                } else {
-                    $lienPhoto= "https://placehold.co/600x400";//image par défaut
-                }
+                } 
 
                 // --------input ----------
 
