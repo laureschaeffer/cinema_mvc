@@ -72,13 +72,16 @@ class ActeurController{
                 // ----crée un identifiant unique, et rajoute l'extension 
                 $extensionsAutorisees= ["jpg", "jpeg", "gif", "png"];
                 $uniqueName= uniqid("", true);
-                $newFileName = $uniqueName.'.'.$extension ;
+                $newFileName = $uniqueName.'.webp';
 
-                $lienPhoto='public/img/affiches/'.$newFileName;
+                $lienPhoto='public/img/personnes/'.$newFileName;
                 //si l'extension fait parti de celles autorisées dans le tableau, et qu'aucune erreur n'est apparu, alors je la télécharge
                 if(in_array($extension, $extensionsAutorisees) && $fileError==0){
-                    move_uploaded_file($tmpName, $lienPhoto);
-                } 
+                    // move_uploaded_file($tmpName, $lienPhoto);
+                    imagewebp(imagecreatefromstring(file_get_contents($tmpName)), $lienPhoto);
+                } else {
+                    $lienPhoto= "https://placehold.co/600x400";//image par défaut
+                }
 
                 
                 // }

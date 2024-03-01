@@ -24,10 +24,11 @@
 
 /* ---------------------------------------------------------navbar--------------------------------------------------------------- */
 
-
-#MyTopnav{
+.topNav{
     background-color:#17181B ;
     opacity: 0.8;
+}
+#MyTopnav{
     display: flex;
     justify-content: space-evenly;
     position: fixed;
@@ -171,9 +172,7 @@ h2{
     font-size: large;
     font-weight: bold;
 }
-.date-movie{
-    opacity: 0.8;
-}
+
 
 .real-movie{
     font-weight: bold;
@@ -188,9 +187,8 @@ h2{
 
  /* -----parallax---------- */
 #parallax{
-    width: 100vw;
     height: 30vh;
-    background-image: url("../img/ticket-2974645_1280.jpg");
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)) ,url("../img/ticket-2974645_1280.jpg");
     background-size: cover;
     background-position: center; 
     /* background-repeat: no-repeat; */
@@ -200,8 +198,8 @@ h2{
     align-items: center;
 }
 #parallax h3{
-    font-family: "Lato", sans-serif;
-    font-size: xx-large;
+    font-family: "Della Respira", serif;
+    font-size: xxx-large;
 }
 
 /* ---------citations----------- */
@@ -239,7 +237,7 @@ h2{
     flex: 1;
     margin: 1%;
     padding: 1%;
-    box-shadow: 20px 13px #7A5864;
+    box-shadow: 12px 11px #7A5864;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -263,13 +261,14 @@ h2{
     display: flex;
     flex-wrap: wrap;
 }
+
 .card{
-    width: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     margin: 2%;
+    overflow: hidden;
 }
 
 .card p, .card a{
@@ -284,8 +283,8 @@ h2{
     opacity: 0.5;
 }
 .card img{
-    width: 150px;
-    height: 200px;
+    width: 250px;
+    height: 300px;
 }
 .form-btn{
     display: flex;
@@ -354,17 +353,18 @@ h2{
 
 /* -------------liste genre------------------ */
 
-#listing-genre ul{
+.listing-genre ul{
     list-style: none;
     padding-left: 2%;
 }
-#listing-genre li{
+.listing-genre li{
     padding: 1% 0;
 }
-#listing-genre a{
+.listing-genre a{
+    color: var(--main-txt-color);
     transition: 0.5s;
 }
-#listing-genre a:hover{
+.listing-genre a:hover{
     opacity: 0.5;
 }
 /* --------------------------------------------------------------------formulaires------------------------------------------------------- */
@@ -467,8 +467,9 @@ nav a{
     flex-direction: column;
     width: 100%;
     text-align: center;
-    background-color: #6e6e72d6;
     border-radius: 3px;
+    height: 90vh;
+    background-color: #010101;
 }
 
 .navbarResponsive .icon{
@@ -481,19 +482,23 @@ nav a{
 
 }
 
-
 .navbarResponsive a{
-    color: black;
-    /* border: solid black; */
     float: none;
     display: block;
     text-align: left;
     padding: 5px 5px;
 }
+
+.navbarResponsive a:not(:last-child){
+    border-bottom: solid 1px #d9d9d9;
+}
 /* ---------------------------------------home-page---------------------- */
 
 #home-container, #sortie-recente, #citations, #acteurs-moment{
     display: block;
+}
+#sortie-recente{
+    margin: 5%;
 }
 
 h1, h2{
@@ -524,6 +529,13 @@ h1, h2{
     width: 50vw;
 }
 
+.card-movie{
+    margin: 5% 0;
+}
+.card-acteur{
+    box-shadow: 0 11px #7A5864;
+    margin: 5% 0;
+}
 /* --------------------------------------cards-------------------------- */
 
 #coup-de-coeur h4{
@@ -534,5 +546,11 @@ h1, h2{
     width: 150px;
 }
 
+.card-movie{
+    padding: 5%;
+}
 
+.resume{
+    padding: 5% 0;
+}
 }

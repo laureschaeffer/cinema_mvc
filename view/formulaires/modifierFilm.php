@@ -39,7 +39,7 @@
                 <?php
                 }
                 ?>
-                <p><button type="submit" name="submit" class="btn btn-secondary">Modifier le film</button></p>
+                <p><button type="submit" name="submit" class="ajout">Modifier le film</button></p>
 
         </form>
     </section>

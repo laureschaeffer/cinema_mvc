@@ -4,14 +4,14 @@
 <div id="listings">
     <?php foreach($requeteLsReal->fetchAll() as $real) { ?>
         <div class="card">
-            <figure><a href="index.php?action=detailReal&id=<?= $real["id_realisateur"]?>"><img src="<?=$real["photo"]?>" alt="photo du réalisateur <?=$real["nomReal"]?>"></a></figure>
-            <p><a href="index.php?action=detailReal&id=<?= $real["id_realisateur"]?>"><?= $real["nomReal"] ?></a></p>
+            <figure><a href="index.php?action=detailReal&id=<?= $real["id_realisateur"]?>" aria-label="detail du realisateur"><img src="<?=$real["photo"]?>" alt="photo du réalisateur <?=$real["nomReal"]?>"></a></figure>
+            <p><a href="index.php?action=detailReal&id=<?= $real["id_realisateur"]?>" aria-label="detail du realisateur"><?= $real["nomReal"] ?></a></p>
             <p><?= $real["date_naissance"]?> </p>
         </div>
         <?php } ?>
 </div>
 <div class="form-btn">
-    <button><a href="index.php?action=formReal">Ajouter un réalisateur</a></button>
+    <button><a href="index.php?action=formReal" aria-label="formulaire ajouter un realisateur">Ajouter un réalisateur</a></button>
 </div>
 
 

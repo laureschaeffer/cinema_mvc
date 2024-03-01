@@ -1,11 +1,11 @@
 <?php ob_start(); // lien avec le fichier template.php ?>
 
-<div id="listing-genre">
+<div class="listing-genre">
     <ul>
     <?php
         //listes des genres de films
         foreach($requeteLsGenre->fetchAll() as $genre) { ?>
-                <li><a href="index.php?action=detailGenre&id=<?=$genre["id_genre"]?>"><?= $genre["nom"] ?></a></li>
+                <li><a href="index.php?action=detailGenre&id=<?=$genre["id_genre"]?>" aria-label="liste films du genre"><?= $genre["nom"] ?></a></li>
                 <?php } ?>
                 
     </ul>

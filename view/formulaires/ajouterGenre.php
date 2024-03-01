@@ -9,7 +9,7 @@ ob_start();
     <form action="index.php?action=ajoutGenre" method="post" enctype="multipart/form-data"> 
         <p><label>Nom :</label></p>
         <input type="text" class="form-control" name="nom" placeholder="Nom" required>
-        <p><button type="submit" name="submit" class="btn btn-secondary">Soumettre le genre</button></p>
+        <p><button type="submit" name="submit" class="ajout">Soumettre le genre</button></p>
     </form>
 </section>
 

@@ -23,7 +23,7 @@ ob_start();
         <p><label for="file">Ajouter une photo, format autorisé: jpg, jpeg, gif</label></p>
         <input type="file" name="file" class="form-control-file">
         
-        <p><button type="submit" name="submit" class="btn btn-secondary">Soumettre l'acteur</button></p>
+        <p><button type="submit" name="submit" class="ajout">Soumettre l'acteur</button></p>
 
 
 

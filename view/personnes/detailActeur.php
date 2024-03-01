@@ -19,18 +19,18 @@
                         // liste de la filmographie avec un lien qui redirige vers le détail du film
                         ?> <ul>
                             <li>
-                                <a href="index.php?action=detailFilm&id=<?=$filmo["id_film"]?>"> <?=$filmo["titre"] ?> </a> dans le rôle de <a href="index.php?action=listeRole&id=<?=$filmo["id_role"]?>"> <?=$filmo["nom_personnage"]?> </a>
+                                <a href="index.php?action=detailFilm&id=<?=$filmo["id_film"]?>" aria-label="detail du film"> <?=$filmo["titre"] ?> </a> dans le rôle de <a href="index.php?action=listeRole&id=<?=$filmo["id_role"]?>" aria-label="detail du film"> <?=$filmo["nom_personnage"]?> </a>
                                 </li>
                             </ul>
                     </div>
-                </div>
+                    <p><?=$acteur["biographie"]?></p>
+                    
+                    <?php  }
+        } ?>
             </div>
-            <p><?=$acteur["biographie"]?></p>
-    </section>
-
-<?php  }
-        }
-
+        </div>
+        </section>
+<?php
 $description="Page dédiée à l'acteur ".$acteur["nomActeur"].", contenant ses infos principales";
 $titre= "Détail Acteur";
 $titre_secondaire = $acteur["nomActeur"];

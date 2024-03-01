@@ -18,7 +18,7 @@
                         <?php foreach($realFilmographie->fetchAll() as $filmo){
                             // liste de la filmographie avec un lien qui redirige vers le détail du film
                             ?> <ul>
-                                <li><a href="index.php?action=detailFilm&id=<?=$filmo["id_film"]?>"><?=$filmo["titre"].' ('.$filmo["annee_sortie_fr"].')'?></a></li>
+                                <li><a href="index.php?action=detailFilm&id=<?=$filmo["id_film"]?>" aria-label="detail du film"><?=$filmo["titre"].' ('.$filmo["annee_sortie_fr"].')'?></a></li>
                             </ul>
                        <?php } ; 
                        ?>

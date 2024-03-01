@@ -12,16 +12,16 @@
     </div>
     </div>
     <div id="coup-de-coeur">
-        <h4>Notre coup de coeur</h4>
+        <h3>Notre coup de coeur</h3>
         <div class="card-movie">
             <div class="card-header">
                 <figure>
                     <img src="public/img/affiches/winterbreak.webp" alt="affiche film winter break">
                 </figure>
                 <div class="card-info">
-                    <p><span class="titre-movie"><a href="index.php?action=detailFilm&id=10">Winter Break,</a></span>4,1/5</p>
+                    <p><span class="titre-movie"><a href="index.php?action=detailFilm&id=10" aria-label="lien vers notre film coup de coeur">Winter Break,</a></span>4,1/5</p>
                     <p class="date-movie">13 décembre 2023</p>
-                    <p>De <span class="real-movie"><a href="index.php?action=detailReal&id=8">Alexander Payne</a></span></p>
+                    <p>De <span class="real-movie"><a href="index.php?action=detailReal&id=8" aria-label="lien vers la fiche d'alexander payne">Alexander Payne</a></span></p>
                 </div>
             </div>
             <p class="resume">Un instructeur maussade d'une école préparatoire de la Nouvelle-Angleterre reste sur le campus pendant les vacances de Noël pour garder une poignée d'étudiants qui n'ont nulle part où aller.</p>
@@ -89,7 +89,7 @@
     <?php foreach($requeteHomeActeur->fetchAll() as $acteur){ ?>
         <div class="card-acteur">
             <figure><img src="<?=$acteur["photo"]?>" alt="photo de l'acteur"></figure>
-            <p><a href="index.php?action=detailActeur&id=<?=$acteur["id_personne"]?>"><?= $acteur["acteur"]?></a></p>
+            <p><a href="index.php?action=detailActeur&id=<?=$acteur["id_personne"]?>" aria-label="lien vers la fiche de l'acteur"><?= $acteur["acteur"]?></a></p>
             <p><?=$acteur["biographie"]?> </p>
         </div>
             <?php

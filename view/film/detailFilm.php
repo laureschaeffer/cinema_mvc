@@ -9,7 +9,7 @@ $detFilm = $requeteDetailFilm->fetch();
                 <figure><img src="<?=$detFilm["affiche"]?>" alt="affiche du film"></figure>
                 <div class="card-info">
                         <?php foreach($requeteGenreFilm->fetchAll() as $genre){ ?>
-                        <p><?=$genre["nomGenre"]?></p>
+                        <p><a href="index.php?action=detailGenre&id=<?=$genre["id_genre"]?>"><?=$genre["nomGenre"]?></a></p> 
                         <?php
                         } ?>
                         <p><?= $detFilm["note"]?>/5</p> 
