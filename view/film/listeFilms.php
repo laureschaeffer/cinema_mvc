@@ -5,7 +5,7 @@
 
 <div id="listings">
      <?php
-    foreach($requeteLsFilms->fetchAll() as $film) { ?>
+    foreach($films as $film) { ?>
     <div class="card">
         <figure><a href="index.php?action=detailFilm&id=<?=$film["id_film"] ?>"><img src="<?=$film["affiche"]?>" alt="affiche du film<?=$film["titre"]?>"></a></figure>
         <p><a href="index.php?action=detailFilm&id=<?=$film["id_film"] ?>" aria-label="detail du film"><?= $film["titre"] ?></a></p>

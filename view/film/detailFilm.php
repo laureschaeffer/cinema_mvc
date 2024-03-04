@@ -1,5 +1,5 @@
 <?php ob_start(); 
-$detFilm = $requeteDetailFilm->fetch();
+// $detFilm = $requeteDetailFilm->fetch();
 
 // lien avec le fichier template.php  ?>
 

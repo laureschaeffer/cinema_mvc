@@ -2,23 +2,16 @@
 // fichier qui crée les fonctions pour la table film, en lien avec les boucles dans les fichiers "view" correspondantes; les méthodes sont appelées dans l'index
 namespace Controller;
 use Model\Connect;
+use Model\FilmManager;
 // FILTER_SANITIZE_URL
 
 class FilmController {
 
     //liste de tous les films
     public function listFilms(){
-        $pdo = Connect::seConnecter();
-        // $managerFilm = new FilmManager();
-        // $requeteLsFilms = $managerFilm->getFilms();
-        $requeteLsFilms = $pdo->prepare(
-            "SELECT f.titre, f.annee_sortie_fr, f.synopsis, f.note, f.affiche, CONCAT(prenom, ' ', nom) AS realisateur, f.id_realisateur, f.id_film
-            FROM film f
-            INNER JOIN realisateur r ON f.id_realisateur = r.id_realisateur
-            INNER JOIN personne p ON r.id_personne = p.id_personne
-            ORDER BY f.titre");
-        $requeteLsFilms->execute();
-
+        $filmManager = new FilmManager();
+       
+        $films = $filmManager->listFilms();
         require "view/film/listeFilms.php";
     }
 
@@ -26,59 +19,28 @@ class FilmController {
     public function detailFilm($id){
         $pdo = Connect::seConnecter();
 
-        $requeteFilm = $pdo->prepare("SELECT id_film FROM film WHERE id_film = :id");
-        $requeteFilm->execute(["id" => $id]);
-        $film = $requeteFilm->fetch();
-    
-        if($film) {
+        $filmManager = new FilmManager();
+        $data = $filmManager->detailFilm($id);
         
-            $requeteDetailFilm = $pdo->prepare("SELECT f.titre, f.annee_sortie_fr, f.synopsis, f.note, f.affiche, CONCAT(prenom, ' ', nom) AS realisateur, f.id_realisateur, f.id_film
-            FROM film f
-            INNER JOIN realisateur r ON f.id_realisateur = r.id_realisateur
-            INNER JOIN personne p ON r.id_personne = p.id_personne
-            WHERE id_film = :id");
-            $requeteDetailFilm->execute(["id" => $id]);
-    
-            // il est nécessaire d'utiliser une seconde requête pour le casting
-            $requeteCasting = $pdo->prepare("SELECT CONCAT(p.prenom, ' ', p.nom) AS nomActeur, r.nom_personnage, c.id_acteur, c.id_role
-            FROM castings c
-            INNER JOIN acteur a ON c.id_acteur = a.id_acteur
-            INNER JOIN personne p ON a.id_personne = p.id_personne
-            INNER JOIN role r ON c.id_role = r.id_role
-            WHERE c.id_film = :id");
-            $requeteCasting->execute(["id" => $id]);
-    
-            // pour avoir plusieurs genres
-            $requeteGenreFilm = $pdo->prepare("SELECT d.id_film, g.nom AS nomGenre, g.id_genre
-            FROM definir d
-            INNER JOIN film f ON d.id_film = f.id_film
-            INNER JOIN genre g ON d.id_genre = g.id_genre
-            WHERE d.id_film = :id");
-    
-            $requeteGenreFilm->execute(["id" => $id]);
-    
-            require "view/film/detailFilm.php";
-        } else {
-            header("Location: index.php");
-        }
+        //tableau qui renvoie un fetch et deux fetchall
+        $detailFilm = $data['requeteDetailFilm'];
+        $requeteCasting = $data['requeteCasting'];
+        $requeteGenreFilm = $data['requeteGenreFilm'];
+
+        // require "view/film/detailFilm.php";
+        
 
     }
 // --------------------------------------------------------------------formulaires-------------------------------------------------- 
 
     public function showList(){ // requete pour les listes déroulantes du formulaire
         $pdo = Connect::seConnecter();
-        // choix du réalisateur
-        $choixReal = $pdo->prepare("SELECT concat(p.prenom, ' ', p.nom) AS nomReal, r.id_realisateur
-        FROM realisateur r
-        INNER JOIN personne p ON r.id_personne = p.id_personne
-        ORDER BY p.nom");
-        $choixReal->execute();
+        $filmManager = new FilmManager();
 
-        // choix du genre, dans la table définir qui va récupérer les id
-        $choixGenre = $pdo->prepare("SELECT *
-        FROM genre");
-        $choixGenre->execute();
+        $data = $filmManager->showList();
 
+        $choixReal = $data['choixReal'];
+        $choixGenre = $data['choixGenre'];
    
         require "view/formulaires/ajouterFilm.php";
     }
@@ -151,6 +113,7 @@ class FilmController {
                 // https://www.php.net/manual/fr/pdo.lastinsertid.php dans la table définir j'ajoute l'id du film nouvellement créé et l'id_genre récupéré
                 $idFilm = $pdo->lastInsertId();
 
+                //checkbox renvoie un tableau dans le name
                 foreach($genres as $genre){
                     $ajouterDefinirBDD = $pdo->prepare("INSERT into definir(id_film, id_genre) VALUES(:id_film, :id_genre)");
                     $ajouterDefinirBDD->execute([
@@ -200,7 +163,7 @@ class FilmController {
             $note= filter_input(INPUT_POST, "note", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 
              //si ces éléments sont filtrés correctement, alors on les execute dans values 
-            // if($titre && $synopsis && $annee_sortie_fr && $duree && $note ){
+            if($titre && $synopsis && $annee_sortie_fr && $duree && $note ){
          
                 $pdo = Connect::seConnecter();                
                 $modifierFilmBDD = $pdo->prepare("UPDATE film
@@ -212,14 +175,28 @@ class FilmController {
                     'duree' => $duree,
                     'synopsis' => $synopsis,
                     'note' => $note,
-                    'id'=>$id,
+                    'id'=>$id
                 ]);
 
+                //checkbox renvoie un tableau dans le name
+                foreach($genres as $genre){
+                    $ajouterDefinirBDD = $pdo->prepare("UPDATE definir 
+                    SET id_genre = :id_genre
+                    WHERE id_film= :id_film");
+                    $ajouterDefinirBDD->execute([
+                        'id_film' => $idFilm,
+                        'id_genre'=> $genre
+                    ]);
+                }
 
-            // } 
+
+                header("Location:index.php?action=detailFilm&id=$id");
+                exit;
+            } else{
+                header("Location:index.php");
+                exit;
+            }
         }
-            header("Location:index.php");
-            exit;
 
     }
 }

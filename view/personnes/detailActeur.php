@@ -1,7 +1,7 @@
 <?php ob_start(); // lien avec le fichier template.php ?>
 
         <section class="detail">
-        <?php foreach($requeteActeur->fetchAll() as $acteur) { 
+        <?php foreach($acteurs as $acteur) { 
             //condition pour savoir comment accorder la phrase
             if($acteur["sexe"] =="femme"){
                 $accord="née le ";

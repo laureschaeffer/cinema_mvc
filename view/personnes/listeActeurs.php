@@ -3,7 +3,7 @@
 <div id="listings">
     <?php
         // liste de tous les acteurs présents dans la base de données ; l'url permet d'appeler l'action dans l'index
-        foreach($requeteLsActeur->fetchAll() as $acteur) { ?>
+        foreach($acteurs as $acteur) { ?>
         <div class="card">
             <figure><a href="index.php?action=detailActeur&id=<?=$acteur["id_acteur"]?>" aria-label="detail de l'acteur"><img src="<?=$acteur["photo"]?>" alt="photo de l'acteur <?=$acteur["nomActeur"]?>"></a></figure>
             <p><a href="index.php?action=detailActeur&id=<?=$acteur["id_acteur"]?>" aria-label="detail de l'acteur"><?= $acteur["nomActeur"]?></a></p>

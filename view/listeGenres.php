@@ -4,7 +4,7 @@
     <ul>
     <?php
         //listes des genres de films
-        foreach($requeteLsGenre->fetchAll() as $genre) { ?>
+        foreach($genres as $genre) { ?>
                 <li><a href="index.php?action=detailGenre&id=<?=$genre["id_genre"]?>" aria-label="liste films du genre"><?= $genre["nom"] ?></a></li>
                 <?php } ?>
                 

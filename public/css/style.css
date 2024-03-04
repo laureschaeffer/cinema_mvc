@@ -283,8 +283,10 @@ h2{
     opacity: 0.5;
 }
 .card img{
-    width: 250px;
     height: 300px;
+}
+.card figure{
+    width: 200px;
 }
 .form-btn{
     display: flex;

@@ -17,13 +17,13 @@ ob_start();
 
         <p><label>Choissiez un réalisateur :</label></p>
         <select class="form-control" name="realisateur" id="realisateur-select">
-            <?php foreach($choixReal->fetchAll() as $real){ ?>
+            <?php foreach($choixReal as $real){ ?>
                     <option value="<?=$real["id_realisateur"]?>"><?=$real["nomReal"]?></option>
                 <?php 
                 } ?>
         </select>
         <p><label>Choisissez un genre :</label></p> 
-        <?php foreach($choixGenre->fetchAll() as $genre){ ?>
+        <?php foreach($choixGenre as $genre){ ?>
             <p><input type="checkbox" id="<?=$genre["nom"]?>" name="genres[]" value="<?=$genre["id_genre"]?>"/>
             <label for="<?=$genre["nom"]?>"><?=$genre["nom"]?></label> </p>  
                 <?php

@@ -1,20 +1,22 @@
 <?php
 // fichier qui crée les fonctions pour la table genre, en lien avec les boucles dans les fichiers "view" correspondantes; les méthodes sont appelées dans l'index
 namespace Controller;
-use Model\Connect;
 
-class GenreController{
-    // liste des genres
+use Model\Connect;
+use Model\GenreManager;
+
+
+class GenreController {
+
+    //liste de tous les genres
     public function listGenres(){
-        $pdo = Connect::seConnecter();
-        $requeteLsGenre = $pdo->query(
-            "SELECT nom, id_genre
-            FROM genre
-            ORDER BY nom"
-        );
+        $genreManager = new GenreManager();
+
+        $genres = $genreManager->findAll();
 
         require "view/listeGenres.php";
     }
+
 
     // detail d'un genre
     public function detailGenre($id){

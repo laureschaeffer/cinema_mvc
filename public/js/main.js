@@ -7,6 +7,7 @@ function myFunction(){
     }
 }
 
+//alerte lorsqu'un formulaire a été rempli et correctement ajouté à la bdd
 const ajout = document.querySelector('.ajout');
 ajout.addEventListener('click', showAlert);
 
