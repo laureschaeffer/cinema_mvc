@@ -151,6 +151,7 @@ class FilmController {
                 // https://www.php.net/manual/fr/pdo.lastinsertid.php dans la table définir j'ajoute l'id du film nouvellement créé et l'id_genre récupéré
                 $idFilm = $pdo->lastInsertId();
 
+                //checkbox renvoie un tableau dans le name
                 foreach($genres as $genre){
                     $ajouterDefinirBDD = $pdo->prepare("INSERT into definir(id_film, id_genre) VALUES(:id_film, :id_genre)");
                     $ajouterDefinirBDD->execute([
@@ -200,7 +201,7 @@ class FilmController {
             $note= filter_input(INPUT_POST, "note", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 
              //si ces éléments sont filtrés correctement, alors on les execute dans values 
-            // if($titre && $synopsis && $annee_sortie_fr && $duree && $note ){
+            if($titre && $synopsis && $annee_sortie_fr && $duree && $note ){
          
                 $pdo = Connect::seConnecter();                
                 $modifierFilmBDD = $pdo->prepare("UPDATE film
@@ -212,14 +213,28 @@ class FilmController {
                     'duree' => $duree,
                     'synopsis' => $synopsis,
                     'note' => $note,
-                    'id'=>$id,
+                    'id'=>$id
                 ]);
 
+                //checkbox renvoie un tableau dans le name
+                foreach($genres as $genre){
+                    $ajouterDefinirBDD = $pdo->prepare("UPDATE definir 
+                    SET id_genre = :id_genre
+                    WHERE id_film= :id_film");
+                    $ajouterDefinirBDD->execute([
+                        'id_film' => $idFilm,
+                        'id_genre'=> $genre
+                    ]);
+                }
 
-            // } 
+
+                header("Location:index.php?action=detailFilm&id=$id");
+                exit;
+            } else{
+                header("Location:index.php");
+                exit;
+            }
         }
-            header("Location:index.php");
-            exit;
 
     }
 }

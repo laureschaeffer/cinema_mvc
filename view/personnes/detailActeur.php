@@ -15,20 +15,19 @@
                     <p><?= $acteur["nomActeur"].', '.$accord.$acteur["date_naissance"]?></p> 
                     <div class="filmographie">
                         <h4>Filmographie</h4>
+                        <ul>
                         <?php foreach($acteurFilmographie->fetchAll() as $filmo){
-                        // liste de la filmographie avec un lien qui redirige vers le détail du film
-                        ?> <ul>
-                            <li>
-                                <a href="index.php?action=detailFilm&id=<?=$filmo["id_film"]?>" aria-label="detail du film"> <?=$filmo["titre"] ?> </a> dans le rôle de <a href="index.php?action=listeRole&id=<?=$filmo["id_role"]?>" aria-label="detail du film"> <?=$filmo["nom_personnage"]?> </a>
-                                </li>
-                            </ul>
+                            // liste de la filmographie avec un lien qui redirige vers le détail du film
+                            ?>
+                            <li><a href="index.php?action=detailFilm&id=<?=$filmo["id_film"]?>" aria-label="detail du film"> <?=$filmo["titre"] ?> </a> dans le rôle de <a href="index.php?action=listeRole&id=<?=$filmo["id_role"]?>" aria-label="detail du film"> <?=$filmo["nom_personnage"]?></a></li>
+                            
+                            <?php  }
+                } ?>
                     </div>
-                    <p><?=$acteur["biographie"]?></p>
-                    
-                    <?php  }
-        } ?>
+                    </ul>
+                </div>
             </div>
-        </div>
+            <p><?=$acteur["biographie"]?></p>
         </section>
 <?php
 $description="Page dédiée à l'acteur ".$acteur["nomActeur"].", contenant ses infos principales";

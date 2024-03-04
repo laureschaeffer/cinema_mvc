@@ -42,9 +42,14 @@ class GenreController{
                 $pdo = Connect::seConnecter();
                 $ajouterGenreBDD = $pdo->prepare("INSERT into genre(nom) VALUES(:nom)");
                 $ajouterGenreBDD->execute(["nom"=>$nom]);
+
+                $idGenre = $pdo->lastInsertId();
+
+                header("Location:index.php?action=detailGenre&id=$idGenre"); // redirige vers la page du genre nouvellement créé
+                exit;
             }
+        } else{
+            header("Location:index.php");
         }
-        header("Location:index.php"); // redirige vers la page par defaut
-        exit;
     }
 }

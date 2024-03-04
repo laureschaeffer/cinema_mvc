@@ -249,7 +249,7 @@ h2{
 }
 
 
-/* -----------------------------------------------------------------------listes genre, real, acteurs, film--------------------------------- */
+/* --------------------------------------------------------------------listes genre, real, acteurs, film--------------------------------- */
 
 
 .introduction{
@@ -310,7 +310,7 @@ h2{
 
 /* -----------------------------------------------detail film-------------------- */
 .detail p{
-    padding: 1%;
+    padding: 2%;
 }
 
 .detail-header{
@@ -340,8 +340,13 @@ h2{
 .filmographie{
     padding: 2%;
 }
+
+.filmographie h4{
+    margin: 2rem 0;
+}
 .filmographie li{
     list-style: none;
+    margin-bottom: 2rem;
 }
 .filmographie a{
 
