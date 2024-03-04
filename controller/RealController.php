@@ -108,13 +108,18 @@ class RealController{
 
                 // dans la table réalisateur j'ajoute l'id de la personne nouvellement créé, et l'id réalisateur est en auto-increment
                 $ajoutReal = $pdo->prepare("INSERT INTO realisateur (id_personne) VALUES (:id_personne)");
-                $ajoutReal->execute(["id_personne" => $pdo->lastInsertId()]);
+                $idReal=$pdo->lastInsertId(); // recupere le dernier id créé
+                $ajoutReal->execute(["id_personne" => $idReal]);
+
+                header("Location:index.php?action=detailReal&id=$idReal"); // redirige vers la page du realisateur nouvellement créé
+                exit;
+            } else{
+                header("Location:index.php");
+                exit;
             }
 
             
 
-            header("Location:index.php"); // redirige vers la page par defaut
-            exit;
 
         }
     }

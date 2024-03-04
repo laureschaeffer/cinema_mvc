@@ -7,17 +7,17 @@
 
                 <img src="<?=$detFilm["affiche"]?>" alt="affiche du film" width=200px height=200px>
                 <p><label>Nom du film:</label></p>
-                <input type="text" class="form-control" name="titre" value="<?= $detFilm["titre"]?>">
+                <input type="text" name="titre" value="<?= $detFilm["titre"]?>">
 
                 
                 <p><label>Année de sortie :</label></p>
-                <input type="number" class="form-control" name ="annee_sortie_fr" value="<?= $detFilm["annee_sortie_fr"]?>">
+                <input type="number" name ="annee_sortie_fr" value="<?= $detFilm["annee_sortie_fr"]?>">
                 
                 <p><label>Durée (en minutes) :</label></p>
-                <input type="number" class="form-control" name ="duree" value="<?= $detFilm["duree"]?>">
+                <input type="number" name ="duree" value="<?= $detFilm["duree"]?>">
                 
                 <p><label>Réalisé par :</label></p>
-                <select class="form-control" name="realisateur" id="realisateur-select">
+                <select name="realisateur" id="realisateur-select">
                     <option value="realisateur"><?=$detFilm["realisateur"]?></option>
                         <?php foreach($choixReal->fetchAll() as $real){ ?>
                             <option value="<?=$real["id_realisateur"]?>"><?=$real["nomReal"]?></option>
@@ -26,16 +26,16 @@
                 </select>
                 
                 <p><label>Genre :</label></p>
-                <select class="form-control" name="genre" id="genre-select">
-                    <?php foreach($requeteGenreFilm->fetchAll() as $genre){ ?> 
-                    <option value="<?=$genre["id_genre"]?>"><?=$genre["nom"]?></option>
-                    <?php 
+                <?php foreach($requeteGenreFilm->fetchAll() as $genre){ ?> 
+                <p><input type="checkbox" id="<?=$genre["nom"]?>" name="genres[]" value="<?=$genre["id_genre"]?>"/>
+                <label for="<?=$genre["nom"]?>"><?=$genre["nom"]?></label> </p>  
+                <?php
                     } ?>
-                </select>
+
                 <p><label>Note sur 5 :</label></p>
-                <input type="number" class="form-control" name="note" value="<?= $detFilm["note"]?>">    
+                <input type="number" name="note" value="<?= $detFilm["note"]?>">    
                 <p><label>Résumé :</label></p>
-                <textarea class="form-control" name="synopsis" row="4" ><?= $detFilm["synopsis"] ?></textarea>             
+                <textarea name="synopsis" row="4" ><?= $detFilm["synopsis"] ?></textarea>             
                 <?php
                 }
                 ?>

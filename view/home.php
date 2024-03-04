@@ -89,7 +89,7 @@
     <?php foreach($requeteHomeActeur->fetchAll() as $acteur){ ?>
         <div class="card-acteur">
             <figure><img src="<?=$acteur["photo"]?>" alt="photo de l'acteur"></figure>
-            <p><a href="index.php?action=detailActeur&id=<?=$acteur["id_personne"]?>" aria-label="lien vers la fiche de l'acteur"><?= $acteur["acteur"]?></a></p>
+            <p><a href="index.php?action=detailActeur&id=<?=$acteur["id_acteur"]?>" aria-label="lien vers la fiche de l'acteur"><?= $acteur["acteur"]?></a></p>
             <p><?=$acteur["biographie"]?> </p>
         </div>
             <?php

@@ -83,11 +83,14 @@ class ActeurController{
                 // dans la table acteur j'ajoute l'id de la personne nouvellement créé, et l'id acteur est en auto-increment
                 $ajoutReal = $pdo->prepare("INSERT INTO acteur (id_personne)
                 VALUES (:id_personne)");
-                $ajoutReal->execute(["id_personne" => $pdo->lastInsertId()]);
+                $idReal=$pdo->lastInsertId(); //recupere le dernier id créé
+                $ajoutReal->execute(["id_personne" => $idReal]);
 
             }
-            header("Location:index.php"); // redirige vers la page par defaut
+            header("Location:index.php?action=detailActeur&id=$idReal"); // redirige vers la page du nouveau realisateur
             exit;
+        } else{
+            header("Location:index.php");
         }
     }
 
