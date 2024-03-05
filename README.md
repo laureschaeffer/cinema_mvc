@@ -10,7 +10,7 @@
 ### Affichage :
  - **Landing page** : préparée en mockup sur figma
  - **Listes** : quatre listes pour tous les films, tous les acteurs/actrices, réalisateurs/réalisatrices, genres disponibles. Chaque élément est relié grace à un lien qui redirige vers la page correspondante. 
- - **Formulaires** : Pour chaque film il est possible de d'apporter une modification, il y a également un formulaire pour ajouter un film directement à la bdd.
+ - **Formulaires** : Pour chaque film il est possible de d'apporter une modification. Il y a également un formulaire pour ajouter un film, un acteur, un réalisateur directement à la bdd.
 
 
 ### Dossier requête  
