@@ -120,13 +120,13 @@ class FilmManager extends Manager {
                     $lienAffiche='public/img/affiches/'.$newFileName;
                     //si l'extension fait parti de celles autorisées dans le tableau, et qu'aucune erreur n'est apparu, alors je latélécharge
                       
-                    if(in_array($extension, $extensionsAutorisees) && $fileError==0 && $fileSize <=$maxSize){
+                    if(in_array($extension, $extensionsAutorisees) && $fileError==0 && $fileSize <=$maxSize && $fileName){
                         // move_uploaded_file($tmpName, $lienAffiche);
                         imagewebp(imagecreatefromstring(file_get_contents($tmpName)), $lienAffiche);
                         } 
-                    } else {
-                        $lienAffiche= "https://placehold.co/600x400";//image par défaut
-                    }
+                    } 
+            } else {
+                $lienAffiche= "https://placehold.co/600x400";//image par défaut
             }
             // -----------ensuite traitement des input-----
 

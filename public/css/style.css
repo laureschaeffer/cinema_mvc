@@ -267,7 +267,7 @@ h2{
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    margin: 2%;
+    margin: 5%;
     overflow: hidden;
 }
 
@@ -287,6 +287,8 @@ h2{
 }
 .card figure{
     width: 200px;
+    display: flex;
+    justify-content: center;
 }
 .form-btn{
     display: flex;
@@ -408,6 +410,10 @@ input[type="file"]{
 }
 .formulaire p{
     margin: 1% 0;
+}
+
+.formulaire img{
+    width: 20vw;
 }
 
 /* -----footer------ */

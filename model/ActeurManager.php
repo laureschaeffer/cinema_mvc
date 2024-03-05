@@ -54,35 +54,42 @@ class ActeurManager extends Manager{
         }   
     }
 
-    //--------------------------formulaires-----------------------
-
+    //--------------------------formulaires----------------------
 
     public function ajoutActeur(){
         if(isset($_POST['submit'])){
             // ----------------------d'abord traitement de l'image téléchargée---------
             if(isset($_FILES['file'])){ //si la session récupère l'image avec la methode file, un tableau associatif se crée
-                $tmpName = $_FILES['file']['tmp_name'];
-                $fileName= $_FILES['file']['name'];
-                $fileSize = $_FILES['file']['size'];
-                $fileError= $_FILES['file']['error'];
-                // https://www.php.net/manual/en/features.file-upload.errors.php
-                $fileType= $_FILES['file']['type'];
+                if($_FILES["file"]["error"] <> 4) {
 
-                // récupère l'extension .jpg, ...
-                $label = explode(".", $fileName);
-                $extension = strtolower(end($label));
-
-                // ----crée un identifiant unique, et rajoute l'extension 
-                $extensionsAutorisees= ["jpg", "jpeg", "gif", "png"];
-                $uniqueName= uniqid("", true);
-                $newFileName = $uniqueName.'.webp';
-
-                $lienPhoto='public/img/personnes/'.$newFileName;
-                //si l'extension fait parti de celles autorisées dans le tableau, et qu'aucune erreur n'est apparu, alors je la télécharge
-                if(in_array($extension, $extensionsAutorisees) && $fileError==0){
-                    // move_uploaded_file($tmpName, $lienPhoto);
-                    imagewebp(imagecreatefromstring(file_get_contents($tmpName)), $lienPhoto);
-                } 
+                    $tmpName = $_FILES['file']['tmp_name'];
+                    $fileName1= $_FILES['file']['name'];
+                    //possible de mettre du script dans le nom
+                    $fileName = filter_var($fileName1, FILTER_SANITIZE_SPECIAL_CHARS);
+                    $fileSize = $_FILES['file']['size'];
+                    $fileError= $_FILES['file']['error'];
+                    // https://www.php.net/manual/en/features.file-upload.errors.php
+                    $fileType= $_FILES['file']['type'];
+    
+                    // récupère l'extension .jpg, ...
+                    $label = explode(".", $fileName);
+                    $extension = strtolower(end($label));
+    
+                    // ----crée un identifiant unique, et rajoute l'extension 
+                    $extensionsAutorisees= ["jpg", "jpeg", "gif", "png"];
+                    $uniqueName= uniqid("", true);
+                    $newFileName = $uniqueName.'.webp';
+    
+                    // taille max
+                    $maxSize = 40000000;
+    
+                    $lienPhoto='public/img/personnes/'.$newFileName;
+                    //si l'extension fait parti de celles autorisées dans le tableau, et qu'aucune erreur n'est apparu, alors je la télécharge
+                    if(in_array($extension, $extensionsAutorisees) && $fileError==0 && $maxSize && $fileName){
+                        // move_uploaded_file($tmpName, $lienPhoto);
+                        imagewebp(imagecreatefromstring(file_get_contents($tmpName)), $lienPhoto);
+                    } 
+                }
                 
             }  else{ //pour ne pas avoir d'erreur dans l'execute plus bas
                 $lienPhoto= "https://placehold.co/600x400";//image par défaut
