@@ -1,33 +1,31 @@
 <?php ob_start(); 
-// $detFilm = $requeteDetailFilm->fetch();
-
 // lien avec le fichier template.php  ?>
 
     <section class="detail">
         <div class="card-movie">
             <div class="card-header">
-                <figure><img src="<?=$detFilm["affiche"]?>" alt="affiche du film"></figure>
+                <figure><img src="<?=$detailFilm["affiche"]?>" alt="affiche du film"></figure>
                 <div class="card-info">
-                        <?php foreach($requeteGenreFilm->fetchAll() as $genre){ ?>
+                        <?php foreach($requeteGenreFilm as $genre){ ?>
                         <p><a href="index.php?action=detailGenre&id=<?=$genre["id_genre"]?>"><?=$genre["nomGenre"]?></a></p> 
                         <?php
                         } ?>
-                        <p><?= $detFilm["note"]?>/5</p> 
-                        <p class="date-movie"><?= $detFilm["annee_sortie_fr"]?></p>
-                        <p>De <span class="real-movie"><a href="index.php?action=detailReal&id=<?=$detFilm["id_realisateur"]?>"><?=$detFilm["realisateur"]?></a></span></p>
+                        <p><?= $detailFilm["note"]?>/5</p> 
+                        <p class="date-movie"><?= $detailFilm["annee_sortie_fr"]?></p>
+                        <p>De <span class="real-movie"><a href="index.php?action=detailReal&id=<?=$detailFilm["id_realisateur"]?>"><?=$detailFilm["realisateur"]?></a></span></p>
                     </div>
                 </div>
-                <p class="resume"><?= $detFilm["synopsis"] ?></p>
+                <p class="resume"><?= $detailFilm["synopsis"] ?></p>
                 <div class="casting">
                     <?php
-                        foreach($requeteCasting->fetchAll() as $casting) { 
+                        foreach($requeteCasting as $casting) { 
                             ?> <p><a href="index.php?action=detailActeur&id=<?=$casting["id_acteur"]?>" aria-label="detail acteur"><?=$casting["nomActeur"]?></a> dans le rôle de <a href="index.php?action=listeRole&id=<?=$casting["id_role"]?>"><?= $casting["nom_personnage"]?></a></p> 
                             <?php 
                         } ?>
                 </div>
         </div>
         <div class="form-btn">
-            <button><a href="index.php?action=modifierFilm&id=<?=$detFilm["id_film"]?>" aria-label="apporter une modification">Apporter une modification</a></button>
+            <button><a href="index.php?action=modifierFilm&id=<?=$detailFilm["id_film"]?>" aria-label="apporter une modification">Apporter une modification</a></button>
         </div>
             <!-- action: redirige vers une page de modification  -->
 
@@ -35,9 +33,9 @@
 
 
         <?php 
-$description="Page dédiée au détail du film".$detFilm["titre"].", contenant ses infos principales";
+$description="Page dédiée au détail du film".$detailFilm["titre"].", contenant ses infos principales";
 $titre= "Détail du film";
-$titre_secondaire = $detFilm["titre"];
+$titre_secondaire = $detailFilm["titre"];
 $contenu = ob_get_clean();
 
 require_once "view/template.php";

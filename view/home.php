@@ -86,7 +86,7 @@
 <h3>TOP Acteurs du moment</h3>
 <section id="acteurs-moment">
     <!-- 4 acteurs précisés dans la requete du controleur  -->
-    <?php foreach($requeteHomeActeur->fetchAll() as $acteur){ ?>
+    <?php foreach($acteurs as $acteur){ ?>
         <div class="card-acteur">
             <figure><img src="<?=$acteur["photo"]?>" alt="photo de l'acteur"></figure>
             <p><a href="index.php?action=detailActeur&id=<?=$acteur["id_acteur"]?>" aria-label="lien vers la fiche de l'acteur"><?= $acteur["acteur"]?></a></p>

@@ -1,5 +1,5 @@
 <?php   //fichier qui traite toutes les fonctions à travers l'url
-// phpinfo();die;
+
 // on appelle tous les controlleurs 
 
 use Controller\ActeurController;
@@ -8,6 +8,12 @@ use Controller\FilmController;
 use Controller\RealController;
 use Controller\GenreController;
 use Controller\RoleController;
+
+//manager de genre, acteur, realisateur, film pour le formulaire
+use Model\GenreManager;
+use Model\ActeurManager;
+use Model\FilmManager;
+use Model\RealisateurManager;
 
 // chargent toutes les classes sous le systeme d'exploitation de linux (Docker lance les conteneurs sous linux)
 spl_autoload_register(function ($class_name) {
@@ -22,6 +28,12 @@ $ctrlReal = new RealController();
 $ctrlActeur = new ActeurController(); 
 $ctrlGenre = new GenreController();
 $ctrlRole = new RoleController();
+
+//classes des managers
+$mngGenre = new GenreManager();
+$mngActeur = new ActeurManager();
+$mngFilm = new FilmManager();
+$mngReal = new RealisateurManager();
 
 
 // En fonction de l'action détectée dans l'URL via la propriété "action" on interagit avec la bonne méthode du controller
@@ -52,12 +64,12 @@ if(isset($_GET["action"])){
         case "formReal": $ctrlReal->formReal(); break;
         case "formActeur" : $ctrlActeur->formActeur(); break; 
         //-------------------------------------------------traitement des données---------------------------------------------------
-        case "ajouterFilm" : $ctrlFilm->ajouterFilm() ; break;
-        case "ajoutAct" : $ctrlActeur->ajoutActeur(); break; 
-        case "ajoutReal" : $ctrlReal->ajoutRealisateur(); break;
-        case "ajoutGenre" : $ctrlGenre->ajoutGenre(); break;
+        case "ajouterFilm" : $mngFilm->ajouterFilm() ; break;
+        case "ajoutAct" : $mngActeur->ajoutActeur(); break; 
+        case "ajoutReal" : $mngReal->ajoutRealisateur(); break;
+        case "ajoutGenre" : $mngGenre->ajoutGenre(); break;
         // modifier un film
-        case "ajouterModification" : $ctrlFilm->modifierFilmBDD($id); break;
+        case "ajouterModification" : $mngFilm->modifierFilmBDD($id); break;
         
             
     }

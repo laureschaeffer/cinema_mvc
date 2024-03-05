@@ -2,7 +2,7 @@
     // liste de tous les realisateurs présents dans la base de données ; l'url permet d'appeler l'action dans l'index  ?>
 
 <div id="listings">
-    <?php foreach($requeteLsReal->fetchAll() as $real) { ?>
+    <?php foreach($realisateurs as $real) { ?>
         <div class="card">
             <figure><a href="index.php?action=detailReal&id=<?= $real["id_realisateur"]?>" aria-label="detail du realisateur"><img src="<?=$real["photo"]?>" alt="photo du réalisateur <?=$real["nomReal"]?>"></a></figure>
             <p><a href="index.php?action=detailReal&id=<?= $real["id_realisateur"]?>" aria-label="detail du realisateur"><?= $real["nomReal"] ?></a></p>
