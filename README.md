@@ -10,7 +10,7 @@
 ### Affichage :
  - **Landing page** : préparée en mockup sur figma
  - **Listes** : quatre listes pour tous les films, tous les acteurs/actrices, réalisateurs/réalisatrices, genres disponibles. Chaque élément est relié grace à un lien qui redirige vers la page correspondante. 
- - **Formulaires** : Pour chaque film il est possible de d'apporter une modification. Il y a également un formulaire pour ajouter un film, un acteur, un réalisateur directement à la bdd.
+ - **Formulaires** : il y a un formulaire d'ajout et de modification pour chaque film, acteur et réalisateur directement dans la bdd.
 
 
 ### Dossier requête  
@@ -19,3 +19,4 @@
 ### Utilisation : 
 - heidiSQL, SQL, docker, laragon, PHP, CSS
 - design pattern: modele MVC
+- trello
