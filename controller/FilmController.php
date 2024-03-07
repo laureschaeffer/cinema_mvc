@@ -4,6 +4,7 @@
 namespace Controller;
 use Model\Connect;
 use Model\FilmManager;
+use Service\CompressImg;
 use Model\GenreManager; //pour la liste des genres
 // FILTER_SANITIZE_URL
 
@@ -35,11 +36,11 @@ class FilmController {
     }
 // --------------------------------------------------------------------formulaires-------------------------------------------------- 
 
-    public function showList(){ // requete pour les listes déroulantes du formulaire
+    public function addFilm(){ // requete pour les listes déroulantes du formulaire
         $pdo = Connect::seConnecter();
         $filmManager = new FilmManager();
 
-        $data = $filmManager->showList();
+        $data = $filmManager->formSelect();
 
         $choixReal = $data['choixReal'];
         $choixGenre = $data['choixGenre'];
@@ -47,27 +48,82 @@ class FilmController {
         require "view/formulaires/ajouterFilm.php";
     }
 
-   
-
-    //affiche les infos d'un film dans le formulaire de modification
-    public function showListFilm($id){
-        $pdo = Connect::seConnecter();
+     // traite les données du formulaire ajout d'un film
+     public function traitementFilm(){
         $filmManager = new FilmManager();
 
-        //toutes les infos du film
-        $data = $filmManager->showListFilm($id);
-
-        $requeteDetailFilm = $data['requeteDetailFilm'];
         
-        //pour afficher le genre
-        $genreManager = new GenreManager();
+        if(isset($_POST['submit'])){ // si la session récupère les infos avec le bouton submit
 
-        $genres = $genreManager->findAll();
+            // recupere l'image dans la fonction file()
+            $compressImg = new CompressImg();
+            //la fonction file attend en parametre string lien pour savoir ou telecharger l'image
+            $lienAffiche= $compressImg->file('public/img/affiches/');
+            
+            // -----------ensuite traitement des input-----
 
-        // choix du réalisateur
-        $choixReal = $data['choixReal'];
-        require "view/formulaires/modifierFilm.php";
+            // filtres les caractères pour la sécurité
+            $nom= filter_input(INPUT_POST, "nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $anneeSortie= filter_input(INPUT_POST, "anneeSortie", FILTER_VALIDATE_INT);
+            $duree=filter_input(INPUT_POST, "duree", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+            $resume= filter_input(INPUT_POST, "resume", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $note= filter_input(INPUT_POST, "note", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+            $genres = filter_input(INPUT_POST, "genres", FILTER_VALIDATE_INT, FILTER_REQUIRE_ARRAY);
+
+            //si ces éléments sont filtrés correctement, alors on les execute dans values 
+            if($nom && $resume && $anneeSortie && $duree && $note && $genres){
+
+                // Ajouter les données récupérées à la bdd à l'aide de la requete sql
+                $filmManager->ajouterFilm($nom, $anneeSortie, $duree, $resume, $note, $genres, $lienAffiche);
+            } else{
+                header("Location:index.php");
+                exit;
+            }
+
+        }
     }
 
    
+    //affiche les infos d'un film dans le formulaire de modification et redirige vers ce formulaire
+    public function modifieFilm($id){
+        $filmManager = new FilmManager();
+
+        //toutes les infos du film
+        $data = $filmManager->formSelectFilm($id);
+        $requeteDetailFilm = $data['requeteDetailFilm']; //renvoie fetch
+        
+        //pour afficher le genre, methode deja dans le genremanager
+        $genreManager = new GenreManager();
+        $genres = $genreManager->findAll();
+
+        // choix du réalisateur
+        $choixReal = $data['choixReal']; //renvoie fetchAll
+        require "view/formulaires/modifierFilm.php";
+    }
+
+    //traite les infos du formulaire de modification
+    public function traiteModifFilm($id){
+        $filmManager = new FilmManager();
+
+         // recupere l'image dans la fonction file()
+         $compressImg = new CompressImg();
+         //la fonction file attend en parametre string lien ou telecharger l'image
+         $lienAffiche= $compressImg->file('public/img/affiches/');
+ 
+         if(isset($_POST['submit'])){
+             $titre= filter_input(INPUT_POST, "titre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+             $synopsis= filter_input(INPUT_POST, "synopsis", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+             $annee_sortie_fr= filter_input(INPUT_POST, "annee_sortie_fr", FILTER_VALIDATE_INT);
+             $duree=filter_input(INPUT_POST, "duree", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+             $note= filter_input(INPUT_POST, "note", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+             $genres = filter_input(INPUT_POST, "genres", FILTER_VALIDATE_INT, FILTER_REQUIRE_ARRAY);
+ 
+              //si ces éléments sont filtrés correctement, alors on les execute dans la fonction du manager
+              if($titre && $synopsis && $annee_sortie_fr && $duree && $note && $genres){
+                $filmManager->modifierFilmBDD($titre, $annee_sortie_fr, $duree, $synopsis, $note, $lienAffiche, $genres, $id);
+              }
+            }
+
+   
+    }
 }

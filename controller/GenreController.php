@@ -35,5 +35,20 @@ class GenreController {
         require "view/formulaires/ajouterGenre.php";
     }
 
+    //enregistre le nouveau genre
+    public function traiteGenre(){
+
+        $genreManager = new GenreManager();
+
+        if(isset($_POST['submit'])){
+            $nom= filter_input(INPUT_POST, "nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            if($nom){
+                $genreManager->ajoutGenre($nom);
+            } else{
+                header("Location:index.php");
+            }
+        }
+    }
+
 
 }

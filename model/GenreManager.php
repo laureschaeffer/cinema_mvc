@@ -33,23 +33,16 @@ class GenreManager extends Manager {
     }
 
         // ------formulaire------
-    public function ajoutGenre(){
-        if(isset($_POST['submit'])){
-            $nom= filter_input(INPUT_POST, "nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            if($nom){
-                $pdo = Connect::seConnecter();
-                $ajouterGenreBDD = $pdo->prepare("INSERT into genre(nom) VALUES(:nom)");
-                $ajouterGenreBDD->execute(["nom"=>$nom]);
+    public function ajoutGenre($nom){
 
-                $idGenre = $pdo->lastInsertId();
-
-                header("Location:index.php?action=detailGenre&id=$idGenre"); // redirige vers la page du genre nouvellement créé
-                exit;
-            }
-        } else{
-            header("Location:index.php");
+        $pdo = Connect::seConnecter();
+        $ajouterGenreBDD = $pdo->prepare("INSERT into genre(nom) VALUES(:nom)");
+        $ajouterGenreBDD->execute(["nom"=>$nom]);
+        $idGenre = $pdo->lastInsertId();
+         header("Location:index.php?action=detailGenre&id=$idGenre"); // redirige vers la page du genre nouvellement créé
+        exit;
         }
-    }
+
 
 
 

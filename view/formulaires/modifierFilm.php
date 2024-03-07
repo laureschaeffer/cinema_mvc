@@ -6,18 +6,19 @@
             <form action="index.php?action=ajouterModification&id=<?=$requeteDetailFilm["id_film"]?>" method="post" enctype="multipart/form-data">
                 <img src="<?=$requeteDetailFilm["affiche"]?>" alt="affiche du film">
                 <p><label for="file">Modifier l'affiche</label></p>
-                <p><input type="file" name="file" class="form-control-file"></p>
+                <p><input type="file" name="file"></p>
                 <p><label>Nom du film:</label></p>
                 <input type="text" name="titre" value="<?= $requeteDetailFilm["titre"]?>">
 
                 
                 <p><label>Année de sortie :</label></p>
-                <input type="number" name ="annee_sortie_fr" value="<?= $requeteDetailFilm["annee_sortie_fr"]?>">
+                <input type="number" name="annee_sortie_fr" value="<?= $requeteDetailFilm["annee_sortie_fr"]?>">
                 
                 <p><label>Durée (en minutes) :</label></p>
                 <input type="number" name ="duree" value="<?= $requeteDetailFilm["duree"]?>">
                 
                 <p><label>Réalisé par :</label></p>
+                <!-- select des realisateurs (un seul choix)  -->
                 <select name="realisateur" id="realisateur-select">
                     <option value="realisateur"><?=$requeteDetailFilm["realisateur"]?></option>
                         <?php foreach($choixReal as $real){ ?>
@@ -27,6 +28,7 @@
                 </select>
                 
                 <p><label>Genre :</label></p>
+                <!-- checkbox des genres  -->
                 <?php foreach($genres as $genre){ ?> 
                 <p><input type="checkbox" id="<?=$genre["nom"]?>" name="genres[]" value="<?=$genre["id_genre"]?>"/>
                 <label for="<?=$genre["nom"]?>"><?=$genre["nom"]?></label> </p>  

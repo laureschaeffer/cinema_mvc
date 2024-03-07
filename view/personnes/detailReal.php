@@ -28,6 +28,9 @@
                 </div>
             </div>
             <p><?=$realisateurs["biographie"] ?></p> 
+            <div class="form-btn">
+                <button><a href="index.php?action=modifierReal&id=<?=$realisateurs["id_personne"]?>" aria-label="apporter une modification">Apporter une modification</a></button>
+            </div>
     </section>
 
 <?php 

@@ -7,22 +7,24 @@ ob_start();
 <section class="formulaire">
     <form action="index.php?action=ajouterFilm" method="post" enctype="multipart/form-data">
         <p><label>Nom du film :</label></p>
-        <input type="text" class="form-control" name="nom" placeholder="Titre" required>
+        <input type="text" name="nom" placeholder="Titre" required>
         <p><label>Année de sortie :</label></p>
-        <input type="number" class="form-control" name="anneeSortie" placeholder="Année de sortie">
+        <input type="number" name="anneeSortie" placeholder="Année de sortie">
         <p><label>Durée (en minute) :</label></p>
-        <input type="number" class="form-control" name="duree" placeholder="Durée">
+        <input type="number" name="duree" placeholder="Durée">
         <p><label>Note sur 5 :</label></p>
-        <input type="number" class="form-control" name="note" placeholder="Note">
+        <input type="number" name="note" placeholder="Note">
 
         <p><label>Choissiez un réalisateur :</label></p>
-        <select class="form-control" name="realisateur" id="realisateur-select">
+        <select name="realisateur" id="realisateur-select">
+            <!-- select des realisateurs (un seul choix)  -->
             <?php foreach($choixReal as $real){ ?>
                     <option value="<?=$real["id_realisateur"]?>"><?=$real["nomReal"]?></option>
                 <?php 
                 } ?>
         </select>
         <p><label>Choisissez un genre :</label></p> 
+        <!-- checkbox des genres  -->
         <?php foreach($choixGenre as $genre){ ?>
             <p><input type="checkbox" id="<?=$genre["nom"]?>" name="genres[]" value="<?=$genre["id_genre"]?>"/>
             <label for="<?=$genre["nom"]?>"><?=$genre["nom"]?></label> </p>  
@@ -31,10 +33,10 @@ ob_start();
             ?> 
       
         <p><label>Resumé</label></p>
-        <textarea class="form-control" name="resume" rows="4" placeholder="Synopsis"></textarea>
+        <textarea name="resume" rows="4" placeholder="Synopsis"></textarea>
 
         <p><label for="file">Ajouter une affiche, format autorisé: jpg, jpeg, gif</label></p>
-        <input type="file" name="file" class="form-control-file">
+        <input type="file" name="file" >
         <p><button type="submit" name="submit" class="ajout" >Soumettre le film</button></p>
 
 

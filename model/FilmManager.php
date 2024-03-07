@@ -2,6 +2,7 @@
 //fichier qui traite les requetes sql
 
 namespace Model;
+use Service\CompressImg;
 
 class FilmManager extends Manager {
     protected $tableName = "film";
@@ -20,6 +21,7 @@ class FilmManager extends Manager {
         return $requeteLsFilms->fetchAll();
     }
 
+    //detail d'un film
     public function detailFilm($id){
         $pdo = Connect::seConnecter();
 
@@ -65,9 +67,9 @@ class FilmManager extends Manager {
 
     }
     
-    // -------------------------------------Formulaires----------------
+    // ------------------------------------------------------Formulaires--------------------------------------
     //liste deroulante formulaire ajout
-    public function showList(){ 
+    public function formSelect(){ 
         $pdo = Connect::seConnecter();
         
         // choix du réalisateur
@@ -87,97 +89,40 @@ class FilmManager extends Manager {
 
     }
 
-     // formulaire ajout d'un film
-    public function ajouterFilm(){
+     // formulaire ajout d'un film, ajouter les données récupérées à la bdd à l'aide de la requete sql
+    public function ajouterFilm($nom, $anneeSortie, $duree, $resume, $note, $genres, $lienAffiche){
 
-        
-        if(isset($_POST['submit'])){ // si la session récupère les infos avec le bouton submit
+        $pdo = Connect::seConnecter();
+        $ajouterFilmBDD = $pdo->prepare("INSERT into film(titre, annee_sortie_fr, duree, synopsis, note, id_realisateur, affiche) VALUES(:titre, :annee_sortie_fr, :duree,:synopsis, :note, :id_realisateur, :affiche)");
+        $ajouterFilmBDD->execute([
+        'titre'=>$nom,
+        'annee_sortie_fr'=>$anneeSortie,
+        'duree'=>$duree,
+        'synopsis'=>$resume,
+        'note'=>$note,
+        'id_realisateur' => $_POST["realisateur"],
+        'affiche' => $lienAffiche // en lien avec le traitement de l'image
+        ]);
 
-            // ----------------------d'abord traitement de l'image téléchargée---------
-            if(isset($_FILES['file'])){ //si la session récupère l'image avec la methode file, un tableau associatif se crée
-                if($_FILES["file"]["error"] <> 4) {
-                    $tmpName = $_FILES['file']['tmp_name'];
-                    $fileName1= $_FILES['file']['name'];
-                    //possible de mettre du script dans le nom
-                    $fileName = filter_var($fileName1, FILTER_SANITIZE_SPECIAL_CHARS);
-                    $fileSize = $_FILES['file']['size'];
-                    $fileError= $_FILES['file']['error'];
-                    // https://www.php.net/manual/en/features.file-upload.errors.php
-                    $fileType= $_FILES['file']['type'];
-        
-                    // récupère l'extension .jpg, ...
-                    $label = explode(".", $fileName);
-                    $extension = strtolower(end($label));
-        
-                    // ----crée un identifiant unique, et rajoute l'extension 
-                    $extensionsAutorisees= ["jpg", "jpeg", "gif", "png"];
-                    $uniqueName= uniqid("", true);
-                    $newFileName = $uniqueName.'.webp';
-    
-                    // taille max
-                    $maxSize = 40000000;
-    
-                    $lienAffiche='public/img/affiches/'.$newFileName;
-                    //si l'extension fait parti de celles autorisées dans le tableau, et qu'aucune erreur n'est apparu, alors je latélécharge
-                      
-                    if(in_array($extension, $extensionsAutorisees) && $fileError==0 && $fileSize <=$maxSize && $fileName){
-                        // move_uploaded_file($tmpName, $lienAffiche);
-                        imagewebp(imagecreatefromstring(file_get_contents($tmpName)), $lienAffiche);
-                        } 
-                    } 
-            } else {
-                $lienAffiche= "https://placehold.co/600x400";//image par défaut
-            }
-            // -----------ensuite traitement des input-----
-
-            // filtres les caractères pour la sécurité
-            $nom= filter_input(INPUT_POST, "nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $anneeSortie= filter_input(INPUT_POST, "anneeSortie", FILTER_VALIDATE_INT);
-            $duree=filter_input(INPUT_POST, "duree", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-            $resume= filter_input(INPUT_POST, "resume", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $note= filter_input(INPUT_POST, "note", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-            $genres = filter_input(INPUT_POST, "genres", FILTER_VALIDATE_INT, FILTER_REQUIRE_ARRAY);
-
-            //si ces éléments sont filtrés correctement, alors on les execute dans values 
-            if($nom && $resume && $anneeSortie && $duree && $note){
-
-                // Ajouter les données récupérées à la bdd à l'aide de la requete sql
-                $pdo = Connect::seConnecter();
-                $ajouterFilmBDD = $pdo->prepare("INSERT into film(titre, annee_sortie_fr, duree, synopsis, note, id_realisateur, affiche) VALUES(:titre, :annee_sortie_fr, :duree, :synopsis, :note, :id_realisateur, :affiche)");
-                $ajouterFilmBDD->execute([
-                    'titre'=>$nom,
-                    'annee_sortie_fr'=>$anneeSortie,
-                    'duree'=>$duree,
-                    'synopsis'=>$resume,
-                    'note'=>$note,
-                    'id_realisateur' => $_POST["realisateur"],
-                    'affiche' => $lienAffiche // en lien avec le traitement de l'image plus haut
+        // https://www.php.net/manual/fr/pdo.lastinsertid.php dans la table définir j'ajoute l'id du film nouvellement créé et l'id_genre récupéré
+        $idFilm = $pdo->lastInsertId();
+        //checkbox renvoie un tableau dans le name
+        foreach($genres as $genre){
+            $ajouterDefinirBDD = $pdo->prepare("INSERT into definir(id_film, id_genre) VALUES(:id_film, :id_genre)");
+            $ajouterDefinirBDD->execute([
+                'id_film' => $idFilm,
+                'id_genre'=> $genre
                 ]);
-
-                // https://www.php.net/manual/fr/pdo.lastinsertid.php dans la table définir j'ajoute l'id du film nouvellement créé et l'id_genre récupéré
-                $idFilm = $pdo->lastInsertId();
-
-                //checkbox renvoie un tableau dans le name
-                foreach($genres as $genre){
-                    $ajouterDefinirBDD = $pdo->prepare("INSERT into definir(id_film, id_genre) VALUES(:id_film, :id_genre)");
-                    $ajouterDefinirBDD->execute([
-                        'id_film' => $idFilm,
-                        'id_genre'=> $genre
-                    ]);
                 }
-
-                var_dump($_FILES); die;
-                // header("Location:index.php?action=detailFilm&id=$idFilm");
-                // exit;
-            }
-
-        }
+        header("Location:index.php?action=detailFilm&id=$idFilm");
+        exit;
+            
     }
 
 
 
     //-------------------------listes pour le formulaire de modification
-    public function showListFilm($id){
+    public function formSelectFilm($id){
         $pdo = Connect::seConnecter();
         //infos du film
         $requeteDetailFilm = $pdo->prepare("SELECT f.titre, f.annee_sortie_fr, f.synopsis, f.duree, f.note, f.affiche, CONCAT(prenom, ' ', nom) AS realisateur, f.id_realisateur, f.id_film
@@ -202,59 +147,11 @@ class FilmManager extends Manager {
     }
 
     //formulaire modification d'un film
-    public function modifierFilmBDD($id){ 
-        // ----------------------d'abord traitement de l'image téléchargée---------
-            if(isset($_FILES['file'])){ //si la session récupère l'image avec la methode file, un tableau associatif se crée
-                if($_FILES["file"]["error"] <> 4) {
-                    $tmpName = $_FILES['file']['tmp_name'];
-                    $fileName1= $_FILES['file']['name'];
-                    //possible de mettre du script dans le nom
-                    $fileName = filter_var($fileName1, FILTER_SANITIZE_SPECIAL_CHARS);
-                    $fileSize = $_FILES['file']['size'];
-                    $fileError= $_FILES['file']['error'];
-                    // https://www.php.net/manual/en/features.file-upload.errors.php
-                    $fileType= $_FILES['file']['type'];
-        
-                    // récupère l'extension .jpg, ...
-                    $label = explode(".", $fileName);
-                    $extension = strtolower(end($label));
-        
-                    // ----crée un identifiant unique, et rajoute l'extension 
-                    $extensionsAutorisees= ["jpg", "jpeg", "gif", "png"];
-                    $uniqueName= uniqid("", true);
-                    $newFileName = $uniqueName.'.webp';
-    
-                    // taille max
-                    $maxSize = 40000000;
-        
-                    $lienAffiche='public/img/affiches/'.$newFileName;
-                    //si l'extension fait parti de celles autorisées dans le tableau, et qu'aucune erreur n'est apparu, alors je la télécharge
-                      
-                    if(in_array($extension, $extensionsAutorisees) && $fileError==0 && $fileSize <=$maxSize && $fileName){
-                        // move_uploaded_file($tmpName, $lienAffiche);
-                        imagewebp(imagecreatefromstring(file_get_contents($tmpName)), $lienAffiche);
-                    } 
-                } else {
-                    $lienAffiche= "https://placehold.co/600x400";//image par défaut
-                }
-
-                    }
-            
-
-
-        if(isset($_POST['submit'])){
-            $titre= filter_input(INPUT_POST, "titre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $synopsis= filter_input(INPUT_POST, "synopsis", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $annee_sortie_fr= filter_input(INPUT_POST, "annee_sortie_fr", FILTER_VALIDATE_INT);
-            $duree=filter_input(INPUT_POST, "duree", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-            $note= filter_input(INPUT_POST, "note", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-
-             //si ces éléments sont filtrés correctement, alors on les execute dans values 
-            if($titre && $synopsis && $annee_sortie_fr && $duree && $note ){
-         
+    public function modifierFilmBDD($titre, $annee_sortie_fr, $duree, $synopsis, $note, $lienAffiche, $genres, $id){ 
+                //modifie les entrée dans la bdd film
                 $pdo = Connect::seConnecter();                
                 $modifierFilmBDD = $pdo->prepare("UPDATE film
-                SET titre= :titre, annee_sortie_fr= :annee_sortie_fr, duree= :duree, synopsis= :synopsis, note= :note
+                SET titre= :titre, annee_sortie_fr= :annee_sortie_fr, duree= :duree, synopsis= :synopsis, note= :note, affiche= :affiche
                 WHERE id_film= :id");
                 $modifierFilmBDD->execute([
                     'titre'=>$titre,
@@ -262,30 +159,28 @@ class FilmManager extends Manager {
                     'duree' => $duree,
                     'synopsis' => $synopsis,
                     'note' => $note,
+                    'affiche' =>$lienAffiche, //en lien avec le traitement de l'image
                     'id'=>$id
                 ]);
 
-                //checkbox renvoie un tableau dans le name
+                //supprime toutes les lignes definir genre ou il y a id_film=...
+                $supprimerTabDefinir = $pdo->prepare("DELETE FROM definir WHERE id_film= :id_film");
+                $supprimerTabDefinir->execute(["id_film"=>$id]);
+
+                //avec le tableau genres créé dans le formulaire, je rajoute dans la table definir les id_genre choisis avec l'id_film correspondant
                 foreach($genres as $genre){
-                    $ajouterDefinirBDD = $pdo->prepare("UPDATE definir 
-                    SET id_genre = :id_genre
-                    WHERE id_film= :id_film");
+                    $ajouterDefinirBDD = $pdo->prepare("INSERT into definir(id_film, id_genre) VALUES(:id_film, :id_genre)");
                     $ajouterDefinirBDD->execute([
-                        'id_film' => $idFilm,
+                        'id_film' => $id,
                         'id_genre'=> $genre
                     ]);
                 }
-
-
                 header("Location:index.php?action=detailFilm&id=$id");
                 exit;
-            } else{
-                header("Location:index.php");
-                exit;
-            }
+            
         }
 
-    }
+    
 
 
     //getters et setters
