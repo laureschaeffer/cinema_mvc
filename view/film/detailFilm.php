@@ -1,5 +1,4 @@
 <?php ob_start(); 
-
 // lien avec le fichier template.php  ?>
 
     <section class="detail">
@@ -15,6 +14,11 @@
                         <p class="date-movie"><?= $detailFilm["annee_sortie_fr"]?></p>
                         <p>De <span class="real-movie"><a href="index.php?action=detailReal&id=<?=$detailFilm["id_realisateur"]?>"><?=$detailFilm["realisateur"]?></a></span></p>
                     </div>
+                    <div class="modifications">
+                        <!-- action: redirige vers une page de modification  -->
+                        <a href="index.php?action=modifierFilm&id=<?=$detailFilm["id_film"]?>" aria-label="apporter une modification">Modifier</a>
+                        <a href="index.php?action=supprimerFilm&id=<?=$detailFilm["id_film"]?>" class="supprimer"><i class="fa-solid fa-trash"></i>Supprimer</a>
+                    </div>
                 </div>
                 <p class="resume"><?= $detailFilm["synopsis"] ?></p>
                 <div class="casting">
@@ -25,11 +29,6 @@
                         } ?>
                 </div>
         </div>
-        <div class="form-btn">
-            <!-- action: redirige vers une page de modification  -->
-            <button><a href="index.php?action=modifierFilm&id=<?=$detailFilm["id_film"]?>" aria-label="apporter une modification">Apporter une modification</a></button>
-        </div>
-        <a href="index.php?action=supprimerFilm&id=<?=$detailFilm["id_film"]?>" class="supprimer"><i class="fa-solid fa-trash"></i>Supprimer</a>
 </section>
 
 

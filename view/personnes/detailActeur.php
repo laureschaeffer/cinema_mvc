@@ -1,5 +1,4 @@
 <?php ob_start(); // lien avec le fichier template.php 
-var_dump($acteurs); die;
    ?>
 
         <section class="detail">
@@ -25,16 +24,16 @@ var_dump($acteurs); die;
                             
                             <?php  }
                 ?>
+                        </ul>
                     </div>
-                    </ul>
+                </div>
+                <div class="modifications">
+                    <a href="index.php?action=modifierActeur&id=<?=$acteurs["id_personne"]?>" aria-label="apporter une modification"><i class="fa-solid fa-pen"></i>Modifier</a>
+                    <a href="index.php?action=supprimerActeur&id=<?=$acteurs["id_acteur"]?>" aria-label="suprimer" class="supprimer"><i class="fa-solid fa-trash"></i>Supprimer</a>
+
                 </div>
             </div>
-            <p><?=$acteurs["biographie"]?></p>
-            <div class="form-btn">
-                <button><a href="index.php?action=modifierActeur&id=<?=$acteurs["id_personne"]?>" aria-label="apporter une modification">Apporter une modification</a></button>
-            </div>
-            <a href="index.php?action=supprimerActeur&id=<?=$acteurs["id_personne"]?>" class="supprimer"><i class="fa-solid fa-trash"></i>Supprimer</a>
-            
+            <p><?=$acteurs["biographie"]?></p>            
         </section>
 <?php
 

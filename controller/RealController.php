@@ -25,10 +25,14 @@ class RealController{
         $realisateurManager= new RealisateurManager();
 
         $data = $realisateurManager->detailReal($id);
-        //infos du realisateur
-        $realisateurs = $data['requeteReal'];
-        //filmographie
-        $films = $data['realFilmographie'];
+        //si data recupere quelque chose, et donc que la requete a fonctionné, alors fetch
+        if($data){
+            //infos du realisateur
+            $realisateurs = $data['requeteReal'];
+            //filmographie
+            $films = $data['realFilmographie'];
+
+        }
 
         require "view/personnes/detailReal.php";
 
@@ -59,7 +63,7 @@ class RealController{
             if($nom && $prenom && $sexe && $dateAnniv && $biographie){
                 $realisateurManager->ajoutRealisateur($nom, $prenom, $sexe, $dateAnniv, $biographie, $lienPhoto);
 
-                $_SESSION['messages'][] = "Realisateur $nom ajouté"; //msg confirmation
+                $_SESSION['messages'] = "Realisateur $nom ajouté"; //msg confirmation
 
                 $idReal=$pdo->lastInsertId(); // recupere le dernier id créé
                 header("Location:index.php?action=detailReal&id=$idReal"); // redirige vers la page du realisateur nouvellement créé
@@ -101,7 +105,7 @@ class RealController{
             if($prenom && $nom && $sexe && $dateAnniv && $biographie){
                 $realisateurManager->modifierRealBDD($prenom, $nom, $sexe, $dateAnniv, $biographie, $lienPhoto, $id);
 
-                $_SESSION['messages'][] = "Realisateur $nom modifié"; //msg confirmation
+                $_SESSION['messages'] = "Realisateur $prenom $nom modifié"; //msg confirmation
 
                 header("location: index.php?action=detailReal&id=$id");
                 exit;
@@ -110,7 +114,16 @@ class RealController{
                 exit;
             }
         }
+    }
 
+    //supprimer un realisateur dans la bdd
+    public function redirigeSupprReal($id){
+        $realisateurManager = new RealisateurManager();
+        $realisateurManager->supprimerReal($id);
+
+        $_SESSION['messages'] = "Réalisateur supprimé";
+        header("Location:index.php?action=listReals");
+        exit;
     }
 
 

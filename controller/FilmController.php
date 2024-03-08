@@ -46,21 +46,24 @@ class FilmController {
     }
 
      // traite les données du formulaire ajout d'un film
-     public function traitementFilm(){
+    public function traitementFilm(){
         $filmManager = new FilmManager();
 
-        
         if(isset($_POST['submit'])){ // si la session récupère les infos avec le bouton submit
+            if(isset($_FILES['file'])){ //si la session récupère l'image avec la methode file, un tableau associatif se crée
 
-            // recupere l'image dans la fonction file()
-            $compressImg = new CompressImg();
-            //la fonction file attend en parametre string lien pour savoir ou telecharger l'image
-            $lienAffiche= $compressImg->file('public/img/affiches/');
+                // recupere l'image dans la fonction file()
+                $compressImg = new CompressImg();
+                $lienAffiche= $compressImg->file('public/img/affiches/'); //la fonction file attend en parametre string lien pour savoir ou telecharger l'image
+            } else{
+                $lienAffiche= "https://placehold.co/600x400";//image par défaut
+            }
+
             
             // -----------ensuite traitement des input-----
 
             // filtres les caractères pour la sécurité
-            $nom= filter_input(INPUT_POST, "nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $titre= filter_input(INPUT_POST, "titre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $anneeSortie= filter_input(INPUT_POST, "anneeSortie", FILTER_VALIDATE_INT);
             $duree=filter_input(INPUT_POST, "duree", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
             $resume= filter_input(INPUT_POST, "resume", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -68,12 +71,12 @@ class FilmController {
             $genres = filter_input(INPUT_POST, "genres", FILTER_VALIDATE_INT, FILTER_REQUIRE_ARRAY);
 
             //si ces éléments sont filtrés correctement, alors on les execute dans values 
-            if($nom && $resume && $anneeSortie && $duree && $note && $genres){
+            if($titre && $resume && $anneeSortie && $duree && $note && $genres){
 
                 // Ajouter les données récupérées à la bdd à l'aide de la requete sql
-                $filmManager->ajouterFilm($nom, $anneeSortie, $duree, $resume, $note, $genres, $lienAffiche);
-
-                $_SESSION['messages'][] = "Film $nom ajouté";
+                $idFilm = $filmManager->ajouterFilm($titre, $anneeSortie, $duree, $resume, $note, $genres, $lienAffiche);
+                
+                $_SESSION['messages'] = "Film $titre ajouté";
                 header("Location:index.php?action=detailFilm&id=$idFilm");
                 exit;
             } else{
@@ -110,6 +113,7 @@ class FilmController {
          $compressImg = new CompressImg();
          //la fonction file attend en parametre string lien ou telecharger l'image
          $lienAffiche= $compressImg->file('public/img/affiches/');
+
  
          if(isset($_POST['submit'])){
              $titre= filter_input(INPUT_POST, "titre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -123,7 +127,7 @@ class FilmController {
               if($titre && $synopsis && $annee_sortie_fr && $duree && $note && $genres){
                 $filmManager->modifierFilmBDD($titre, $annee_sortie_fr, $duree, $synopsis, $note, $lienAffiche, $genres, $id);
 
-                $_SESSION['messages'][] = "Film $nom modifié";
+                $_SESSION['messages'][] = "Film $titre modifié";
                 header("Location:index.php?action=detailFilm&id=$id");
                 exit;
               }
@@ -137,7 +141,7 @@ class FilmController {
         $filmManager = new FilmManager();
         $filmManager->supprimerFilm($id);
 
-        $_SESSION['messages'][] = "Film $nom supprimé";
+        $_SESSION['messages'] = "Film supprimé";
         header("location:index.php?action=listFilms");
         exit;
     }

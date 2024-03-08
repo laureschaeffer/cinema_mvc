@@ -26,11 +26,15 @@
                     </div>
 
                 </div>
+                <div class="modifications">
+                    <a href="index.php?action=modifierReal&id=<?=$realisateurs["id_personne"]?>" aria-label="apporter une modification"><i class="fa-solid fa-pen"></i>Modifier</a>
+                    <a href="index.php?action=supprimerReal&id=<?=$realisateurs["id_realisateur"]?>" class="supprimer"><i class="fa-solid fa-trash"></i>Supprimer</a>
+                </div>
             </div>
-            <p><?=$realisateurs["biographie"] ?></p> 
-            <div class="form-btn">
-                <button><a href="index.php?action=modifierReal&id=<?=$realisateurs["id_personne"]?>" aria-label="apporter une modification">Apporter une modification</a></button>
+            <div class="biographie">
+                <p><?=$realisateurs["biographie"] ?></p> 
             </div>
+            
     </section>
 
 <?php 

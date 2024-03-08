@@ -10,6 +10,7 @@
   }
 
 #wrapper{
+    min-height: 100vh;
     font-family: "Gill Sans", sans-serif;
     background-color: var(--main-bg-color);
 }
@@ -159,7 +160,7 @@ h2{
 
 .card-header{
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 .card-header img, .card-acteur img{
@@ -290,33 +291,18 @@ h2{
     display: flex;
     justify-content: center;
 }
-.form-btn{
-    display: flex;
-    justify-content: center;
-}
 
-.form-btn button{
-    color: black;
-    border: none;
-    padding: 1%;
-    border-radius: 15px;
-    margin-bottom: 1%;
-    transition: 0.5s;
-}
 
 .form-btn button:hover{
     opacity: 0.8;
 }
-button a{
-    color: #010101;
 
-}
 
-.supprimer{
+.modifications a{
     color: var(--main-txt-color);
     display: flex;
     justify-content: center;
-    padding: 2%;
+    padding: 5%;
 }
 
 /* -----------------------------------------------detail film-------------------- */
@@ -346,6 +332,7 @@ button a{
 .detail a:hover{
     opacity: 0.5;
 }
+
 
 /* ------------------detail acteur--------- */
 .filmographie{
@@ -424,16 +411,17 @@ input[type="file"]{
 }
 
 /* -----footer------ */
+footer{
+    background-color: #D9D9D9;
+    margin-top: 2%;
+}
+
 footer a {
     color: #010101;
     transition: 0.5s;
 }
 footer a:hover{
     opacity: 0.5;
-}
-footer{
-    background-color: #D9D9D9;
-    margin-top: 2%;
 }
 footer p{
     text-align: center;

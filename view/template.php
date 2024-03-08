@@ -1,6 +1,5 @@
 <?php
-// use Service\Message; 
-// $msg = new Message();
+use Service\Message; 
 ?>
 
 <!DOCTYPE html>
@@ -50,6 +49,7 @@
             <div id="contenu">
                 <h1>PDO Cinema</h1>
                 <h2><?= $titre_secondaire ?></h2>
+                <p><?= Message::showMessage(); ?></p>
                 <?= $contenu  ?>
             </div>
 

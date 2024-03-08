@@ -7,7 +7,7 @@ ob_start();
 <section class="formulaire">
     <form action="index.php?action=ajouterFilm" method="post" enctype="multipart/form-data">
         <p><label>Nom du film :</label></p>
-        <input type="text" name="nom" placeholder="Titre" required>
+        <input type="text" name="titre" placeholder="Titre" required>
         <p><label>Année de sortie :</label></p>
         <input type="number" name="anneeSortie" placeholder="Année de sortie">
         <p><label>Durée (en minute) :</label></p>

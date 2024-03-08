@@ -114,6 +114,9 @@ class FilmManager extends Manager {
                 'id_genre'=> $genre
                 ]);
                 }
+
+
+        return $idFilm;
             
     }
 
@@ -144,7 +147,7 @@ class FilmManager extends Manager {
         
     }
 
-    //formulaire modification d'un film, fonction appelée dans le controller après le traitement
+    //formulaire modification d'un film, fonction appelée dans le controller après le traitement 
     public function modifierFilmBDD($titre, $annee_sortie_fr, $duree, $synopsis, $note, $lienAffiche, $genres, $id){ 
                 //modifie les entrée dans la bdd film
                 $pdo = Connect::seConnecter();                
@@ -177,12 +180,9 @@ class FilmManager extends Manager {
         }
 
         //-----------------------------------------supprimer le film-----------------------------
-        public function supprimerFilm($id){
-            //d'abord supprimer les entrees ou existe l'id film dans casting
-            $pdo = Connect::seConnecter(); 
-            $supprimerCasting = $pdo->prepare("DELETE from castings WHERE id_film= :id");
-            $supprimerCasting->execute(["id" => $id]);
-
+        public function supprimerFilm($id){            
+            //comme dans la bdd j'ai mis en place une contrainte "suppression en cascade", supprimer le film supprime egalement les entrees ou l'id existe dans castings
+            $pdo = Connect::seConnecter();
 
             //supprimer genre du film dans la table definir
             $supprimerDefinir= $pdo->prepare("DELETE from definir WHERE id_film= :id");

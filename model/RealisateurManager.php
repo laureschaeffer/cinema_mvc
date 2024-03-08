@@ -50,9 +50,7 @@ class RealisateurManager extends Manager{
             "realFilmographie"=>$realFilmographie->fetchAll()];
             return $data;
     
-        } else {
-            header("Location: index.php"); exit;
-        }
+        } 
 
     }
 
@@ -101,7 +99,15 @@ class RealisateurManager extends Manager{
         ]);
     }
         
-    
+    //supprime uniquement le fait d'etre realisateur, pas la personne
+    public function supprimerReal($id){
+        //dans la table film l'id_realisateur n'est pas obligatoire et a une valeur par defaut null
+        $pdo = Connect::seConnecter();
+        $supprimerRealBDD=$pdo->prepare("DELETE from realisateur WHERE id_personne= :id");
+        $supprimerRealBDD->execute(["id"=>$id]);
+        
+
+    }
 
 
     //getters et setters

@@ -74,8 +74,8 @@ if(isset($_GET["action"])){
 
         //supprimer
         case "supprimerFilm" : $ctrlFilm->redirigeSuppr($id); break;
-        // case "supprimerActeur" : $ctrlActeur->redirigeSupprAct($id); break;
-        
+        case "supprimerActeur" : $ctrlActeur->redirigeSupprAct($id); break;
+        case "supprimerReal" : $ctrlReal->redirigeSupprReal($id); break;
             
     }
 } else {

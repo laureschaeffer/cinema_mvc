@@ -39,11 +39,14 @@ class ActeurController{
     public function traitementActeur(){
         $acteurManager = new ActeurManager();
         if(isset($_POST['submit'])){
-            // recupere l'image dans la fonction file()
-            $compressImg = new CompressImg();
-            //la fonction file attend en parametre string lien ou telecharger l'image
-            $lienPhoto= $compressImg->file('public/img/personnes/');
+            if(isset($_FILES['file'])){ //si la session récupère l'image avec la methode file, un tableau associatif se crée
 
+                // recupere l'image dans la fonction file()
+                $compressImg = new CompressImg();
+                $lienPhoto= $compressImg->file('public/img/personnes/'); //la fonction file attend en parametre string lien pour savoir ou telecharger l'image
+            } else{
+                $lienPhoto= "https://placehold.co/600x400";//image par défaut
+            }
             
             // ------------------------- les input ------------------
             $nom= filter_input(INPUT_POST, "nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -55,7 +58,7 @@ class ActeurController{
             if($nom && $prenom && $sexe && $dateAnniv && $biographie){
                 $acteurManager->ajoutActeur($nom, $prenom, $sexe, $dateAnniv, $biographie, $lienPhoto);
 
-                $_SESSION['messages'][] = "Acteur $nom ajouté"; //message de confirmation
+                $_SESSION['messages'] = "Acteur $nom ajouté"; //message de confirmation
 
                 $idActeur=$pdo->lastInsertId(); //recupere le dernier id créé
                 header("Location:index.php?action=detailActeur&id=$idActeur"); // redirige vers la page du nouveau realisateur
@@ -98,7 +101,7 @@ class ActeurController{
             if($prenom && $nom && $sexe && $dateAnniv && $biographie){
                 $acteurManager->modifierActBDD($prenom, $nom, $sexe, $dateAnniv, $biographie, $lienPhoto, $id);
 
-                $_SESSION['messages'][] = "Acteur $nom modifié"; //message de confirmation
+                $_SESSION['messages'] = "Acteur $nom modifié"; //message de confirmation
 
                 header("location: index.php?action=detailActeur&id=$id");
             } else {
@@ -108,7 +111,14 @@ class ActeurController{
 
     }
 
-    //supprimer acteur
-    // public function redirigeSupprAct($id)
+    //supprimer un acteur dans la bdd
+    public function redirigeSupprAct($id){
+        $acteurManager = new ActeurManager();
+        $acteurManager->supprimerActeur($id); //supprime l'acteur mais pas la personne
+
+        $_SESSION['messages'] = "Acteur supprimé";
+        header("location:index.php?action=listActeurs");
+        exit;
+    }
 
 }

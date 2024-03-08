@@ -30,7 +30,7 @@ class ActeurManager extends Manager{
         $act = $acteur->fetch();
 
         if($act){
-            $requeteActeur = $pdo->prepare("SELECT CONCAT(p.prenom, ' ', p.nom) AS nomActeur, DATE_FORMAT(date_naissance, '%d/%m/%Y') AS date_naissance, p.photo, p.biographie, p.sexe, a.id_personne
+            $requeteActeur = $pdo->prepare("SELECT CONCAT(p.prenom, ' ', p.nom) AS nomActeur, DATE_FORMAT(date_naissance, '%d/%m/%Y') AS date_naissance, p.photo, p.biographie, p.sexe, a.id_personne, a.id_acteur
             FROM acteur a
             INNER JOIN personne p ON a.id_personne = p.id_personne
             WHERE a.id_personne = :id");
@@ -106,6 +106,14 @@ class ActeurManager extends Manager{
             'photo'=>$lienPhoto
         ]);
 
+    }
+
+    //supprime uniquement le fait d'etre acteur, pas la personne
+    public function supprimerActeur($id){
+        //comme dans la bdd j'ai mis en place une contrainte "suppression en cascade", supprimer l'acteur supprime egalement les entrees ou l'id existe dans castings
+        $pdo = Connect::seConnecter();
+        $supprimerActBDD=$pdo->prepare("DELETE from acteur WHERE id_personne= :id");
+        $supprimerActBDD->execute(["id"=>$id]);
     }
 
 
