@@ -84,10 +84,22 @@ class RealisateurManager extends Manager{
         $ajoutReal = $pdo->prepare("INSERT INTO realisateur (id_personne) VALUES (:id_personne)");
         $idReal=$pdo->lastInsertId(); // recupere le dernier id créé
         $ajoutReal->execute(["id_personne" => $idReal]);
-
-        header("Location:index.php?action=detailReal&id=$idReal"); // redirige vers la page du realisateur nouvellement créé
-        exit;
     } 
+    
+    //formulaire modification d'un realisateur, fonction appelée dans le controller apres le traitement
+    public function modifierRealBDD($prenom, $nom, $sexe, $dateAnniv, $biographie, $lienPhoto, $id){
+        //modifie les entree dans la bdd personne
+        $pdo = Connect::seConnecter();
+        $modifierRealBDD= $pdo->prepare("UPDATE personne SET prenom=:prenom, nom=:nom, sexe= :sexe, date_naissance=:date_naissance, biographie= :biographie, photo= :photo WHERE id_personne= :id");
+        $modifierRealBDD->execute([
+            'prenom'=>$prenom,
+            'nom'=>$nom,
+            'sexe'=>$sexe,
+            'date_naissance'=>$dateAnniv, 
+            'biographie'=>$biographie,
+            'photo'=>$lienPhoto
+        ]);
+    }
         
     
 

@@ -20,8 +20,6 @@ class FilmController {
 
     //detail d'un film
     public function detailFilm($id){
-        $pdo = Connect::seConnecter();
-
         $filmManager = new FilmManager();
         $data = $filmManager->detailFilm($id);
         
@@ -37,7 +35,6 @@ class FilmController {
 // --------------------------------------------------------------------formulaires-------------------------------------------------- 
 
     public function addFilm(){ // requete pour les listes déroulantes du formulaire
-        $pdo = Connect::seConnecter();
         $filmManager = new FilmManager();
 
         $data = $filmManager->formSelect();
@@ -75,6 +72,10 @@ class FilmController {
 
                 // Ajouter les données récupérées à la bdd à l'aide de la requete sql
                 $filmManager->ajouterFilm($nom, $anneeSortie, $duree, $resume, $note, $genres, $lienAffiche);
+
+                $_SESSION['messages'][] = "Film $nom ajouté";
+                header("Location:index.php?action=detailFilm&id=$idFilm");
+                exit;
             } else{
                 header("Location:index.php");
                 exit;
@@ -118,12 +119,26 @@ class FilmController {
              $note= filter_input(INPUT_POST, "note", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
              $genres = filter_input(INPUT_POST, "genres", FILTER_VALIDATE_INT, FILTER_REQUIRE_ARRAY);
  
-              //si ces éléments sont filtrés correctement, alors on les execute dans la fonction du manager
+              //si ces éléments sont filtrés correctement, alors on les rentre dans la bdd avec la fonction du manager
               if($titre && $synopsis && $annee_sortie_fr && $duree && $note && $genres){
                 $filmManager->modifierFilmBDD($titre, $annee_sortie_fr, $duree, $synopsis, $note, $lienAffiche, $genres, $id);
+
+                $_SESSION['messages'][] = "Film $nom modifié";
+                header("Location:index.php?action=detailFilm&id=$id");
+                exit;
               }
+
             }
 
-   
+    }
+
+    //supprimer un film dans la bdd
+    public function redirigeSuppr($id){
+        $filmManager = new FilmManager();
+        $filmManager->supprimerFilm($id);
+
+        $_SESSION['messages'][] = "Film $nom supprimé";
+        header("location:index.php?action=listFilms");
+        exit;
     }
 }

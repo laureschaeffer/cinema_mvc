@@ -1,4 +1,5 @@
 <?php ob_start(); // lien avec le fichier template.php 
+var_dump($acteurs); die;
    ?>
 
         <section class="detail">
@@ -32,6 +33,7 @@
             <div class="form-btn">
                 <button><a href="index.php?action=modifierActeur&id=<?=$acteurs["id_personne"]?>" aria-label="apporter une modification">Apporter une modification</a></button>
             </div>
+            <a href="index.php?action=supprimerActeur&id=<?=$acteurs["id_personne"]?>" class="supprimer"><i class="fa-solid fa-trash"></i>Supprimer</a>
             
         </section>
 <?php

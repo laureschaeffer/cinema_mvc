@@ -307,9 +307,16 @@ h2{
 .form-btn button:hover{
     opacity: 0.8;
 }
-.form-btn a{
+button a{
     color: #010101;
 
+}
+
+.supprimer{
+    color: var(--main-txt-color);
+    display: flex;
+    justify-content: center;
+    padding: 2%;
 }
 
 /* -----------------------------------------------detail film-------------------- */

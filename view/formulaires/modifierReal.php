@@ -3,7 +3,7 @@
 ?>
 
 <section class="formulaire">
-    <form action="index.php?action=ajouterModifAct&id=<?=$realisateurs["id_personne"]?>" method="post" enctype="multipart/form-data">
+    <form action="index.php?action=ajouterModifReal&id=<?=$realisateurs["id_personne"]?>" method="post" enctype="multipart/form-data">
         <img src="<?=$realisateurs["photo"]?>" alt="photo de l'acteur">
         <p><label for="file">Modifier la photo</label></p>
         <p><input type="file" name="file"></p>

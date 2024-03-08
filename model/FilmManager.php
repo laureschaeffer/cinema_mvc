@@ -114,8 +114,6 @@ class FilmManager extends Manager {
                 'id_genre'=> $genre
                 ]);
                 }
-        header("Location:index.php?action=detailFilm&id=$idFilm");
-        exit;
             
     }
 
@@ -146,7 +144,7 @@ class FilmManager extends Manager {
         
     }
 
-    //formulaire modification d'un film
+    //formulaire modification d'un film, fonction appelée dans le controller après le traitement
     public function modifierFilmBDD($titre, $annee_sortie_fr, $duree, $synopsis, $note, $lienAffiche, $genres, $id){ 
                 //modifie les entrée dans la bdd film
                 $pdo = Connect::seConnecter();                
@@ -175,9 +173,27 @@ class FilmManager extends Manager {
                         'id_genre'=> $genre
                     ]);
                 }
-                header("Location:index.php?action=detailFilm&id=$id");
-                exit;
             
+        }
+
+        //-----------------------------------------supprimer le film-----------------------------
+        public function supprimerFilm($id){
+            //d'abord supprimer les entrees ou existe l'id film dans casting
+            $pdo = Connect::seConnecter(); 
+            $supprimerCasting = $pdo->prepare("DELETE from castings WHERE id_film= :id");
+            $supprimerCasting->execute(["id" => $id]);
+
+
+            //supprimer genre du film dans la table definir
+            $supprimerDefinir= $pdo->prepare("DELETE from definir WHERE id_film= :id");
+            $supprimerDefinir->execute(["id"=>$id]);
+
+            //supprimer l'affiche
+            // unlink(); 
+
+            //supprimer le film
+            $supprimerFilm= $pdo->prepare("DELETE from film WHERE id_film= :id");
+            $supprimerFilm->execute(["id"=>$id]);
         }
 
     

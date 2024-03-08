@@ -1,4 +1,5 @@
 <?php ob_start(); 
+
 // lien avec le fichier template.php  ?>
 
     <section class="detail">
@@ -25,10 +26,10 @@
                 </div>
         </div>
         <div class="form-btn">
+            <!-- action: redirige vers une page de modification  -->
             <button><a href="index.php?action=modifierFilm&id=<?=$detailFilm["id_film"]?>" aria-label="apporter une modification">Apporter une modification</a></button>
         </div>
-            <!-- action: redirige vers une page de modification  -->
-
+        <a href="index.php?action=supprimerFilm&id=<?=$detailFilm["id_film"]?>" class="supprimer"><i class="fa-solid fa-trash"></i>Supprimer</a>
 </section>
 
 

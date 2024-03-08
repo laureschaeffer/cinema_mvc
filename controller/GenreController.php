@@ -36,7 +36,7 @@ class GenreController {
     }
 
     //enregistre le nouveau genre
-    public function traiteGenre(){
+    public function traitementGenre(){
 
         $genreManager = new GenreManager();
 
@@ -44,6 +44,12 @@ class GenreController {
             $nom= filter_input(INPUT_POST, "nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             if($nom){
                 $genreManager->ajoutGenre($nom);
+
+                $_SESSION['messages'][] = "Genre $nom ajouté";
+                
+                $idGenre = $pdo->lastInsertId();
+                header("Location:index.php?action=detailGenre&id=$idGenre"); // redirige vers la page du genre nouvellement créé
+               exit;
             } else{
                 header("Location:index.php");
             }

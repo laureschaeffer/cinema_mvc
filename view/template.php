@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php
+// use Service\Message; 
+// $msg = new Message();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -47,7 +50,7 @@
             <div id="contenu">
                 <h1>PDO Cinema</h1>
                 <h2><?= $titre_secondaire ?></h2>
-                <?= $contenu ?>
+                <?= $contenu  ?>
             </div>
 
 

@@ -5,6 +5,7 @@ namespace Model;
 
 class ActeurManager extends Manager{
     protected $tableName = "acteur";
+    
 
     //liste
     public function listActeurs(){
@@ -55,6 +56,33 @@ class ActeurManager extends Manager{
         }   
     }
 
+    
+    
+    
+    //--------------------------formulaires----------------------
+    
+    //apres traitement des input, ajouter à la bdd
+    public function ajoutActeur($nom, $prenom, $sexe, $dateAnniv, $biographie, $lienPhoto){
+
+        $pdo = Connect::seConnecter();
+        $ajouterPers = $pdo->prepare("INSERT INTO personne(nom, prenom, sexe, date_naissance, photo, biographie) VALUES(:nom, :prenom, :sexe, :date_naissance, :photo, :biographie)");
+        $ajouterPers->execute([
+            "nom"=> $nom,
+            "prenom" => $prenom,
+        "sexe" => $sexe,
+        "date_naissance" => $dateAnniv,
+        "photo" => $lienPhoto,
+        "biographie" => $biographie,
+    ]);
+    
+    // dans la table acteur j'ajoute l'id de la personne nouvellement créé, et l'id acteur est en auto-increment
+    $ajoutActeur = $pdo->prepare("INSERT INTO acteur (id_personne)
+        VALUES (:id_personne)");
+        $idActeur=$pdo->lastInsertId(); //recupere le dernier id créé
+        $ajoutActeur->execute(["id_personne" => $idActeur]);
+        
+    } 
+    
     //infos de la personne dans le formulaire de modification
     public function formSelectAct($id){
         $pdo = Connect::seConnecter();
@@ -64,34 +92,21 @@ class ActeurManager extends Manager{
         return $acteurs->fetch();
     }
 
-
-
-    //--------------------------formulaires----------------------
-
-    //apres traitement des input, ajouter à la bdd
-    public function ajoutActeur($nom, $prenom, $sexe, $dateAnniv, $biographie, $lienPhoto){
-
+    //formulaire modification d'un acteur, fonction appelée dans le controller apres le traitement
+    public function modifierActBDD($prenom, $nom, $sexe, $dateAnniv, $biographie, $lienPhoto, $id){
+        //modifie les entree dans la bdd personne
         $pdo = Connect::seConnecter();
-        $ajouterPers = $pdo->prepare("INSERT INTO personne(nom, prenom, sexe, date_naissance, photo, biographie) VALUES(:nom, :prenom, :sexe, :date_naissance, :photo, :biographie)");
-        $ajouterPers->execute([
-        "nom"=> $nom,
-        "prenom" => $prenom,
-        "sexe" => $sexe,
-        "date_naissance" => $dateAnniv,
-        "photo" => $lienPhoto,
-        "biographie" => $biographie,
+        $modifierActeurBDD= $pdo->prepare("UPDATE personne SET prenom=:prenom, nom=:nom, sexe= :sexe, date_naissance=:date_naissance, biographie= :biographie, photo= :photo WHERE id_personne= :id");
+        $modifierActeurBDD->execute([
+            'prenom'=>$prenom,
+            'nom'=>$nom,
+            'sexe'=>$sexe,
+            'date_naissance'=>$dateAnniv, 
+            'biographie'=>$biographie,
+            'photo'=>$lienPhoto
         ]);
-    
-        // dans la table acteur j'ajoute l'id de la personne nouvellement créé, et l'id acteur est en auto-increment
-        $ajoutReal = $pdo->prepare("INSERT INTO acteur (id_personne)
-        VALUES (:id_personne)");
-        $idReal=$pdo->lastInsertId(); //recupere le dernier id créé
-        $ajoutReal->execute(["id_personne" => $idReal]);
 
-        header("Location:index.php?action=detailActeur&id=$idReal"); // redirige vers la page du nouveau realisateur
-        exit;
-        } 
-    
+    }
 
 
 

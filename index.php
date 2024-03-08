@@ -1,5 +1,5 @@
 <?php   //controller frontal
-
+session_start();
 // on appelle tous les controlleurs 
 
 use Controller\ActeurController;
@@ -9,6 +9,7 @@ use Controller\RealController;
 use Controller\GenreController;
 use Controller\RoleController;
 
+use Model\Connect;
 
 // chargent toutes les classes sous le systeme d'exploitation de linux (Docker lance les conteneurs sous linux)
 spl_autoload_register(function ($class_name) {
@@ -65,9 +66,15 @@ if(isset($_GET["action"])){
         case "ajouterFilm" : $ctrlFilm->traitementFilm() ; break;
         case "ajoutAct" : $ctrlActeur->traitementActeur(); break; 
         case "ajoutReal" : $ctrlReal->traitementReal(); break;
-        // case "ajoutGenre" : $mngGenre->ajoutGenre(); break;
-        // // modifier un film
-        // case "ajouterModification" : $ctrlFilm->modifierFilmBDD($id); break;
+        case "ajoutGenre" : $ctrlGenre->traitementGenre(); break;
+        // modification
+        case "ajouterModification" : $ctrlFilm->traiteModifFilm($id); break;
+        case "ajouterModifAct" : $ctrlActeur->traiteModifAct($id); break; 
+        case "ajouterModifReal" : $ctrlReal->traiteModifReal($id); break;
+
+        //supprimer
+        case "supprimerFilm" : $ctrlFilm->redirigeSuppr($id); break;
+        // case "supprimerActeur" : $ctrlActeur->redirigeSupprAct($id); break;
         
             
     }

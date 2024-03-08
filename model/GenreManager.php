@@ -38,9 +38,6 @@ class GenreManager extends Manager {
         $pdo = Connect::seConnecter();
         $ajouterGenreBDD = $pdo->prepare("INSERT into genre(nom) VALUES(:nom)");
         $ajouterGenreBDD->execute(["nom"=>$nom]);
-        $idGenre = $pdo->lastInsertId();
-         header("Location:index.php?action=detailGenre&id=$idGenre"); // redirige vers la page du genre nouvellement créé
-        exit;
         }
 
 
