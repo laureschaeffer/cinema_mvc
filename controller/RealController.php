@@ -47,10 +47,10 @@ class RealController{
         $realisateurManager = new RealisateurManager();
         if(isset($_POST['submit'])){
             
-            // recupere l'image dans la fonction file()
+            // recupere l'image dans la fonction traiteImg()
             $compressImg = new CompressImg();
-            //la fonction file attend en parametre string lien ou telecharger l'image
-            $lienPhoto= $compressImg->file('public/img/personnes/');
+            //la fonction traiteImg attend en parametre string lien ou telecharger l'image
+            $lienPhoto= $compressImg->traiteImg('public/img/personnes/');
 
 
             // --------input ----------
@@ -89,10 +89,10 @@ class RealController{
     public function traiteModifReal($id){
         $realisateurManager = new RealisateurManager();
 
-        //recupere l'image dans la fonction file()
+        //recupere l'image dans la fonction traiteImg()
         $compressImg = new CompressImg();
-        //la fonction file attend en parametre string lien ou telecharger l'image
-        $lienPhoto= $compressImg->file('public/img/personnes/');
+        //la fonction traiteImg attend en parametre string lien ou telecharger l'image
+        $lienPhoto= $compressImg->traiteImg('public/img/personnes/');
 
         if(isset($_POST['submit'])){
             $prenom = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);

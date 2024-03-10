@@ -54,7 +54,7 @@ class FilmController {
 
                 // recupere l'image dans la fonction file()
                 $compressImg = new CompressImg();
-                $lienAffiche= $compressImg->file('public/img/affiches/'); //la fonction file attend en parametre string lien pour savoir ou telecharger l'image
+                $lienAffiche= $compressImg->traiteImg('public/img/affiches/'); //la fonction file attend en parametre string lien pour savoir ou telecharger l'image
             } else{
                 $lienAffiche= "https://placehold.co/600x400";//image par défaut
             }
@@ -109,10 +109,10 @@ class FilmController {
     public function traiteModifFilm($id){
         $filmManager = new FilmManager();
 
-         // recupere l'image dans la fonction file()
+         // recupere l'image dans la fonction traiteImg()
          $compressImg = new CompressImg();
-         //la fonction file attend en parametre string lien ou telecharger l'image
-         $lienAffiche= $compressImg->file('public/img/affiches/');
+         //la fonction traiteImg attend en parametre string lien ou telecharger l'image
+         $lienAffiche= $compressImg->traiteImg('public/img/affiches/');
 
  
          if(isset($_POST['submit'])){

@@ -18,7 +18,7 @@
 
 </div>
 <div class="form-btn">
-    <button><a href="index.php?action=formulaireFilm" aria-label="formulaire ajout d'un film">Ajouter un film</a></button>
+    <a href="index.php?action=formulaireFilm" aria-label="formulaire ajout d'un film"><button>Ajouter un film</button></a>
 </div>
 
 <?php

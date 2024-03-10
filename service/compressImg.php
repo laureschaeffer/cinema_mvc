@@ -5,7 +5,7 @@ namespace Service;
 class CompressImg{
 
     //traite l'image, attend en parametre le lien ou la telecharger
-    public function file($lien){
+    public function traiteImg($lien){
 
             if($_FILES["file"]["error"] <> 4) {
                 $tmpName = $_FILES['file']['tmp_name'];

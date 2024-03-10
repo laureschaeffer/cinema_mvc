@@ -10,9 +10,11 @@
   }
 
 #wrapper{
-    min-height: 100vh;
     font-family: "Gill Sans", sans-serif;
     background-color: var(--main-bg-color);
+}
+#contenu{
+    min-height: calc(100vh - 80px);
 }
 /* ----tous les elements en blanc---- */
 #MyTopnav a, .subscribe button, .card-citation p, .card-acteur p, .card-acteur a, .card p, .card a, .detail p, .casting a, .filmographie a, .filmographie li, #listing-genre a, h1, h2, h3, #intro p, h4, .real-movie a, .card-movie p, .card-movie a{
@@ -292,6 +294,22 @@ h2{
     justify-content: center;
 }
 
+.form-btn{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2%;
+}
+
+.form-btn button{
+    background-color: transparent;
+    color: var(--main-txt-color);
+    padding: 1% 4%;
+    border-radius: 15px;
+    border: 0.1rem solid var(--main-txt-color);
+    font-size: large;
+    transition: 0.5s;
+}
+
 
 .form-btn button:hover{
     opacity: 0.8;
@@ -412,8 +430,8 @@ input[type="file"]{
 
 /* -----footer------ */
 footer{
+    height: 100px;
     background-color: #D9D9D9;
-    margin-top: 2%;
 }
 
 footer a {

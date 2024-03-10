@@ -60,6 +60,7 @@ class ActeurController{
 
                 $_SESSION['messages'] = "Acteur $nom ajouté"; //message de confirmation
 
+                $pdo = Connect::seConnecter();
                 $idActeur=$pdo->lastInsertId(); //recupere le dernier id créé
                 header("Location:index.php?action=detailActeur&id=$idActeur"); // redirige vers la page du nouveau realisateur
                 exit;
@@ -85,10 +86,11 @@ class ActeurController{
     public function traiteModifAct($id){
         $acteurManager = new ActeurManager();
 
-        //recupere l'image dans la fonction file()
+        //recupere l'image dans la fonction traiteImg()
         $compressImg = new CompressImg();
-        //la fonction file attend en parametre string lien ou telecharger l'image
-        $lienPhoto= $compressImg->file('public/img/personnes/');
+        //la fonction traiteImg attend en parametre string lien ou telecharger l'image
+        $lien='public/img/personnes/';
+        $lienPhoto= $compressImg->traiteImg($lien);
 
         if(isset($_POST['submit'])){
             $prenom = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -103,9 +105,11 @@ class ActeurController{
 
                 $_SESSION['messages'] = "Acteur $nom modifié"; //message de confirmation
 
-                header("location: index.php?action=detailActeur&id=$id");
+                header("location:index.php?action=detailActeur&id=$id");
+                exit;
             } else {
-                header("location: index.php");
+                header("location:index.php");
+                exit;
             }
         }
 
