@@ -11,7 +11,7 @@
     </ul>
             </div>
 <div class="form-btn">
-    <button><a href="index.php?action=formGenre">Ajouter un genre</a></button>
+    <a href="index.php?action=formGenre"><button>Ajouter un genre</button></a>
 </div>
 <?php
 $description="Voilà la liste de tous les gens présents sur notre site.";

@@ -165,12 +165,13 @@ h2{
     justify-content: space-around;
     align-items: center;
 }
-.card-header img, .card-acteur img{
+.card-movie img, .card-acteur img{
     width: 20vw;
 }
 .card-info{
-    padding-left: 3%;
+    padding-left: 8%;
 }
+
 .titre-movie{
     font-size: large;
     font-weight: bold;
@@ -274,6 +275,10 @@ h2{
     overflow: hidden;
 }
 
+.card-info a{
+    color: var(--main-txt-color);
+}
+
 .card p, .card a{
     padding: 2% 0;
     text-align: center;
@@ -321,19 +326,44 @@ h2{
     color: #010101;
 }
 
-
+.modifications{
+    margin-left: 5%;
+}
 .modifications a{
-    color: var(--main-txt-color);
+    color: #D7C0D0;
     display: flex;
     justify-content: center;
     padding: 5%;
+    font-weight: bold;
 }
 
 /* -----------------------------------------------detail film-------------------- */
-.detail p{
-    padding: 2%;
+
+.detail{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1% 20%;
 }
 
+.detail figure{
+    box-shadow: 12px 11px #3B4D5A;
+    width: 300px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+.detail img{
+    height: 400px;
+}
+.detail p{
+    padding: 5% 0;
+}
+
+
+.card-header p{
+    padding: 2%;
+}
 .detail-header{
     padding: 2%;
     margin-bottom: 1%;
@@ -351,6 +381,7 @@ h2{
     padding: 2% 5%;
 }
 .detail a{
+    font-weight: bold;
     transition: 0.5s;
 }
 .detail a:hover{
@@ -434,6 +465,18 @@ input[type="file"]{
     width: 20vw;
 }
 
+.formulaire button{
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.formulaire button:hover{
+    opacity: 0.5;
+}
+
+
+
+
 /* -----footer------ */
 footer{
     height: 100px;
@@ -460,6 +503,12 @@ footer li{
     padding: 0 1%;
 }
 
+/*--------------msg de confirmation---------------*/
+.msg_confirmation p{
+    color: #63637D;
+    text-align: center;
+    font-size: larger;
+}
 
 /* ===============================================VERSION MOBILE ================================= */
 @media screen and (max-width: 768px){
@@ -557,9 +606,7 @@ h1, h2{
     padding: 2%;
 }
 /* ------acteurs du moment-----  */
-.card-header img{
-    width: 50vw;
-}
+
 
 .card-movie{
     margin: 5% 0;
@@ -582,7 +629,26 @@ h1, h2{
     padding: 5%;
 }
 
+.card-info{
+    padding-top: 5%;
+}
+
 .resume{
     padding: 5% 0;
 }
+
+.card-header{
+    display: block;
+}
+.modifications{
+    margin: 0;
+}
+.modifications a{
+    display: block;
+}
+
+.detail{
+    padding: 0 4%;
+}
+
 }

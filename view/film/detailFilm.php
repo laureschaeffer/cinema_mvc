@@ -2,7 +2,6 @@
 // lien avec le fichier template.php  ?>
 
     <section class="detail">
-        <div class="card-movie">
             <div class="card-header">
                 <figure><img src="<?=$detailFilm["affiche"]?>" alt="affiche du film"></figure>
                 <div class="card-info">
@@ -16,7 +15,7 @@
                     </div>
                     <div class="modifications">
                         <!-- action: redirige vers une page de modification  -->
-                        <a href="index.php?action=modifierFilm&id=<?=$detailFilm["id_film"]?>" aria-label="apporter une modification">Modifier</a>
+                        <a href="index.php?action=modifierFilm&id=<?=$detailFilm["id_film"]?>" aria-label="apporter une modification"><i class="fa-solid fa-pen"></i>Modifier</a>
                         <a href="index.php?action=supprimerFilm&id=<?=$detailFilm["id_film"]?>" class="supprimer"><i class="fa-solid fa-trash"></i>Supprimer</a>
                     </div>
                 </div>
@@ -28,7 +27,6 @@
                             <?php 
                         } ?>
                 </div>
-        </div>
 </section>
 
 

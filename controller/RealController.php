@@ -53,7 +53,7 @@ class RealController{
                  
                 // recupere l'image dans la fonction traiteImg()
                 $compressImg = new CompressImg();
-                $lienAffiche= $compressImg->traiteImg('public/img/affiches/', $_FILES['file']); //la fonction file attend en parametre string lien pour savoir ou telecharger l'image
+                $lienAffiche= $compressImg->traiteImg('public/img/personnes/', $_FILES['file']); //la fonction file attend en parametre string lien pour savoir ou telecharger l'image
             } else{
                 $lienAffiche= "https://placehold.co/600x400";//image par défaut
             }
@@ -101,7 +101,7 @@ class RealController{
                  
             // recupere l'image dans la fonction traiteImg()
             $compressImg = new CompressImg();
-            $lienPhoto= $compressImg->traiteImg('public/img/affiches/', $_FILES['file']); //la fonction file attend en parametre string lien pour savoir ou telecharger l'image
+            $lienPhoto= $compressImg->traiteImg('public/img/personnes/', $_FILES['file']); //la fonction file attend en parametre string lien pour savoir ou telecharger l'image
         } else{
             $lienPhoto= "https://placehold.co/600x400";//image par défaut
         }

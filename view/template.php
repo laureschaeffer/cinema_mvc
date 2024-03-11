@@ -68,7 +68,16 @@ use Service\Message;
     </div>
 
 <!-- navbar responsive -->
-<script src="public/js/main.js"></script>
+<script>
+    function myFunction(){
+    var x = document.getElementById("MyTopnav");
+    if (x.className === "topNav"){
+        x.className = "navbarResponsive";
+    } else{
+        x.className = "topNav" ;
+    }
+}
+</script>
 </body>
 </html>
 <?php

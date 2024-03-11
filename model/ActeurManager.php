@@ -11,7 +11,7 @@ class ActeurManager extends Manager{
     public function listActeurs(){
         $pdo = Connect::seConnecter();
         $requeteLsActeur = $pdo->query(
-            "SELECT CONCAT(p.prenom, ' ', p.nom) AS nomActeur, DATE_FORMAT(date_naissance, '%d/%m/%Y') AS date_naissance, a.id_personne, p.photo
+            "SELECT CONCAT(p.prenom, ' ', p.nom) AS nomActeur, DATE_FORMAT(date_naissance, '%d/%m/%Y') AS date_naissance, a.id_personne, p.photo, a.id_acteur
             FROM acteur a
             INNER JOIN personne p ON a.id_personne = p.id_personne
             ORDER BY p.nom"
@@ -25,7 +25,7 @@ class ActeurManager extends Manager{
     public function detailActeur($id) {
         $pdo = Connect::seConnecter();
         
-        $acteur = $pdo->prepare("SELECT id_acteur FROM acteur WHERE id_personne = :id");
+        $acteur = $pdo->prepare("SELECT id_acteur FROM acteur WHERE id_acteur = :id");
         $acteur->execute(["id" => $id]);
         $act = $acteur->fetch();
 
@@ -33,7 +33,7 @@ class ActeurManager extends Manager{
             $requeteActeur = $pdo->prepare("SELECT CONCAT(p.prenom, ' ', p.nom) AS nomActeur, DATE_FORMAT(date_naissance, '%d/%m/%Y') AS date_naissance, p.photo, p.biographie, p.sexe, a.id_personne, a.id_acteur
             FROM acteur a
             INNER JOIN personne p ON a.id_personne = p.id_personne
-            WHERE a.id_personne = :id");
+            WHERE a.id_acteur = :id");
             $requeteActeur->execute(["id" => $id]);
             // on fait passer un tableau associatif qui associe le nom de champ paramétré avec la valeur de l'id
     
@@ -109,7 +109,7 @@ class ActeurManager extends Manager{
 
     }
     
-    //cherche id_acteur de la personne modifiée avec l'id_personne, pour rediriger vers la bonne page
+//cherche id_acteur de la personne modifiée avec l'id_personne, pour rediriger vers la bonne page
     public function findAct($id){
         $pdo = Connect::seConnecter();
         $findIdAct=$pdo->prepare("SELECT * FROM acteur 
@@ -123,7 +123,7 @@ class ActeurManager extends Manager{
     public function supprimerActeur($id){
         //comme dans la bdd j'ai mis en place une contrainte "suppression en cascade", supprimer l'acteur supprime egalement les entrees ou l'id existe dans castings
         $pdo = Connect::seConnecter();
-        $supprimerActBDD=$pdo->prepare("DELETE from acteur WHERE id_personne= :id");
+        $supprimerActBDD=$pdo->prepare("DELETE from acteur WHERE id_acteur= :id");
         $supprimerActBDD->execute(["id"=>$id]);
     }
 

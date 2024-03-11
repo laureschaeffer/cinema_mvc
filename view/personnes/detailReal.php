@@ -11,7 +11,7 @@
             }
             ?>
             <div class="card-header">
-                <figure><img src="<?=$realisateurs["photo"]?>" alt="photo du réalisateur" width=200px></figure>
+                <figure><img src="<?=$realisateurs["photo"]?>" alt="photo du réalisateur"></figure>
                 <div class="card-info">
                     <p><?= $realisateurs["nomReal"].', '.$accord.$realisateurs["date_naissance"]?></p> 
                     <div class="filmographie">

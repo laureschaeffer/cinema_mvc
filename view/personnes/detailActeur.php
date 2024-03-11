@@ -28,12 +28,15 @@
                     </div>
                 </div>
                 <div class="modifications">
+                    <!-- attend id_personne pour modifier, mais id_acteur pour supprimer ; pour ne pas supprimer la personne mais seulement le fait d'etre acteur  -->
                     <a href="index.php?action=modifierActeur&id=<?=$acteurs["id_personne"]?>" aria-label="apporter une modification"><i class="fa-solid fa-pen"></i>Modifier</a>
                     <a href="index.php?action=supprimerActeur&id=<?=$acteurs["id_acteur"]?>" aria-label="suprimer" class="supprimer"><i class="fa-solid fa-trash"></i>Supprimer</a>
 
                 </div>
             </div>
-            <p><?=$acteurs["biographie"]?></p>            
+            <div class="biographie">
+                <p><?=$acteurs["biographie"]?></p>            
+            </div>
         </section>
 <?php
 

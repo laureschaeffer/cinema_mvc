@@ -9,11 +9,11 @@ ob_start();
         <p><label>Nom du film :</label></p>
         <input type="text" name="titre" placeholder="Titre" required>
         <p><label>Année de sortie :</label></p>
-        <input type="number" name="anneeSortie" placeholder="Année de sortie">
+        <input type="number" name="anneeSortie" placeholder="Année de sortie" required>
         <p><label>Durée (en minute) :</label></p>
-        <input type="number" name="duree" placeholder="Durée">
+        <input type="number" name="duree" placeholder="Durée" required>
         <p><label>Note sur 5 :</label></p>
-        <input type="number" name="note" placeholder="Note">
+        <input type="number" name="note" placeholder="Note" required>
 
         <p><label>Choissiez un réalisateur :</label></p>
         <select name="realisateur" id="realisateur-select">
@@ -26,7 +26,7 @@ ob_start();
         <p><label>Choisissez un genre :</label></p> 
         <!-- checkbox des genres  -->
         <?php foreach($choixGenre as $genre){ ?>
-            <p><input type="checkbox" id="<?=$genre["nom"]?>" name="genres[]" value="<?=$genre["id_genre"]?>"/>
+            <p><input type="checkbox" id="<?=$genre["nom"]?>" name="genres[]" value="<?=$genre["id_genre"]?>" required/>
             <label for="<?=$genre["nom"]?>"><?=$genre["nom"]?></label> </p>  
                 <?php
             }

@@ -28,12 +28,11 @@ class CompressImg{
                 
                 // taille max
                 $maxSize = 40000000;
-                $newFileName = $uniqueName.".".$extension;
                             
                 //chemin dans la bdd, $lien est different pour affiche (film) et img (personnes)
                 $lienAffiche=$lien.$newFileName;
                 
-                $extensionsAutorisees= ["jpg", "jpeg", "gif", "png"];
+                $extensionsAutorisees= ["jpg", "jpeg", "gif", "png", "webp"];
                 //si l'extension fait parti de celles autorisées dans le tableau, et qu'aucune erreur n'est apparu, alors je latélécharge
                 if(in_array($extension, $extensionsAutorisees) && $fileSize <=$maxSize && $fileName){
                     //crée l'image en fichier webp qui est compressé, moins lourd et donc plus rapide à etre téléchargé

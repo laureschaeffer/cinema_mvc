@@ -75,7 +75,6 @@ class FilmController {
 
                 // Ajouter les données récupérées à la bdd à l'aide de la requete sql
                 $idFilm = $filmManager->ajouterFilm($titre, $anneeSortie, $duree, $resume, $note, $genres, $lienAffiche);
-                
                 $_SESSION['messages'] = "<div class='msg_confirmation'><p>Film $titre ajouté</p></div>";
                 header("Location:index.php?action=detailFilm&id=$idFilm");
                 exit;

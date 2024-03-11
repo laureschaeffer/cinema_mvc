@@ -35,7 +35,7 @@
 
     <div class="card-movie" id="movie1">
         <div class="card-header">
-            <figure><img src="public/img/affiches/laBete.jpg" alt="affiche film la bete"></figure>
+            <figure><img src="public/img/affiches/laBete.webp" alt="affiche film la bete"></figure>
             <div class="card-info">
                 <p><span class="titre-movie">La bete, </span>3/5</p>
                 <p class="date-movie">7 février 2024</p>
@@ -47,7 +47,7 @@
 
     <div class="card-movie" id="movie2">
         <div class="card-header">
-            <figure><img src="public/img/affiches/greenBorder.jpg" alt="affiche film green border"></figure>
+            <figure><img src="public/img/affiches/greenBorder.webp" alt="affiche film green border"></figure>
             <div class="card-info">
                 <p><span class="titre-movie">Green Border, </span>3.3/5</p>
                 <p class="date-movie">7 février 2024</p>
@@ -58,7 +58,7 @@
     </div>
     <div class="card-movie" id="movie3">
         <div class="card-header">
-            <figure><img src="public/img/affiches/daali.jpg" alt="affiche film Daaaaaali"></figure>
+            <figure><img src="public/img/affiches/daali.webp" alt="affiche film Daaaaaali"></figure>
             <div class="card-info">
                 <p><span class="titre-movie">DAAAAAALI !, </span>3.4/5</p>
                 <p class="date-movie">7 février 2024</p>

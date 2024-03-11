@@ -38,7 +38,7 @@
                 <p><label>Note sur 5 :</label></p>
                 <input type="number" name="note" value="<?= $requeteDetailFilm["note"]?>">    
                 <p><label>Résumé :</label></p>
-                <textarea name="synopsis" row="4" ><?= $requeteDetailFilm["synopsis"] ?></textarea>             
+                <textarea name="synopsis" row="4" cols="40"><?= $requeteDetailFilm["synopsis"] ?></textarea>             
                 <?php
                 
                 ?>

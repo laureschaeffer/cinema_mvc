@@ -94,7 +94,7 @@ class ActeurController{
                      
             // recupere l'image dans la fonction traiteImg()
                 $compressImg = new CompressImg();
-                $lienPhoto= $compressImg->traiteImg('public/img/affiches/', $_FILES['file']); //la fonction file attend en parametre string lien pour savoir ou telecharger l'image
+                $lienPhoto= $compressImg->traiteImg('public/img/personnes/', $_FILES['file']); //la fonction file attend en parametre string lien pour savoir ou telecharger l'image
             } else{
                 $lienPhoto= "https://placehold.co/600x400";//image par défaut
             }
@@ -129,7 +129,7 @@ class ActeurController{
         $acteurManager = new ActeurManager();
         $acteurManager->supprimerActeur($id); //supprime l'acteur mais pas la personne
 
-        $_SESSION['messages'] = "Acteur supprimé";
+        $_SESSION['messages'] = "<div class='msg_confirmation'><p>Acteur supprimé</p></div>";
         header("location:index.php?action=listActeurs");
         exit;
     }
