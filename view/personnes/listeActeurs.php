@@ -14,7 +14,7 @@
 
 </div>
 <div class="form-btn">
-    <button><a href="index.php?action=formActeur" aria-label="formulaire ajouter un acteur">Ajouter un acteur</a></button>
+    <a href="index.php?action=formActeur" aria-label="formulaire ajouter un acteur"><button>Ajouter un acteur</button></a>
 </div>
 <?php
     

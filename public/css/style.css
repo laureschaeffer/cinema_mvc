@@ -294,25 +294,31 @@ h2{
     justify-content: center;
 }
 
+/* boutons ajout  */
 .form-btn{
     display: flex;
     justify-content: center;
     margin-bottom: 2%;
 }
-
+.form-btn a{
+    white-space: nowrap;
+}
 .form-btn button{
     background-color: transparent;
     color: var(--main-txt-color);
-    padding: 1% 4%;
+    padding: 10%;
     border-radius: 15px;
     border: 0.1rem solid var(--main-txt-color);
     font-size: large;
     transition: 0.5s;
+    cursor: pointer;
 }
 
 
 .form-btn button:hover{
     opacity: 0.8;
+    background-color: var(--main-txt-color);
+    color: #010101;
 }
 
 

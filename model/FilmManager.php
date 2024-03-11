@@ -179,6 +179,37 @@ class FilmManager extends Manager {
             
         }
 
+        //modifie le film sans l'image
+    public function modifierFilmBDDSansImg($titre, $annee_sortie_fr, $duree, $synopsis, $note, $genres, $id){ 
+                //modifie les entrée dans la bdd film
+                $pdo = Connect::seConnecter();                
+                $modifierFilmBDD = $pdo->prepare("UPDATE film
+                SET titre= :titre, annee_sortie_fr= :annee_sortie_fr, duree= :duree, synopsis= :synopsis, note= :note
+                WHERE id_film= :id");
+                $modifierFilmBDD->execute([
+                    'titre'=>$titre,
+                    'annee_sortie_fr' => $annee_sortie_fr,
+                    'duree' => $duree,
+                    'synopsis' => $synopsis,
+                    'note' => $note,
+                    'id'=>$id
+                ]);
+
+                //supprime toutes les lignes definir genre ou il y a id_film=...
+                $supprimerTabDefinir = $pdo->prepare("DELETE FROM definir WHERE id_film= :id_film");
+                $supprimerTabDefinir->execute(["id_film"=>$id]);
+
+                //avec le tableau genres créé dans le formulaire, je rajoute dans la table definir les id_genre choisis avec l'id_film correspondant
+                foreach($genres as $genre){
+                    $ajouterDefinirBDD = $pdo->prepare("INSERT into definir(id_film, id_genre) VALUES(:id_film, :id_genre)");
+                    $ajouterDefinirBDD->execute([
+                        'id_film' => $id,
+                        'id_genre'=> $genre
+                    ]);
+                }
+            
+        }
+
         //-----------------------------------------supprimer le film-----------------------------
         public function supprimerFilm($id){            
             //comme dans la bdd j'ai mis en place une contrainte "suppression en cascade", supprimer le film supprime egalement les entrees ou l'id existe dans castings

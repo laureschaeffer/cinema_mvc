@@ -103,8 +103,19 @@ class ActeurManager extends Manager{
             'sexe'=>$sexe,
             'date_naissance'=>$dateAnniv, 
             'biographie'=>$biographie,
-            'photo'=>$lienPhoto
+            'photo'=>$lienPhoto,
+            'id'=>$id
         ]);
+
+    }
+    
+    //cherche id_acteur de la personne modifiée avec l'id_personne, pour rediriger vers la bonne page
+    public function findAct($id){
+        $pdo = Connect::seConnecter();
+        $findIdAct=$pdo->prepare("SELECT * FROM acteur 
+        WHERE id_personne= :id");
+        $findIdAct->execute(["id"=>$id]);
+        return $findIdAct->fetch();
 
     }
 

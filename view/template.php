@@ -49,7 +49,7 @@ use Service\Message;
             <div id="contenu">
                 <h1>PDO Cinema</h1>
                 <h2><?= $titre_secondaire ?></h2>
-                <p><?= Message::showMessage(); ?></p>
+                <?= Message::showMessage(); ?>
                 <?= $contenu  ?>
             </div>
 

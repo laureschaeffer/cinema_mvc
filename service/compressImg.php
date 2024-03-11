@@ -5,8 +5,9 @@ namespace Service;
 class CompressImg{
 
     //traite l'image, attend en parametre le lien ou la telecharger
-    public function traiteImg($lien){
+    public function traiteImg(string $lien){
 
+        //si l'image est téléchargée
             if($_FILES["file"]["error"] <> 4) {
                 $tmpName = $_FILES['file']['tmp_name'];
                 $fileName1= $_FILES['file']['name'];
@@ -27,6 +28,7 @@ class CompressImg{
                 
                 // taille max
                 $maxSize = 40000000;
+                $newFileName = $uniqueName.".".$extension;
                             
                 //chemin dans la bdd, $lien est different pour affiche (film) et img (personnes)
                 $lienAffiche=$lien.$newFileName;
@@ -34,13 +36,19 @@ class CompressImg{
                 $extensionsAutorisees= ["jpg", "jpeg", "gif", "png"];
                 //si l'extension fait parti de celles autorisées dans le tableau, et qu'aucune erreur n'est apparu, alors je latélécharge
                 if(in_array($extension, $extensionsAutorisees) && $fileSize <=$maxSize && $fileName){
-                    // move_uploaded_file($tmpName, $lienAffiche);
                     //crée l'image en fichier webp qui est compressé, moins lourd et donc plus rapide à etre téléchargé
                     imagewebp(imagecreatefromstring(file_get_contents($tmpName)), $lienAffiche);
-                    } else {
-                        $lienAffiche= "https://placehold.co/600x400";//image par défaut
-                    }
-                } 
+                    } 
+            } elseif($_FILES["file"]["error"]==1 || $_FILES["file"]["error"]==2){
+                //si l'image téléchargée est trop volumineuse
+                echo "<div class='msg_confirmation'<p>Fichier trop volumineux, réessayez</p></div>";
+            } elseif($_FILES["file"]["error"]==3){
+                //probleme de téléchargement
+                echo "<div class='msg_confirmation'<p>Erreur de téléchargement, réessayez</p></div>" ;
+            }  else {
+                //les autres erreurs sont également des pb de téléchargement
+                $lienAffiche= "https://placehold.co/600x400";//image par défaut
+            } 
 
         return $lienAffiche;
     }

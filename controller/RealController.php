@@ -49,8 +49,14 @@ class RealController{
             
             // recupere l'image dans la fonction traiteImg()
             $compressImg = new CompressImg();
-            //la fonction traiteImg attend en parametre string lien ou telecharger l'image
-            $lienPhoto= $compressImg->traiteImg('public/img/personnes/');
+            if(isset($_FILES['file'])){ //si la session récupère l'image avec la methode file, un tableau associatif se crée
+                 
+                // recupere l'image dans la fonction traiteImg()
+                $compressImg = new CompressImg();
+                $lienAffiche= $compressImg->traiteImg('public/img/affiches/', $_FILES['file']); //la fonction file attend en parametre string lien pour savoir ou telecharger l'image
+            } else{
+                $lienAffiche= "https://placehold.co/600x400";//image par défaut
+            }
 
 
             // --------input ----------
@@ -63,7 +69,7 @@ class RealController{
             if($nom && $prenom && $sexe && $dateAnniv && $biographie){
                 $realisateurManager->ajoutRealisateur($nom, $prenom, $sexe, $dateAnniv, $biographie, $lienPhoto);
 
-                $_SESSION['messages'] = "Realisateur $nom ajouté"; //msg confirmation
+                $_SESSION['messages'] = "<div class='msg_confirmation'><p>Realisateur $nom ajouté</p></div>"; //msg confirmation
 
                 $idReal=$pdo->lastInsertId(); // recupere le dernier id créé
                 header("Location:index.php?action=detailReal&id=$idReal"); // redirige vers la page du realisateur nouvellement créé
@@ -91,8 +97,14 @@ class RealController{
 
         //recupere l'image dans la fonction traiteImg()
         $compressImg = new CompressImg();
-        //la fonction traiteImg attend en parametre string lien ou telecharger l'image
-        $lienPhoto= $compressImg->traiteImg('public/img/personnes/');
+        if(isset($_FILES['file'])){ //si la session récupère l'image avec la methode file, un tableau associatif se crée
+                 
+            // recupere l'image dans la fonction traiteImg()
+            $compressImg = new CompressImg();
+            $lienPhoto= $compressImg->traiteImg('public/img/affiches/', $_FILES['file']); //la fonction file attend en parametre string lien pour savoir ou telecharger l'image
+        } else{
+            $lienPhoto= "https://placehold.co/600x400";//image par défaut
+        }
 
         if(isset($_POST['submit'])){
             $prenom = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -105,9 +117,13 @@ class RealController{
             if($prenom && $nom && $sexe && $dateAnniv && $biographie){
                 $realisateurManager->modifierRealBDD($prenom, $nom, $sexe, $dateAnniv, $biographie, $lienPhoto, $id);
 
-                $_SESSION['messages'] = "Realisateur $prenom $nom modifié"; //msg confirmation
+                $_SESSION['messages'] = "<div class='msg_confirmation'><p>Realisateur $nom modifié</p></div>"; //msg confirmation
 
-                header("location: index.php?action=detailReal&id=$id");
+                //tableau contenant id_real et id_pers
+                $reals=$realisateurManager->findReal($id); 
+                $idReal= $reals["id_realisateur"];
+
+                header("location: index.php?action=detailReal&id=$idReal");
                 exit;
             } else {
                 header("location: index.php");

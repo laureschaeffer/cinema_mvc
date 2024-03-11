@@ -54,6 +54,28 @@ class RealisateurManager extends Manager{
 
     }
 
+    
+    // -----------------------------------------formulaire-------------------
+    
+    // fonctions ajout real
+    public function ajoutRealisateur($nom, $prenom, $sexe, $dateAnniv, $biographie, $lienPhoto){
+
+        $pdo = Connect::seConnecter();
+        $ajouterPers = $pdo->prepare("INSERT INTO personne(nom, prenom, sexe, date_naissance, photo, biographie) VALUES(:nom, :prenom, :sexe, :date_naissance, :photo, :biographie)");
+        $ajouterPers->execute([
+            "nom"=> $nom,
+            "prenom" => $prenom,
+            "sexe" => $sexe,
+            "date_naissance" => $dateAnniv,
+            "photo" => $lienPhoto,
+            "biographie" => $biographie,
+        ]);
+        // dans la table réalisateur j'ajoute l'id de la personne nouvellement créé, et l'id réalisateur est en auto-increment
+        $ajoutReal = $pdo->prepare("INSERT INTO realisateur (id_personne) VALUES (:id_personne)");
+        $idReal=$pdo->lastInsertId(); // recupere le dernier id créé
+        $ajoutReal->execute(["id_personne" => $idReal]);
+    } 
+    
     //infos de la personne dans le formulaire de modification
     public function formSelectReal($id){
         $pdo = Connect::seConnecter();
@@ -62,27 +84,6 @@ class RealisateurManager extends Manager{
 
         return $realisateurs->fetch();
     }
-
-    // -----------------------------------------formulaire-------------------
-  
-    // fonctions ajout real
-    public function ajoutRealisateur($nom, $prenom, $sexe, $dateAnniv, $biographie, $lienPhoto){
-
-        $pdo = Connect::seConnecter();
-        $ajouterPers = $pdo->prepare("INSERT INTO personne(nom, prenom, sexe, date_naissance, photo, biographie) VALUES(:nom, :prenom, :sexe, :date_naissance, :photo, :biographie)");
-        $ajouterPers->execute([
-        "nom"=> $nom,
-        "prenom" => $prenom,
-        "sexe" => $sexe,
-        "date_naissance" => $dateAnniv,
-        "photo" => $lienPhoto,
-        "biographie" => $biographie,
-        ]);
-        // dans la table réalisateur j'ajoute l'id de la personne nouvellement créé, et l'id réalisateur est en auto-increment
-        $ajoutReal = $pdo->prepare("INSERT INTO realisateur (id_personne) VALUES (:id_personne)");
-        $idReal=$pdo->lastInsertId(); // recupere le dernier id créé
-        $ajoutReal->execute(["id_personne" => $idReal]);
-    } 
     
     //formulaire modification d'un realisateur, fonction appelée dans le controller apres le traitement
     public function modifierRealBDD($prenom, $nom, $sexe, $dateAnniv, $biographie, $lienPhoto, $id){
@@ -95,15 +96,27 @@ class RealisateurManager extends Manager{
             'sexe'=>$sexe,
             'date_naissance'=>$dateAnniv, 
             'biographie'=>$biographie,
-            'photo'=>$lienPhoto
+            'photo'=>$lienPhoto,
+            'id'=>$id //je modifie la personne, donc id personne
         ]);
+
+    }
+    
+    //cherche id_real de la personne modifiée avec l'id_personne, pour rediriger vers la bonne page
+    public function findReal($id){
+        $pdo = Connect::seConnecter();
+        $findIdReal=$pdo->prepare("SELECT * FROM realisateur 
+        WHERE id_personne= :id");
+        $findIdReal->execute(["id"=>$id]);
+        return $findIdReal->fetch();
+
     }
         
     //supprime uniquement le fait d'etre realisateur, pas la personne
     public function supprimerReal($id){
-        //dans la table film l'id_realisateur n'est pas obligatoire et a une valeur par defaut null
+        //dans la table film si un realisateur est supprimé l'entrée id_realisateur est mis à NULL
         $pdo = Connect::seConnecter();
-        $supprimerRealBDD=$pdo->prepare("DELETE from realisateur WHERE id_personne= :id");
+        $supprimerRealBDD=$pdo->prepare("DELETE from realisateur WHERE id_realisateur= :id");
         $supprimerRealBDD->execute(["id"=>$id]);
         
 

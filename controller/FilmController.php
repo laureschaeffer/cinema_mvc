@@ -54,7 +54,7 @@ class FilmController {
 
                 // recupere l'image dans la fonction file()
                 $compressImg = new CompressImg();
-                $lienAffiche= $compressImg->traiteImg('public/img/affiches/'); //la fonction file attend en parametre string lien pour savoir ou telecharger l'image
+                $lienAffiche= $compressImg->traiteImg('public/img/affiches/', $_FILES['file']); //la fonction file attend en parametre string lien pour savoir ou telecharger l'image
             } else{
                 $lienAffiche= "https://placehold.co/600x400";//image par défaut
             }
@@ -76,7 +76,7 @@ class FilmController {
                 // Ajouter les données récupérées à la bdd à l'aide de la requete sql
                 $idFilm = $filmManager->ajouterFilm($titre, $anneeSortie, $duree, $resume, $note, $genres, $lienAffiche);
                 
-                $_SESSION['messages'] = "Film $titre ajouté";
+                $_SESSION['messages'] = "<div class='msg_confirmation'><p>Film $titre ajouté</p></div>";
                 header("Location:index.php?action=detailFilm&id=$idFilm");
                 exit;
             } else{
@@ -109,25 +109,32 @@ class FilmController {
     public function traiteModifFilm($id){
         $filmManager = new FilmManager();
 
-         // recupere l'image dans la fonction traiteImg()
-         $compressImg = new CompressImg();
-         //la fonction traiteImg attend en parametre string lien ou telecharger l'image
-         $lienAffiche= $compressImg->traiteImg('public/img/affiches/');
+        // si la session récupère les infos avec le bouton submit
+        if(isset($_POST['submit'])){
 
- 
-         if(isset($_POST['submit'])){
-             $titre= filter_input(INPUT_POST, "titre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-             $synopsis= filter_input(INPUT_POST, "synopsis", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-             $annee_sortie_fr= filter_input(INPUT_POST, "annee_sortie_fr", FILTER_VALIDATE_INT);
-             $duree=filter_input(INPUT_POST, "duree", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-             $note= filter_input(INPUT_POST, "note", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-             $genres = filter_input(INPUT_POST, "genres", FILTER_VALIDATE_INT, FILTER_REQUIRE_ARRAY);
- 
-              //si ces éléments sont filtrés correctement, alors on les rentre dans la bdd avec la fonction du manager
-              if($titre && $synopsis && $annee_sortie_fr && $duree && $note && $genres){
-                $filmManager->modifierFilmBDD($titre, $annee_sortie_fr, $duree, $synopsis, $note, $lienAffiche, $genres, $id);
+            
+            $titre= filter_input(INPUT_POST, "titre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $synopsis= filter_input(INPUT_POST, "synopsis", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $annee_sortie_fr= filter_input(INPUT_POST, "annee_sortie_fr", FILTER_VALIDATE_INT);
+            $duree=filter_input(INPUT_POST, "duree", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+            $note= filter_input(INPUT_POST, "note", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+            $genres = filter_input(INPUT_POST, "genres", FILTER_VALIDATE_INT, FILTER_REQUIRE_ARRAY);
+            
+            //si ces éléments sont filtrés correctement, alors on les rentre dans la bdd avec la fonction du manager
+            if($titre && $synopsis && $annee_sortie_fr && $duree && $note && $genres){
+                
+                if(isset($_FILES['file'])){ //si la session récupère l'image avec la methode file, on modifie la bdd avec la fonction complete
+                    
+                    // recupere l'image dans la fonction traiteImg()
+                    $compressImg = new CompressImg();
+                    $lienAffiche= $compressImg->traiteImg('public/img/affiches/', $_FILES['file']); //la fonction file attend en parametre string lien pour savoir ou telecharger l'image
+                    $filmManager->modifierFilmBDD($titre, $annee_sortie_fr, $duree, $synopsis, $note, $lienAffiche, $genres, $id);
+                 } else {
+                    //s'il n'y a pas de téléchargement d'image, pour ne pas l'écraser on utilise une autre fonction
+                    $filmManager->modifierFilmBDDSansImg($titre, $annee_sortie_fr, $duree, $synopsis, $note, $genres, $id);
+                 }
 
-                $_SESSION['messages'][] = "Film $titre modifié";
+                $_SESSION['messages'] = "<div class='msg_confirmation'><p>Film $titre modifié</p></div>";
                 header("Location:index.php?action=detailFilm&id=$id");
                 exit;
               }

@@ -11,7 +11,7 @@
         <?php } ?>
 </div>
 <div class="form-btn">
-    <button><a href="index.php?action=formReal" aria-label="formulaire ajouter un realisateur">Ajouter un réalisateur</a></button>
+    <a href="index.php?action=formReal" aria-label="formulaire ajouter un realisateur"><button>Ajouter un réalisateur</button>
 </div>
 
 

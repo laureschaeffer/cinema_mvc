@@ -43,7 +43,7 @@ class ActeurController{
 
                 // recupere l'image dans la fonction file()
                 $compressImg = new CompressImg();
-                $lienPhoto= $compressImg->file('public/img/personnes/'); //la fonction file attend en parametre string lien pour savoir ou telecharger l'image
+                $lienPhoto= $compressImg->traiteImg('public/img/personnes/', $_FILES['file']); //la fonction file attend en parametre string lien pour savoir ou telecharger l'image
             } else{
                 $lienPhoto= "https://placehold.co/600x400";//image par défaut
             }
@@ -58,7 +58,7 @@ class ActeurController{
             if($nom && $prenom && $sexe && $dateAnniv && $biographie){
                 $acteurManager->ajoutActeur($nom, $prenom, $sexe, $dateAnniv, $biographie, $lienPhoto);
 
-                $_SESSION['messages'] = "Acteur $nom ajouté"; //message de confirmation
+                $_SESSION['messages'] = "<div class='msg_confirmation'><p>Acteur $nom ajouté</p></div>"; //message de confirmation
 
                 $pdo = Connect::seConnecter();
                 $idActeur=$pdo->lastInsertId(); //recupere le dernier id créé
@@ -86,13 +86,18 @@ class ActeurController{
     public function traiteModifAct($id){
         $acteurManager = new ActeurManager();
 
-        //recupere l'image dans la fonction traiteImg()
-        $compressImg = new CompressImg();
-        //la fonction traiteImg attend en parametre string lien ou telecharger l'image
-        $lien='public/img/personnes/';
-        $lienPhoto= $compressImg->traiteImg($lien);
-
+        
         if(isset($_POST['submit'])){
+            //recupere l'image dans la fonction traiteImg()
+            $compressImg = new CompressImg();
+            if(isset($_FILES['file'])){ //si la session récupère l'image avec la methode file, un tableau associatif se crée
+                     
+            // recupere l'image dans la fonction traiteImg()
+                $compressImg = new CompressImg();
+                $lienPhoto= $compressImg->traiteImg('public/img/affiches/', $_FILES['file']); //la fonction file attend en parametre string lien pour savoir ou telecharger l'image
+            } else{
+                $lienPhoto= "https://placehold.co/600x400";//image par défaut
+            }
             $prenom = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $nom = filter_input(INPUT_POST, "nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $sexe = filter_input(INPUT_POST, "sexe", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -103,9 +108,13 @@ class ActeurController{
             if($prenom && $nom && $sexe && $dateAnniv && $biographie){
                 $acteurManager->modifierActBDD($prenom, $nom, $sexe, $dateAnniv, $biographie, $lienPhoto, $id);
 
-                $_SESSION['messages'] = "Acteur $nom modifié"; //message de confirmation
+                $_SESSION['messages'] = "<div class='msg_confirmation'><p>Acteur $nom modifié</p></div>"; //message de confirmation
 
-                header("location:index.php?action=detailActeur&id=$id");
+                //tableau contenant id_acteur et id_pers
+                $acteurs=$acteurManager->findAct($id); 
+                $idAct= $acteurs["id_acteur"];
+
+                header("location:index.php?action=detailActeur&id=$idAct");
                 exit;
             } else {
                 header("location:index.php");
