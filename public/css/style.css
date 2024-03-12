@@ -6,23 +6,42 @@
 }
 :root {
     --main-bg-color: #1c1f23;
+
+    /* blanc et noir qui changeront de couleur au lightmode  */
     --main-txt-color: white; 
+    --main-black : black;
+
+    /* couleurs qui resteront toujours de la meme couleur, legerement differents de blanc et noir pour qu'ils ne comptent pas dans la condition du toggle  */
+    --always-white: #fbfbfb; 
+    --always-black: rgb(6 5 5);
   }
 
 #wrapper{
     font-family: "Gill Sans", sans-serif;
     background-color: var(--main-bg-color);
-}
-#contenu{
-    min-height: calc(100vh - 80px);
-}
-/* ----tous les elements en blanc---- */
-#MyTopnav a, .subscribe button, .card-citation p, .card-acteur p, .card-acteur a, .card p, .card a, .detail p, .casting a, .filmographie a, .filmographie li, #listing-genre a, h1, h2, h3, #intro p, h4, .real-movie a, .card-movie p, .card-movie a{
     color: var(--main-txt-color);
 }
 
-.subscribe-btn, .form-btn button, .formulaire button{
-    background-color: var(--main-txt-color);
+/* change le bg en blanc pour lightmode  */
+#wrapper.light-mode {
+    background-color: white;
+}
+
+#contenu{
+    min-height: calc(100vh - 80px);
+}
+
+/* elements qui restent blanc  */
+#MyTopnav a, .subscribe p, h3, .card-citation p, .card-acteur p, .card-acteur a, .subscribe button{
+    color: var(--always-white);
+}
+.subscribe-btn{
+    background-color: var(--always-white);
+}
+
+/* elements en blanc  */
+.form-btn button, .formulaire button{
+    background-color: var(--always-white);
 }
 
 /* ---------------------------------------------------------navbar--------------------------------------------------------------- */
@@ -42,8 +61,8 @@
 #MyTopnav img{
     width: 50px;
 }
+/* icone menu burger  */
 #MyTopnav .icon{
-    /* icone menu burger  */
     display: none;
 }
 
@@ -59,12 +78,29 @@
 .network a{
     padding: 0 12px;
 }
+/* bouton general  */
+#btn-mode {
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    background-color: #e83479;
+    color: white;
+}
+
+
+/* -------------------bouton lightmode  */
+#wrapper.light-mode #btn-mode {
+    background-color: white;
+    color: black;
+}
 
 
 /* --------------------------------------------------------------------------home-page---------------------------------- */
 
 /* ---------------------------------------home-container------------------ */
-h1, h2, h3, #intro p{
+h1, h2, h3, h4, #intro p{
     text-align: center;
 }
 h1{
@@ -91,7 +127,7 @@ h2{
 }
 .subscribe{
     padding-bottom: 0.5%;
-    background-color: #010101;
+    background-color: var(--always-black);
     border-radius: 15px;
 }
 .subscribe p{
@@ -113,7 +149,8 @@ h2{
 }
 
 .subscribe button{
-    background-color: #17181B;
+    background-color: var(--always-black);
+    color: var(--always-white);
     border: none;
     padding: 2% 3%;
     border-radius: 15px;
@@ -273,6 +310,8 @@ h2{
     justify-content: flex-start;
     margin: 5%;
     overflow: hidden;
+    /* ce boxshadow ne se voit qu'en lightmode  */
+    box-shadow: rgba(17, 17, 26, 0.1) 15px 20px 16px 13px, rgba(17, 17, 26, 0.05) -20px 6px 20px 17px;
 }
 
 .card-info a{
@@ -282,6 +321,7 @@ h2{
 .card p, .card a{
     padding: 2% 0;
     text-align: center;
+    color: var(--main-txt-color);
 }
 
 .card a{
@@ -330,7 +370,7 @@ h2{
     margin-left: 5%;
 }
 .modifications a{
-    color: #D7C0D0;
+    color: var(--main-txt-color);
     display: flex;
     justify-content: center;
     padding: 5%;
@@ -481,6 +521,7 @@ input[type="file"]{
 footer{
     height: 100px;
     background-color: #D9D9D9;
+    color: var(--always-black);
 }
 
 footer a {
@@ -526,14 +567,14 @@ footer li{
 #MyTopnav .icon{
     position: absolute;
     display: block;
-    color: var(--main-txt-color);
+    color: var(--always-white);
     font-size: 30px;
     top: 10px;
     right: 25px;
 
 }
 
-nav a{
+nav a, #btn-mode{
     display: none;
 }
 .accueil-btn{
@@ -569,7 +610,9 @@ nav a{
     text-align: left;
     padding: 5px 5px;
 }
-
+.navbarResponsive #btn-mode{
+    display: block;
+}
 .navbarResponsive a:not(:last-child){
     border-bottom: solid 1px #d9d9d9;
 }
@@ -621,12 +664,13 @@ h1, h2{
     padding: 2%;
 }
 
-.card-acteur img{
-    width: 150px;
-}
 
 .card-movie{
     padding: 5%;
+}
+
+.card-movie img, .card-acteur img{
+    width: 70vw;
 }
 
 .card-info{
@@ -649,6 +693,10 @@ h1, h2{
 
 .detail{
     padding: 0 4%;
+}
+
+.detail figure{
+    box-shadow: none;
 }
 
 }

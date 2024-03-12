@@ -83,7 +83,7 @@
         <p class="citation-auteur">- Jean-Luc Godard</p>
     </div>
 </section>
-<h3>TOP Acteurs du moment</h3>
+<h4>TOP Acteurs du moment</h4>
 <section id="acteurs-moment">
     <!-- 4 acteurs précisés dans la requete du controleur  -->
     <?php foreach($acteurs as $acteur){ ?>

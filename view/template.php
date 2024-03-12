@@ -9,6 +9,7 @@ use Service\Message;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content=<?=$description?> >
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Della+Respira&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="public/css/style.css">
@@ -39,10 +40,12 @@ use Service\Message;
                 <i class="fa-brands fa-instagram"></i>
             </a>   
         </div>
+        <!-- menu "burger" pour les media queries -->
         <a href="javascript:void(0);" class="icon" onclick="myFunction()" aria-label="icone menu burger">
                 <i class="fa fa-bars"></i>
         </a>
-        <!-- menu "burger" pour les media queries -->
+        <!-- lightmode  -->
+        <button onclick="toggleMode()" id="btn-mode"><i class="ri-sun-line" id="modeIcon"></i></button>
 
     </nav>
         <main>
@@ -67,17 +70,8 @@ use Service\Message;
         </main>
     </div>
 
-<!-- navbar responsive -->
-<script>
-    function myFunction(){
-    var x = document.getElementById("MyTopnav");
-    if (x.className === "topNav"){
-        x.className = "navbarResponsive";
-    } else{
-        x.className = "topNav" ;
-    }
-}
-</script>
+<!-- navbar responsive et lightmode/darkmode-->
+<script src="public/js/script.js"></script>
 </body>
 </html>
 <?php
