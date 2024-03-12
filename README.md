@@ -11,6 +11,7 @@
  - **Landing page** : préparée en mockup sur figma
  - **Listes** : quatre listes pour tous les films, tous les acteurs/actrices, réalisateurs/réalisatrices, genres disponibles. Chaque élément est relié grace à un lien qui redirige vers la page correspondante. 
  - **Formulaires** : il y a un formulaire d'ajout et de modification pour chaque film, acteur et réalisateur directement dans la bdd.
+ - **Lightmode** : possiblité de switch en lightmode (darkmode par defaut) avec javascript
 
 
 ### Dossier requête  
@@ -19,4 +20,4 @@
 ### Utilisation : 
 - heidiSQL, SQL, docker, laragon, PHP, CSS
 - design pattern: modele MVC
-- trello
+- trello : méthode Kanban et moscow
