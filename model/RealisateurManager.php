@@ -13,7 +13,7 @@ class RealisateurManager extends Manager{
             "SELECT CONCAT(p.prenom, ' ', p.nom) AS nomReal, DATE_FORMAT(date_naissance, '%d/%m/%Y') AS date_naissance, r.id_realisateur, p.photo
             FROM realisateur r
             INNER JOIN personne p ON r.id_personne = p.id_personne
-            ORDER BY nomReal"
+            ORDER BY p.nom"
         );
     
 
@@ -42,7 +42,8 @@ class RealisateurManager extends Manager{
             FROM film f
             INNER JOIN realisateur r ON f.id_realisateur = r.id_realisateur
             INNER JOIN personne p ON r.id_personne = p.id_personne
-            WHERE r.id_realisateur = :id");
+            WHERE r.id_realisateur = :id
+            ORDER BY f.annee_sortie_fr DESC");
             $realFilmographie->execute(["id"=> $id]);
             
             //tableau pour return tous les fetch
@@ -50,7 +51,9 @@ class RealisateurManager extends Manager{
             "realFilmographie"=>$realFilmographie->fetchAll()];
             return $data;
     
-        } 
+        } else {
+            header("location: index.php"); exit;
+        }
 
     }
 

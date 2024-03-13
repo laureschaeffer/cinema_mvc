@@ -1,4 +1,6 @@
-<?php ob_start() ; //temporisation de sortie ?>
+<?php ob_start() ; //temporisation de sortie 
+var_dump($data); die;
+?>
 
 <section id="home-container">
     <div id="intro">
@@ -86,17 +88,30 @@
 <h4>TOP Acteurs du moment</h4>
 <section id="acteurs-moment">
     <!-- 4 acteurs précisés dans la requete du controleur  -->
-    <?php foreach($acteurs as $acteur){ ?>
+    <?php foreach($topActeurs as $topActeur){ ?>
         <div class="card-acteur">
-            <figure><img src="<?=$acteur["photo"]?>" alt="photo de l'acteur"></figure>
-            <p><a href="index.php?action=detailActeur&id=<?=$acteur["id_acteur"]?>" aria-label="lien vers la fiche de l'acteur"><?= $acteur["acteur"]?></a></p>
-            <p><?=$acteur["biographie"]?> </p>
+            <figure><img src="<?=$topActeur["photo"]?>" alt="photo de l'acteur"></figure>
+            <p><a href="index.php?action=detailActeur&id=<?=$topActeur["id_acteur"]?>" aria-label="lien vers la fiche de l'acteur"><?= $topActeur["acteur"]?></a></p>
+            <p><?=$topActeur["biographie"]?> </p>
         </div>
             <?php
                }
                ?>
 </section>
-
+<!-- 3 acteurs les plus presents dans la bdd  -->
+<section id="acteurs_plus_presents">
+    <?php 
+    foreach($acteursPresents as $acteurPresent){
+        ?>
+        <div class="card-acteur">
+            <figure><img src="<?=$acteurPresent["photo"]?>" alt="photo de l'acteur"></figure>
+            <p><a href="index.php?action=detailActeur&id=<?=$acteurPresent["id_acteur"]?>" aria-label="lien vers la fiche de l'acteur"><?= $acteurPresent["nomActeur"]?></a></p>
+            <p><?=$acteurPresent["biographie"]?></p>
+        </div>
+<?php
+    }
+    ?>
+</section>
 
 
 <?php

@@ -16,10 +16,10 @@ class FilmManager extends Manager {
             FROM film f
             INNER JOIN realisateur r ON f.id_realisateur = r.id_realisateur
             INNER JOIN personne p ON r.id_personne = p.id_personne
-            ORDER BY f.titre");
+            ORDER BY f.annee_sortie_fr DESC");
         $requeteLsFilms->execute();
         return $requeteLsFilms->fetchAll();
-    }
+    }//ordre date
 
     //detail d'un film
     public function detailFilm($id){
