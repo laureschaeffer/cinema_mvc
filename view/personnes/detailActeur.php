@@ -20,7 +20,7 @@
                         <?php foreach($films as $filmo){
                             // liste de la filmographie avec un lien qui redirige vers le détail du film
                             ?>
-                            <li><a href="index.php?action=detailFilm&id=<?=$filmo["id_film"]?>" aria-label="detail du film"> <?=$filmo["titre"] ?> </a> dans le rôle de <a href="index.php?action=listeRole&id=<?=$filmo["id_role"]?>" aria-label="detail du film"> <?=$filmo["nom_personnage"]?></a></li>
+                            <li><a href="index.php?action=detailFilm&id=<?=$filmo["id_film"]?>" aria-label="detail du film"> <?=$filmo["titre"] ?> (<?=$filmo["annee_sortie_fr"]?>) </a> dans le rôle de <a href="index.php?action=listeRole&id=<?=$filmo["id_role"]?>" aria-label="detail du film"> <?=$filmo["nom_personnage"]?></a></li>
                             
                             <?php  }
                 ?>

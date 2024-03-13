@@ -42,7 +42,8 @@ class ActeurManager extends Manager{
             FROM castings c
             INNER JOIN film f ON c.id_film = f.id_film
             INNER JOIN role r ON c.id_role = r.id_role
-            WHERE c.id_acteur= :id");
+            WHERE c.id_acteur= :id
+            ORDER BY f.annee_sortie_fr DESC");
             $acteurFilmographie->execute(["id"=> $id]);
 
             //tableau pour return tous les fetch

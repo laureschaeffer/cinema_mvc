@@ -1,5 +1,4 @@
 <?php ob_start(); // lien avec le fichier template.php
- 
 ?>
 
     <section class="formulaire">
@@ -20,21 +19,34 @@
                 <p><label>Réalisé par :</label></p>
                 <!-- select des realisateurs (un seul choix)  -->
                 <select name="realisateur" id="realisateur-select">
-                    <option value="realisateur"><?=$requeteDetailFilm["realisateur"]?></option>
+                    <option selected="selected" value="<?=$requeteDetailFilm["id_realisateur"]?>"><?=$requeteDetailFilm["realisateur"]?></option>
                         <?php foreach($choixReal as $real){ ?>
                             <option value="<?=$real["id_realisateur"]?>"><?=$real["nomReal"]?></option>
                         <?php 
-                        } ?>
+                        }                        
+                        
+                        ?>
                 </select>
-                
                 <p><label>Genre :</label></p>
                 <!-- checkbox des genres  -->
-                <?php foreach($genres as $genre){ ?> 
-                <p><input type="checkbox" id="<?=$genre["nom"]?>" name="genres[]" value="<?=$genre["id_genre"]?>"/>
-                <label for="<?=$genre["nom"]?>"><?=$genre["nom"]?></label> </p>  
-                <?php
-                    } ?>
-
+                <?php 
+                $i=0;
+                $checked = "";
+                foreach($genreDefault as $g) {
+                    foreach($genres as $genre){
+                        if($genre["id_genre"] == $g['id_genre']) {
+                            $checked = "checked";
+                            
+                            ?>                 
+                            <p><input type="checkbox" id="<?=$genre["nom"]?>" name="genres[]" value="<?=$genre["id_genre"]?>" <?= $checked ?> />
+                            <label for="<?=$genre["nom"]?>"><?=$genre["nom"]?></label> </p>  
+                            <?php
+                        }  else {
+                            
+                        }                       
+                    }
+                } ?> 
+                
                 <p><label>Note sur 5 :</label></p>
                 <input type="number" name="note" value="<?= $requeteDetailFilm["note"]?>">    
                 <p><label>Résumé :</label></p>

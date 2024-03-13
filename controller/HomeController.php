@@ -17,8 +17,6 @@ class HomeController {
         $topActeurs = $data["requeteHomeActeur"];
         //fetchAll du calcul des 3 acteurs les plus presents
         $acteursPresents = $data["requeteActeurPresent"];
-        //fetchAll des film des 3 acteurs les plus presents
-        $filmsActeursPresents = $data["requeteActeurFilmographie"];
 
         require "view/home.php";
     }

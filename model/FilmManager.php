@@ -141,8 +141,17 @@ class FilmManager extends Manager {
         ORDER BY p.nom");
         $choixReal->execute();
 
+        // pour avoir acces aux genres, pour mettre checked par defaut
+        $requeteGenreFilm = $pdo->prepare("SELECT d.id_film, g.nom AS nomGenre, g.id_genre
+        FROM definir d
+        INNER JOIN film f ON d.id_film = f.id_film
+        INNER JOIN genre g ON d.id_genre = g.id_genre
+        WHERE d.id_film = :id");
+        $requeteGenreFilm->execute(["id" => $id]);
+
         $data = ["requeteDetailFilm"=>$requeteDetailFilm->fetch(), //ne renvoie qu'une ligne
-                "choixReal"=>$choixReal->fetchAll()];
+                "choixReal"=>$choixReal->fetchAll(),
+                "requeteGenreFilm"=>$requeteGenreFilm->fetchAll()];
         return $data;
         
     }

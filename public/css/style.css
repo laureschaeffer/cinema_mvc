@@ -202,7 +202,7 @@ h2{
     justify-content: space-around;
     align-items: center;
 }
-.card-movie img, .card-acteur img{
+.card-movie img{
     width: 20vw;
 }
 .card-info{
@@ -255,6 +255,7 @@ h2{
 }
 
 .citation{
+    padding: 4% 0;
     font-family: 'Courier New', Courier, monospace;
     font-style: italic;
 }
@@ -263,22 +264,37 @@ h2{
 }
 
 
-/* -----acteurs  */
+/* ------------top3 acteurs  */
+h4{
+    margin: 5% 0;
+}
 
 #acteurs-moment{
     display: flex;
     flex-wrap: wrap;
 }
 
-.card-acteur figure{
-    text-align: center;
+/* les 4 cards acteurs  */
+#acteurs-moment>.card-acteur{
+    box-shadow: 12px 11px #7A5864;
 }
+
+.card-acteur figure{
+    display: flex;
+    justify-content: center;
+    width: 200px;
+    overflow: hidden;
+}
+
+.card-acteur img{
+    height: 300px;
+}
+
 .card-acteur{
     background-color: #303039;
     flex: 1;
     margin: 1%;
     padding: 1%;
-    box-shadow: 12px 11px #7A5864;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -288,8 +304,25 @@ h2{
     text-align: justify;
     padding: 3% 0;
 }
+/* ---------------acteurs les plus présents  */
+#acteurs-plus-presents{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 4%;
+}
 
+#acteurs-plus-presents>.card-acteur{
+    box-shadow: 12px 11px #45695A;
+}
 
+/* effets visuels */
+
+.card-acteur a:hover{
+    opacity: 0.5;
+}
+.card-acteur a{
+    transition: 0.5s;
+}
 /* --------------------------------------------------------------------listes genre, real, acteurs, film--------------------------------- */
 
 
@@ -388,7 +421,7 @@ h2{
 
 .detail figure{
     box-shadow: 12px 11px #3B4D5A;
-    width: 300px;
+    width: 400px;
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -423,6 +456,7 @@ h2{
 .detail a{
     font-weight: bold;
     transition: 0.5s;
+    color: var(--main-txt-color);
 }
 .detail a:hover{
     opacity: 0.5;

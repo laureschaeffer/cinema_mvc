@@ -4,7 +4,7 @@
 
 <section class="formulaire">
     <form action="index.php?action=ajouterModifReal&id=<?=$realisateurs["id_personne"]?>" method="post" enctype="multipart/form-data">
-        <img src="<?=$realisateurs["photo"]?>" alt="photo de l'acteur">
+        <img src="<?=$realisateurs["photo"]?>" alt="photo du realisateur">
         <p><label for="file">Modifier la photo</label></p>
         <p><input type="file" name="file"></p>
         <p><label>Nom:</label></p>
@@ -18,7 +18,7 @@
         <p><label>Biographie</label></p>
         <textarea name="biographie" rows="4" cols="40"><?=$realisateurs["biographie"]?></textarea>
 
-        <p><button type="submit" name="submit" class="ajout">Modifier l'acteur</button></p>
+        <p><button type="submit" name="submit" class="ajout">Modifier le réalisateur</button></p>
 
     </form>
 </section>

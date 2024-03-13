@@ -1,5 +1,4 @@
 <?php ob_start() ; //temporisation de sortie 
-var_dump($data); die;
 ?>
 
 <section id="home-container">
@@ -71,6 +70,20 @@ var_dump($data); die;
     </div>
 
 </section>
+<h4>TOP Acteurs du moment</h4>
+<section id="acteurs-moment">
+    <!-- 4 acteurs précisés dans la requete du controleur  -->
+    <?php foreach($topActeurs as $topActeur){ ?>
+        <div class="card-acteur">
+            <figure><a href="index.php?action=detailActeur&id=<?=$acteurPresent["id_acteur"]?>" aria-label="lien vers la fiche de l'acteur"><img src="<?=$topActeur["photo"]?>" alt="photo de l'acteur"></a></figure>
+            <p><a href="index.php?action=detailActeur&id=<?=$topActeur["id_acteur"]?>" aria-label="lien vers la fiche de l'acteur"><?= $topActeur["acteur"]?></a></p>
+            <p><?=$topActeur["biographie"]?> </p>
+        </div>
+        <?php
+               }
+               ?>
+</section>
+
 <section id="citations">
     <div class="card-citation">
         <p class="citation">Le cinéma, c'est un oeil ouvert sur le monde.</p>
@@ -85,26 +98,14 @@ var_dump($data); die;
         <p class="citation-auteur">- Jean-Luc Godard</p>
     </div>
 </section>
-<h4>TOP Acteurs du moment</h4>
-<section id="acteurs-moment">
-    <!-- 4 acteurs précisés dans la requete du controleur  -->
-    <?php foreach($topActeurs as $topActeur){ ?>
-        <div class="card-acteur">
-            <figure><img src="<?=$topActeur["photo"]?>" alt="photo de l'acteur"></figure>
-            <p><a href="index.php?action=detailActeur&id=<?=$topActeur["id_acteur"]?>" aria-label="lien vers la fiche de l'acteur"><?= $topActeur["acteur"]?></a></p>
-            <p><?=$topActeur["biographie"]?> </p>
-        </div>
-            <?php
-               }
-               ?>
-</section>
+<h4>TOP Acteurs les plus présents sur notre site</h4>
 <!-- 3 acteurs les plus presents dans la bdd  -->
-<section id="acteurs_plus_presents">
+<section id="acteurs-plus-presents">
     <?php 
     foreach($acteursPresents as $acteurPresent){
         ?>
         <div class="card-acteur">
-            <figure><img src="<?=$acteurPresent["photo"]?>" alt="photo de l'acteur"></figure>
+            <figure><a href="index.php?action=detailActeur&id=<?=$acteurPresent["id_acteur"]?>" aria-label="lien vers la fiche de l'acteur"><img src="<?=$acteurPresent["photo"]?>" alt="photo de l'acteur"></a></figure>
             <p><a href="index.php?action=detailActeur&id=<?=$acteurPresent["id_acteur"]?>" aria-label="lien vers la fiche de l'acteur"><?= $acteurPresent["nomActeur"]?></a></p>
             <p><?=$acteurPresent["biographie"]?></p>
         </div>

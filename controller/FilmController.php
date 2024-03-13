@@ -99,6 +99,8 @@ class FilmController {
         $genreManager = new GenreManager();
         $genres = $genreManager->findAll();
 
+        //pour obtenir les genres du film avant modification
+        $genreDefault = $data['requeteGenreFilm'];
         // choix du réalisateur
         $choixReal = $data['choixReal']; //renvoie fetchAll
         require "view/formulaires/modifierFilm.php";
