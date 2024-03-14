@@ -1,4 +1,5 @@
 <?php ob_start(); // lien avec le fichier template.php
+
 ?>
 
     <section class="formulaire">
@@ -19,32 +20,28 @@
                 <p><label>Réalisé par :</label></p>
                 <!-- select des realisateurs (un seul choix)  -->
                 <select name="realisateur" id="realisateur-select">
-                    <option selected="selected" value="<?=$requeteDetailFilm["id_realisateur"]?>"><?=$requeteDetailFilm["realisateur"]?></option>
-                        <?php foreach($choixReal as $real){ ?>
-                            <option value="<?=$real["id_realisateur"]?>"><?=$real["nomReal"]?></option>
+                    <?php 
+                    // si id_real dans requete film est egal à un id_real de la liste, ajoute l'option selected, pour que le bon real soit mis par defaut
+                    foreach($choixReal as $r){ 
+                        $selected = ($r['id_realisateur'] == $requeteDetailFilm['id_realisateur']) ? 'selected' : '' ; ?>
+                        <option value="<?=$r["id_realisateur"]?>" <?=$selected?>><?=$r["nomReal"]?></option>
                         <?php 
-                        }                        
-                        
+                        }  
                         ?>
                 </select>
                 <p><label>Genre :</label></p>
                 <!-- checkbox des genres  -->
                 <?php 
-                $i=0;
-                $checked = "";
-                foreach($genreDefault as $g) {
-                    foreach($genres as $genre){
-                        if($genre["id_genre"] == $g['id_genre']) {
-                            $checked = "checked";
-                            
-                            ?>                 
-                            <p><input type="checkbox" id="<?=$genre["nom"]?>" name="genres[]" value="<?=$genre["id_genre"]?>" <?= $checked ?> />
-                            <label for="<?=$genre["nom"]?>"><?=$genre["nom"]?></label> </p>  
-                            <?php
-                        }  else {
-                            
-                        }                       
-                    }
+                
+                //boucle de tous les genres dispo dans la bdd
+                foreach($genres as $g){
+                    //si dans le tableau idGenres (where id_film=... ) il y a un id, rajoute checked
+                    $checked = (in_array($g['id_genre'], $idGenres)) ? 'checked' : ''; ?>
+                
+                        <p><input type="checkbox" id="<?=$g["nom"]?>" name="genres[]" value="<?=$g["id_genre"]?>" <?= $checked ?> />
+                        <label for="<?=$g["nom"]?>"><?=$g["nom"]?></label> </p>  
+                        <?php
+                                              
                 } ?> 
                 
                 <p><label>Note sur 5 :</label></p>

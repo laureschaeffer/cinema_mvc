@@ -26,7 +26,7 @@ ob_start();
         <p><label>Choisissez un genre :</label></p> 
         <!-- checkbox des genres  -->
         <?php foreach($choixGenre as $genre){ ?>
-            <p><input type="checkbox" id="<?=$genre["nom"]?>" name="genres[]" value="<?=$genre["id_genre"]?>" required/>
+            <p><input type="checkbox" id="<?=$genre["nom"]?>" name="genres[]" value="<?=$genre["id_genre"]?>"/>
             <label for="<?=$genre["nom"]?>"><?=$genre["nom"]?></label> </p>  
                 <?php
             }

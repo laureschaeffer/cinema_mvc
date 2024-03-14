@@ -13,7 +13,7 @@ class Manager {
         $pdo = Connect::seConnecter();
         // $managerFilm = new FilmManager();
         // $requeteLsFilms = $managerFilm->getFilms();
-        $requete = $pdo->prepare("SELECT * FROM ". $this->tableName);
+        $requete = $pdo->prepare("SELECT * FROM ". $this->tableName ." ORDER BY nom");
         $requete->execute();
         return $requete->fetchAll();
     }

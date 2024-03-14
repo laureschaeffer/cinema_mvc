@@ -90,9 +90,9 @@ class FilmController {
     //affiche les infos d'un film dans le formulaire de modification et redirige vers ce formulaire
     public function modifieFilm($id){
         $filmManager = new FilmManager();
-
-        //toutes les infos du film
         $data = $filmManager->formSelectFilm($id);
+        
+        //toutes les infos du film
         $requeteDetailFilm = $data['requeteDetailFilm']; //renvoie fetch
         
         //pour afficher le genre, methode deja dans le genremanager
@@ -100,7 +100,7 @@ class FilmController {
         $genres = $genreManager->findAll();
 
         //pour obtenir les genres du film avant modification
-        $genreDefault = $data['requeteGenreFilm'];
+        $idGenres = $data['requeteGenreFilm'];
         // choix du réalisateur
         $choixReal = $data['choixReal']; //renvoie fetchAll
         require "view/formulaires/modifierFilm.php";
